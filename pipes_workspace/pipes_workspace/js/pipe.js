@@ -35,6 +35,8 @@ class Pipe {
   }
   show() {
     imageMode(CORNER);
+    // ellipse(this.x,this.y,50);
+    
     this.image = image(this.src, this.x, this.y,this.w,this.h);
   }
 
@@ -60,9 +62,9 @@ class Pipe {
     // this.py = snap(pmouseY,gridSpace, gridOffset);
   }
 
-  released(x,y) {
-    this.x = x;
-    this.y = y;
+  released(x,y,gridOffset) {
+    this.x = x-gridOffset;
+    this.y = y-gridOffset;
     // Quit dragging
     this.dragging = false;
   }

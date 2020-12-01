@@ -86,7 +86,7 @@ function mouseReleased() {
   // }
   let x=  pipe.snap(mouseX,gridSpace, gridOffset);
   let y=  pipe.snap(mouseY,gridSpace, gridOffset);
-  pipe.released(x,y);
+  pipe.released(x,y,gridOffset);
   
   shape1.released();
  // pipeElement = new Pipe(windowWidth / 2, windowHeight / 2, 100, 300);
