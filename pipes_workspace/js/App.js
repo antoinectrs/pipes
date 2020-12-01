@@ -1,17 +1,13 @@
-// CODE JS
 console.log("hello, pipes begin");
 // constructor() {
 // this.canvas = document.createElement("canvas");
 // document.body.appendChild(this.canvas);
-
 //ctxx
 // this.ctx = this.canvas.createCanvas(200, 200);
 // this.canvas.width = this.w = window.innerWidth;
 // this.canvas.height = this.h = window.innerHeight;
-
 // this.setup();
 // }
-
 let pipe = [];
 let shape1;
 let pipeNumber = 1;
@@ -37,27 +33,33 @@ function setup() {
   // });
 
   // this.draw();
+  //new grid class
+  grid = new Grid();
   pipeElement = new Pipe(windowWidth / 2, windowHeight / 2, 100, 300);
   pipe.push(pipeElement);
   shape1 = new Draggable(200, 100, 50, 150);
 }
 
 function draw() {
-  background(244, 0, 0);
+  background(255,20);
+
+  //show grid class
+  strokeWeight(2);
+  stroke(0);
+  grid.showG();
+
+  //loop draw pipe
   for (let index = 0; index < pipeNumber; index++) {
     pipe[index].update();
     pipe[index].show();
-    console.log(pipeNumber)
+    // console.log(pipeNumber)
   }
+  //square swipe test 
+  // shape1.update();
+  // shape1.show();
 
-
-  shape1.update();
-  shape1.show();
-
-  // this.ctx.clearRect(0, 0, this.w, this.h);
+ 
   // this.button.show();
-  // console.log("draw");
-  // requestAnimationFrame(this.draw.bind(this));
 }
 
 function mousePressed() {
@@ -72,13 +74,7 @@ function mouseReleased() {
   pipe[index].released();
   }
   shape1.released();
-
   pipeElement = new Pipe(windowWidth / 2, windowHeight / 2, 100, 300);
   pipe.push(pipeElement);
-
   pipeNumber++;
 }
-
-// window.onload = () => {
-//   new App();
-// };
