@@ -11,12 +11,6 @@ class Pipe {
   constructor(x,y,w,h) {
     this.dragging = false; // Is the object being dragged?
     this.rollover = false; // Is the mouse over the ellipse?
-
-    // this.x = windowWidth/2;
-    // this.y = windowHeight/2;
-    // this.w = 100;
-    // this.h = 300;
-
     this.x = x;
     this.y = y;
     this.w = w;
@@ -26,6 +20,10 @@ class Pipe {
     this.offsetY = 0;
     this.image;
     this.src = svg_01;
+
+    //SNAP
+    this.px;
+    this.py;
   }
 
   update() {
@@ -36,14 +34,13 @@ class Pipe {
     }
   }
   show() {
-    imageMode(CENTER);
-    // this.image = image(this.src, this.x, this.y,100,300);
+    imageMode(CORNER);
     this.image = image(this.src, this.x, this.y,this.w,this.h);
   }
 
-  pressed() {
-  
-    // Did I click on the rectangle?
+  pressed(gridSpace, gridOffset) {
+      //slide in rectangle zone
+      //** BUG SIZE **
     if (
       mouseX > this.x &&
       mouseX < this.x + this.w &&
@@ -55,11 +52,30 @@ class Pipe {
       this.offsetX = this.x - mouseX;
       this.offsetY = this.y - mouseY;
     }
+    
+    //BEGIN TO SNAP
+    // this.x = snap(mouseX,gridSpace, gridOffset);
+    // this.y = snap(mouseY,gridSpace, gridOffset);
+    // this.px = snap(pmouseX);
+    // this.py = snap(pmouseY,gridSpace, gridOffset);
   }
 
   released() {
     // Quit dragging
     this.dragging = false;
   }
-  // image(svg_01, width/2, height/2);
+
+  snap(op,gridSpace, gridOffset) {
+    
+    // subtract offset (to center lines)
+    // divide by grid to get row/column
+    // round to snap to the closest one
+    this.cell = Math.round((op - gridOffset) / gridSpace);
+    // multiply back to grid scale
+    // add offset to center
+    console.log(this.cell)
+
+    return this.cell * gridSpace + gridOffset;
+
+  }
 }

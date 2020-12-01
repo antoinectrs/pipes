@@ -8,10 +8,18 @@ console.log("hello, pipes begin");
 // this.canvas.height = this.h = window.innerHeight;
 // this.setup();
 // }
-let pipe = [];
+
+//PIPE GLOBAL VALUE
+let pipe;
 let shape1;
 let pipeNumber = 1;
 let pipeElement;
+
+//GRID GLOBAL VALUE
+let gridSpace = 100;
+let gridOffset = gridSpace / 2;
+
+//SET UP
 function setup() {
   let width = windowWidth;
   let height = windowHeight;
@@ -34,14 +42,14 @@ function setup() {
 
   // this.draw();
   //new grid class
-  grid = new Grid();
-  pipeElement = new Pipe(windowWidth / 2, windowHeight / 2, 100, 300);
-  pipe.push(pipeElement);
+  grid = new Grid(gridSpace);
+  pipe = new Pipe(windowWidth / 2, windowHeight / 2, 100, 300);
+  // pipe.push(pipeElement);
   shape1 = new Draggable(200, 100, 50, 150);
 }
 
 function draw() {
-  background(255,20);
+  background(255, 20);
 
   //show grid class
   strokeWeight(2);
@@ -49,32 +57,36 @@ function draw() {
   grid.showG();
 
   //loop draw pipe
-  for (let index = 0; index < pipeNumber; index++) {
-    pipe[index].update();
-    pipe[index].show();
-    // console.log(pipeNumber)
-  }
-  //square swipe test 
+  // for (let index = 0; index < pipeNumber; index++) {
+  //   pipe[index].update();
+  //   pipe[index].show();
+  //   // console.log(pipeNumber)
+  // }
+  pipe.update();
+  pipe.show();
+  //square swipe test
   // shape1.update();
   // shape1.show();
 
- 
   // this.button.show();
 }
 
 function mousePressed() {
-  for (let index = 0; index < pipeNumber; index++) {
-  pipe[index].pressed();
-  }
+  // for (let index = 0; index < pipeNumber; index++) {
+  //   pipe[index].pressed(gridSpace, gridOffset);
+  // }
+  pipe.pressed();
   shape1.pressed();
+  var x=  pipe.snap(mouseX,gridSpace, gridOffset);
 }
 
 function mouseReleased() {
-  for (let index = 0; index < pipeNumber; index++) {
-  pipe[index].released();
-  }
+  // for (let index = 0; index < pipeNumber; index++) {
+  //   pipe[index].released();
+  // }
+  pipe.released();
   shape1.released();
-  pipeElement = new Pipe(windowWidth / 2, windowHeight / 2, 100, 300);
-  pipe.push(pipeElement);
+ // pipeElement = new Pipe(windowWidth / 2, windowHeight / 2, 100, 300);
+  // pipe.push(pipeElement);
   pipeNumber++;
 }
