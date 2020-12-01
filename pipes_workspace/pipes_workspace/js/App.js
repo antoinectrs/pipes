@@ -12,7 +12,7 @@ console.log("hello, pipes begin");
 //PIPE GLOBAL VALUE
 let pipe;
 let shape1;
-let pipeNumber = 1;
+// let pipeNumber = 1;
 let pipeElement;
 
 //GRID GLOBAL VALUE
@@ -45,7 +45,6 @@ function setup() {
   grid = new Grid(gridSpace);
   pipe = new Pipe(windowWidth / 2, windowHeight / 2, 100, 300);
   // pipe.push(pipeElement);
-  shape1 = new Draggable(200, 100, 50, 150);
 }
 
 function draw() {
@@ -64,10 +63,12 @@ function draw() {
   // }
   pipe.update();
   pipe.show();
-  //square swipe test
-  // shape1.update();
-  // shape1.show();
+if(mouseIsPressed){
+  let x=  pipe.snap(mouseX,gridSpace, gridOffset);
+  let y=  pipe.snap(mouseY,gridSpace, gridOffset);
 
+  pipe.pressed(x,y);
+}
   // this.button.show();
 }
 
@@ -75,8 +76,11 @@ function mousePressed() {
   // for (let index = 0; index < pipeNumber; index++) {
   //   pipe[index].pressed(gridSpace, gridOffset);
   // }
-  pipe.pressed();
-  shape1.pressed();
+  // let x=  pipe.snap(mouseX,gridSpace, gridOffset);
+  // let y=  pipe.snap(mouseY,gridSpace, gridOffset);
+
+  // pipe.pressed(x,y);
+
   
 }
 
@@ -88,8 +92,7 @@ function mouseReleased() {
   let y=  pipe.snap(mouseY,gridSpace, gridOffset);
   pipe.released(x,y,gridOffset);
   
-  shape1.released();
  // pipeElement = new Pipe(windowWidth / 2, windowHeight / 2, 100, 300);
   // pipe.push(pipeElement);
-  pipeNumber++;
+  // pipeNumber++;
 }
