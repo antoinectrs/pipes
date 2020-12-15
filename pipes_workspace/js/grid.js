@@ -1,34 +1,42 @@
-// Draw grid
-// var l = 0;
-// strokeWeight(0.3);
-// stroke(1);
-// while (l < this.w || l < height) {
-//   line(0, l, width, l);
-//   line(l, 0, l, height);
-//   l += grid;
-// }
-// end Draw grid
 class Grid {
   constructor(gridSpace,gridOffset) {
-    this.w = windowWidth;
-    this.h = windowHeight;
-    this.l = 0;
+    // this.w = windowWidth;
+    // this.h = windowHeight;
+    // this.l = 0;
     this.strokeW = 0.3;
     this.strokeC = 0;
-    this.gridSpace = gridSpace;
-    this.gridOffset = gridOffset;
-  }
+    // this.gridSpace = gridSpace;
+    // this.gridOffset = gridOffset;
 
-  showG() {
+    this.targetCellSize = 0.2;
+    this.nCols = 0;
+    this.nRows = 0;
+    this.cellSize = 0;
+
+    this.pos = {x: 0, y: 0};
+  }
+  drawGrid() {
     strokeWeight(this.strokeW);
     stroke(this.strokeC);
-
-    //KEEP L RESET TO 0 too continue grid
-    this.l = 0;
-    while (this.l < this.w || this.l < this.h) {
-      line(0, this.l, this.w, this.l);
-      line(this.l, 0, this.l, this.h);
-      this.l += this.gridSpace;
+    // let {cellSize, nCols, nRows} = GRID_PARAMS; //destructuring
+    
+    for (let col = 0; col < this.nCols; col++) {
+      for (let row = 0; row < this.nRows; row++) {
+        rect(col * this.cellSize, row * this.cellSize,this.cellSize, this.cellSize);
+      }
     }
   }
+  computeGrid() {
+    this.cellSize = width*this.targetCellSize;
+    this.nCols = 1/this.targetCellSize;
+    this.nRows = ceil(height/ this.cellSize);
+    }
+    snap(windowX, windowY) {
+      
+      let centerCell = this.cellSize/2;
+      
+      let x = round((windowX - centerCell) / width * this.nCols) * this.cellSize + centerCell;
+      let y = round((windowY - centerCell) / height * this.nRows) * this.cellSize + centerCell;
+      return {x, y}; // {x: x, y: y}
+    }
 }

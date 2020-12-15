@@ -43,18 +43,21 @@ function setup() {
 
   //new grid class
   grid = new Grid(gridSpace);
+  grid.computeGrid();
+  grid.drawGrid();
   pipe = new Pipe(windowWidth / 2, windowHeight / 2, 100, 300);
   // pipe.push(pipeElement);
 }
 
 function draw() {
   background(255, 20);
-
+  grid.drawGrid();
   //show grid class
   strokeWeight(2);
   stroke(0);
-  grid.showG();
 
+  let targ = grid.snap(mouseX, mouseY);
+  ellipse(targ.x, targ.y, 20);
   //loop draw pipe
   // for (let index = 0; index < pipeNumber; index++) {
   //   pipe[index].update();
@@ -67,10 +70,10 @@ if(mouseIsPressed){
 
   let x=  pipe.snap(mouseX,gridSpace, gridOffset);
   let y=  pipe.snap(mouseY,gridSpace, gridOffset);
-  document.getElementById("svgLayout").style.left = x+"px";
-  document.getElementById("svgLayout").style.top = y+"px";
+  // document.getElementById("svgLayout").style.left = x+"px";
+  // document.getElementById("svgLayout").style.top = y+"px";
 
-  pipe.pressed(x,y);
+  // pipe.pressed(x,y);
 }
   // this.button.show();
 }
@@ -89,11 +92,15 @@ function mouseReleased() {
   // for (let index = 0; index < pipeNumber; index++) {
   //   pipe[index].released();
   // }
-  let x=  pipe.snap(mouseX,gridSpace, gridOffset);
-  let y=  pipe.snap(mouseY,gridSpace, gridOffset);
-  pipe.released(x,y,gridOffset);
+  // let x=  pipe.snap(mouseX,gridSpace, gridOffset);
+  // let y=  pipe.snap(mouseY,gridSpace, gridOffset);
+  // pipe.released(x,y,gridOffset);
   
  // pipeElement = new Pipe(windowWidth / 2, windowHeight / 2, 100, 300);
   // pipe.push(pipeElement);
   // pipeNumber++;
+}
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  grid.computeGrid();
 }

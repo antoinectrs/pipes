@@ -3,7 +3,7 @@ let svg_01;
 let imageNumber = 1;
 function preload() {
   for (let i = 0; i < imageNumber; i++) {
-    svg_01 = loadImage("pipes_folder/pipes_01.svg");
+    svg_01 = loadImage("pipes_folder/pipes_02_scale.png");
   }
 }
 
@@ -54,8 +54,8 @@ class Pipe {
 
       // this.dragging = true;
       // // If so, keep track of relative location of click to corner of rectangle
-      // this.offsetX = this.x - mouseX;
-      // this.offsetY = this.y - mouseY;
+      this.offsetX = this.x - mouseX;
+      this.offsetY = this.y - mouseY;
      
      
     }
@@ -76,6 +76,7 @@ class Pipe {
     // divide by grid to get row/column
     // round to snap to the closest one
     this.cell = Math.round((op - gridOffset) / gridSpace);
+    // console.log(this.cell);
     // multiply back to grid scale
     // add offset to center
 
