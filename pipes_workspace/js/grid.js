@@ -19,7 +19,7 @@ class Grid {
     strokeWeight(this.strokeW);
     stroke(this.strokeC);
     // let {cellSize, nCols, nRows} = GRID_PARAMS; //destructuring
-    
+   
     for (let col = 0; col < this.nCols; col++) {
       for (let row = 0; row < this.nRows; row++) {
         rect(col * this.cellSize, row * this.cellSize,this.cellSize, this.cellSize);
@@ -30,6 +30,9 @@ class Grid {
     this.cellSize = width*this.targetCellSize;
     this.nCols = 1/this.targetCellSize;
     this.nRows = ceil(height/ this.cellSize);
+
+   let cellS = this.cellSize;
+    return cellS
     }
     snap(windowX, windowY) {
       

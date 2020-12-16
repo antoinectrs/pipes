@@ -1,14 +1,4 @@
 console.log("hello, pipes begin");
-// constructor() {
-// this.canvas = document.createElement("canvas");
-// document.body.appendChild(this.canvas);
-//ctxx
-// this.ctx = this.canvas.createCanvas(200, 200);
-// this.canvas.width = this.w = window.innerWidth;
-// this.canvas.height = this.h = window.innerHeight;
-// this.setup();
-// }
-
 //PIPE GLOBAL VALUE
 let pipe;
 let shape1;
@@ -24,28 +14,13 @@ function setup() {
   let width = windowWidth;
   let height = windowHeight;
   let canvas = createCanvas(width, height);
-  
-
-  // canvas.parent('canvasForHTML');
-  // this.button = new Button(this.w / 2, this.h / 2, 50, 50, this.ctx);
-  //FB
-  //listener
-  // DATABASE.ref("COLOR_CHANGE").on("value", (snapshot) => {
-  //   if (!this.appHasStarted) {
-  //     this.button.changeColor(snapshot.val());
-  //     this.draw();
-  //     this.appHasStarted = true;
-  //   } else {
-  //     const value = snapshot.val();
-  //     this.button.changeColor(value);
-  //   }
-  // });
 
   //new grid class
   grid = new Grid(gridSpace);
-  grid.computeGrid();
+  let cellS = grid.computeGrid();
+
   grid.drawGrid();
-  pipe = new Pipe(windowWidth / 2, windowHeight / 2, 100, 300);
+  pipe = new Pipe(windowWidth / 2, windowHeight / 2, cellS, cellS*3);
   // pipe.push(pipeElement);
 }
 
@@ -57,7 +32,7 @@ function draw() {
   stroke(0);
 
   let targ = grid.snap(mouseX, mouseY);
-  ellipse(targ.x, targ.y, 20);
+
   //loop draw pipe
   // for (let index = 0; index < pipeNumber; index++) {
   //   pipe[index].update();
@@ -65,11 +40,11 @@ function draw() {
   //   // console.log(pipeNumber)
   // }
   pipe.update();
-  pipe.show();
+  pipe.show(targ.x, targ.y);
 if(mouseIsPressed){
 
-  let x=  pipe.snap(mouseX,gridSpace, gridOffset);
-  let y=  pipe.snap(mouseY,gridSpace, gridOffset);
+  // let x=  pipe.snap(mouseX,gridSpace, gridOffset);
+  // let y=  pipe.snap(mouseY,gridSpace, gridOffset);
   // document.getElementById("svgLayout").style.left = x+"px";
   // document.getElementById("svgLayout").style.top = y+"px";
 
