@@ -1,6 +1,6 @@
 console.log("hello, pipes begin");
 //PIPE GLOBAL VALUE
-let pipe;
+let pipe, pipe2;
 let shape1;
 // let pipeNumber = 1;
 let pipeElement;
@@ -8,7 +8,7 @@ let pipeElement;
 //GRID GLOBAL VALUE
 let gridSpace = 100;
 let gridOffset = gridSpace / 2;
-
+let cellS;
 //SET UP
 function setup() {
   let width = windowWidth;
@@ -17,10 +17,12 @@ function setup() {
 
   //new grid class
   grid = new Grid(gridSpace);
-  let cellS = grid.computeGrid();
+  cellS = grid.computeGrid();
 
   grid.drawGrid();
-  pipe = new Pipe(windowWidth / 2, windowHeight / 2, cellS, cellS*3);
+  pipe = new Pipe(windowWidth / 2, windowHeight / 2, cellS, cellS*3,p_01);
+  pipe2 = new Pipe(windowWidth / 2, windowHeight / 2, cellS, cellS,p_02);
+  // pipe = new Pipe(windowWidth / 2, windowHeight / 2, cellS, cellS*3,p_02);
   // pipe.push(pipeElement);
 }
 
@@ -40,14 +42,14 @@ function draw() {
   //   // console.log(pipeNumber)
   // }
   pipe.update();
-  pipe.show(targ.x, targ.y);
+  pipe2.update();
+  pipe.show(targ.x, targ.y, cellS, cellS*3);
+  pipe2.show(targ.x, targ.y, cellS, cellS);
 if(mouseIsPressed){
-
   // let x=  pipe.snap(mouseX,gridSpace, gridOffset);
   // let y=  pipe.snap(mouseY,gridSpace, gridOffset);
   // document.getElementById("svgLayout").style.left = x+"px";
   // document.getElementById("svgLayout").style.top = y+"px";
-
   // pipe.pressed(x,y);
 }
   // this.button.show();

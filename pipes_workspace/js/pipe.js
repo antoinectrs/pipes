@@ -1,14 +1,16 @@
 // let images = [];
-let svg_01;
+let p_01;
+let p_02;
 let imageNumber = 1;
 function preload() {
-  for (let i = 0; i < imageNumber; i++) {
-    svg_01 = loadImage("pipes_folder/pipes_02_scale.png");
-  }
+  // for (let i = 0; i < imageNumber; i++) {
+    p_01 = loadImage("pipes_folder/pipes_02_scale.png");
+   p_02 = loadImage("pipes_folder/door.png");
+  // }
 }
 
 class Pipe {
-  constructor(x, y, w, h) {
+  constructor(x, y, w, h,src) {
     this.dragging = false; // Is the object being dragged?
     this.rollover = false; // Is the mouse over the ellipse?
     this.x = x;
@@ -19,7 +21,7 @@ class Pipe {
     this.offsetX = 0;
     this.offsetY = 0;
     this.image;
-    this.src = svg_01;
+    this.src = src;
 
     //SNAP
     this.px;
