@@ -37,51 +37,26 @@ class Pipe {
   }
   show(px,py,w,h) {
     imageMode(CENTER);
-    ellipse(px,py,50);
-
     this.image = image(this.src, px, py, w, h);
   }
 
-  pressed(x, y) {
+  pressed(px,py,w,h) {
     //slide in rectangle zone
     //** BUG SIZE **
+  
     if (
-      mouseX > this.x &&
-      mouseX < this.x + this.w &&
-      mouseY > this.y &&
-      mouseY < this.y + this.h
+      mouseX > px &&
+      mouseX < px + w &&
+      mouseY > py &&
+      mouseY < py + h
     ) {
-
-      //SNAPP AFTER
-
-      // this.dragging = true;
-      // // If so, keep track of relative location of click to corner of rectangle
-      this.offsetX = this.x - mouseX;
-      this.offsetY = this.y - mouseY;
-     
-     
+      console.log("inside");
     }
-    //SNAP IMMEDIATELLY
-    this.x = x -50;
-    this.y = y -50;
   }
 
-  released(x, y, gridOffset) {
-    this.x = x - gridOffset;
-    this.y = y - gridOffset;
-    // Quit dragging
-    this.dragging = false;
-  }
-
-  snap(op, gridSpace, gridOffset) {
-    // subtract offset (to center lines)
-    // divide by grid to get row/column
-    // round to snap to the closest one
-    this.cell = Math.round((op - gridOffset) / gridSpace);
-    // console.log(this.cell);
-    // multiply back to grid scale
-    // add offset to center
-
-    return this.cell * gridSpace + gridOffset;
-  }
+  // clicked() {
+  //   if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
+  //     console.log("click");
+  //   }
+  // }
 }
