@@ -78,4 +78,5 @@ function mouseReleased() {
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   grid.computeGrid();
+  
 }

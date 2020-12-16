@@ -33,11 +33,11 @@ class Pipe {
       this.y = mouseY + this.offsetY;
     }
   }
-  show(px,py) {
+  show(px,py,w,h) {
     imageMode(CENTER);
     ellipse(px,py,50);
 
-    this.image = image(this.src, px, py, this.w, this.h);
+    this.image = image(this.src, px, py, w, h);
   }
 
   pressed(x, y) {
