@@ -25,7 +25,7 @@ function setup() {
   pipe.push(new Pipe(width / 2, height / 2, cellS, cellS, p_02));
   targ = grid.snap(47, 331);
 }
-
+let isDraging = false;
 function draw() {
   background(255, 20);
   grid.drawGrid();
@@ -43,13 +43,23 @@ function draw() {
 
   for (let index = 0; index < pipe.length; index++) {
     let inside = pipe[index].pressed(targ.x, targ.y, cellS, cellS);
-    let isDraging = false;
+  
     if (inside == false && mouseIsPressed) {
       isDraging= true;
+    
       // console.log(pipe[index].pressed(targ.x, targ.y, cellS, cellS));
-    }else if (mouseIsPressed && isDraging) {
+    }
+    if(isDraging== true){
       targ = grid.snap(mouseX, mouseY);
     }
+    if(mouseIsPressed == false){
+      isDraging= false;
+    }
+   
+    // else if (mouseIsPressed && isDraging) {
+     
+    // }
+    
     
   }
 }

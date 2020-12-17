@@ -49,7 +49,7 @@ class Pipe {
     if (
       mouseX > px-px/2 &&
       mouseX < px-px/4 + w &&
-      mouseY > py-px/2 &&
+      mouseY > py-px/4 &&
       mouseY < py-py/8 + h
     ) {
       insideShape = !insideShape;
