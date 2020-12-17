@@ -2,6 +2,7 @@
 let p_01;
 let p_02;
 let imageNumber = 1;
+let insideShape = false;
 function preload() {
   // for (let i = 0; i < imageNumber; i++) {
     p_01 = loadImage("pipes_folder/pipes_02_scale.png");
@@ -37,6 +38,7 @@ class Pipe {
   }
   show(px,py,w,h) {
     imageMode(CENTER);
+    // this.image = image(this.src, px, py, w, h);
     this.image = image(this.src, px, py, w, h);
   }
 
@@ -45,12 +47,13 @@ class Pipe {
     //** BUG SIZE **
   
     if (
-      mouseX > px &&
-      mouseX < px + w &&
-      mouseY > py &&
-      mouseY < py + h
+      mouseX > px-px/2 &&
+      mouseX < px-px/4 + w &&
+      mouseY > py-px/2 &&
+      mouseY < py-py/8 + h
     ) {
-      console.log("inside");
+      insideShape = !insideShape;
+      return insideShape;
     }
   }
 

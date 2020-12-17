@@ -21,8 +21,8 @@ function setup() {
   cellS = grid.computeGrid();
 
   grid.drawGrid();
-  pipe.push(new Pipe(windowWidth / 2, windowHeight / 2, cellS, cellS*3,p_01) );
-  pipe.push(new Pipe(windowWidth / 2, windowHeight / 2, cellS, cellS*3,p_02) );
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS*3,p_01) );
+  pipe.push(new Pipe(width/ 2, height / 2, cellS, cellS,p_02) );
   targ = grid.snap(mouseX, mouseY);
 }
 
@@ -32,27 +32,32 @@ function draw() {
   //show grid class
   strokeWeight(2);
   stroke(0);
-
-
-
   //loop draw pipe
   // for (let index = 0; index < pipeNumber; index++) {
   //   pipe[index].update();
   // }
 
   // pipe.update();
-  pipe[0].show(targ.x, targ.y, cellS, cellS*3);
+  // pipe[0].show(targ.x, targ.y, cellS, cellS*3);
   pipe[1].show(targ.x, targ.y, cellS, cellS);
 
+  for (let index = 0; index < pipe.length; index++) {
+    ellipse(200, 200, 20, 20);
+    let inside =  pipe[index].pressed(targ.x, targ.y, cellS, cellS);
+    if(inside==false){
+      console.log(pipe[index].pressed(targ.x, targ.y, cellS, cellS));
+    }
+    }
 }
 
 function mousePressed() {
   //Reset grid.snap xy
   targ = grid.snap(mouseX, mouseY);
 
-  for (let index = 0; index < pipe.length; index++) {
-    pipe[index].pressed(targ.x, targ.y, cellS, cellS);
-  }
+  // for (let index = 0; index < pipe.length; index++) {
+  // let inside =  pipe[index].pressed(targ.x, targ.y, cellS, cellS);
+  // console.log(pipe[index].pressed(targ.x, targ.y, cellS, cellS));
+  // }
   // let x=  pipe.snap(mouseX,gridSpace, gridOffset);
   // let y=  pipe.snap(mouseY,gridSpace, gridOffset);
   // pipe.pressed(x,y);
@@ -63,6 +68,5 @@ function mouseReleased() {
 }
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-  grid.computeGrid(); 
-  
+  cellS = grid.computeGrid();
 }
