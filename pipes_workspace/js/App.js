@@ -9,7 +9,7 @@ let pipeElement;
 let gridSpace = 100;
 let gridOffset = gridSpace / 2;
 let cellS;
-let targ ;
+let targ;
 //SET UP
 function setup() {
   let width = windowWidth;
@@ -21,9 +21,9 @@ function setup() {
   cellS = grid.computeGrid();
 
   grid.drawGrid();
-  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS*3,p_01) );
-  pipe.push(new Pipe(width/ 2, height / 2, cellS, cellS,p_02) );
-  targ = grid.snap(mouseX, mouseY);
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * 3, p_01));
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS, p_02));
+  targ = grid.snap(47, 331);
 }
 
 function draw() {
@@ -42,17 +42,21 @@ function draw() {
   pipe[1].show(targ.x, targ.y, cellS, cellS);
 
   for (let index = 0; index < pipe.length; index++) {
-    ellipse(200, 200, 20, 20);
-    let inside =  pipe[index].pressed(targ.x, targ.y, cellS, cellS);
-    if(inside==false){
-      console.log(pipe[index].pressed(targ.x, targ.y, cellS, cellS));
+    let inside = pipe[index].pressed(targ.x, targ.y, cellS, cellS);
+    let isDraging = false;
+    if (inside == false && mouseIsPressed) {
+      isDraging= true;
+      // console.log(pipe[index].pressed(targ.x, targ.y, cellS, cellS));
+    }else if (mouseIsPressed && isDraging) {
+      targ = grid.snap(mouseX, mouseY);
     }
-    }
+    
+  }
 }
 
 function mousePressed() {
   //Reset grid.snap xy
-  targ = grid.snap(mouseX, mouseY);
+  // targ = grid.snap(mouseX, mouseY);
 
   // for (let index = 0; index < pipe.length; index++) {
   // let inside =  pipe[index].pressed(targ.x, targ.y, cellS, cellS);
