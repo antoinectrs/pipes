@@ -41,7 +41,10 @@ function setup() {
   grid.drawGrid();
   pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * 3, p_01));
   pipe.push(new Pipe(width / 2, height / 2, cellS, cellS, p_02));
-  targ = grid.snap(40, 330);
+
+  // JSON NEED HERE
+  // console.log( pLevel.level1[0][0])
+  targ = grid.snap(pLevel.level1[0][0], pLevel.level1[0][1]);
 }
 let isDraging = false;
 function draw() {
