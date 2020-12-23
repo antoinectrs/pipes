@@ -40,19 +40,6 @@ class Pipe {
 
   pressed(px,py,w,h) {
     //slide in rectangle zone
-    //** BUG SIZE **
-  
-    // if (
-    //   mouseX > px-px/2 &&
-    //   mouseX < px-px/4 + w &&
-    //   mouseY > py-px/4 &&
-    //   mouseY < py-py/8 + h
-    // ) {
-    //   console.log("inside");
-    //   insideShape = !insideShape;
-    //   return insideShape;
-    // }
-
     if (
       mouseX > px -w/2 &&
       mouseX < px + w/2 &&
