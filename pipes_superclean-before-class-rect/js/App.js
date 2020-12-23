@@ -35,10 +35,10 @@ function setup() {
   //RECT GRID SETUP
   for (let col = 0; col < grid.nCols; col++) {
     for (let row = 0; row < grid.nRows; row++) {
-      rectGrid.push(new Rect(row, grid.cellSize, row));
+      rectGrid.push(new Rect(col, grid.cellSize, row));
     }
   }
- 
+  console.log(rectGrid.length)
 
   grid.drawGrid();
   // pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * 3, p_01));

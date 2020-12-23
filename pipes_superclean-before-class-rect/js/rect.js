@@ -5,9 +5,9 @@ class Rect {
     this.row = row,
     this.isTaken = false
   }
-  show() {
+  show(col, row) {
     // console.log(this.col,this.cellSize, this.row);
-    rect(this.col * this.cellSize, this.row * this.cellSize, this.cellSize, this.cellSize);
+    rect(col * this.cellSize, row * this.cellSize, this.cellSize, this.cellSize);
     // return 0;
   }
 }
