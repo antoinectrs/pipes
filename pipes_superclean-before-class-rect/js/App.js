@@ -9,12 +9,7 @@ let pipeElement;
 let gridSpace = 100;
 let gridOffset = gridSpace / 2;
 let cellS;
-let targ;
-// PRELOAD
-// let pLevel;
-// function preload() {
-
-// }
+let targ = [];
 let p_01;
 let p_02;
 function preload() {
@@ -24,11 +19,6 @@ function preload() {
   pLevel = loadJSON("./js/position.json")
   // }
 }
-
-// function preload() {
-// pLevel = loadJSON("./js/position.json")
-// }
-//SET UP
 function setup() {
   let width = windowWidth;
   let height = windowHeight;
@@ -39,12 +29,15 @@ function setup() {
   cellS = grid.computeGrid();
 
   grid.drawGrid();
-  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * 3, p_01));
+  // pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * 3, p_01));
+  
+  //SET UP DOOR PIPE
   pipe.push(new Pipe(width / 2, height / 2, cellS, cellS, p_02));
-
-  // JSON NEED HERE
-  // console.log( pLevel.level1[0][0])
-  targ = grid.snap(pLevel.level1[0][0], pLevel.level1[0][1]);
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS, p_02));
+  
+  //push tarf into targ x y position
+  targ.push(grid.snap(pLevel.level1[0][0], pLevel.level1[0][1]));
+  targ.push(grid.snap(pLevel.level1[1][0], pLevel.level1[1][1]));
 }
 let isDraging = false;
 function draw() {
@@ -54,52 +47,24 @@ function draw() {
   //show grid class
   strokeWeight(2);
   stroke(0);
-  //loop draw pipe
-  // for (let index = 0; index < pipeNumber; index++) {
-  //   pipe[index].update();
-  // }
 
-  // pipe.update();
-  // pipe[0].show(targ.x, targ.y, cellS, cellS*3);
-  pipe[1].show(targ.x, targ.y, cellS, cellS);
+// SHOW DOORS PIPES
+  pipe[0].show(targ[0].x, targ[0].y, cellS, cellS*3);
+  pipe[1].show(targ[1].x, targ[1].y, cellS, cellS);
 
   for (let index = 0; index < pipe.length; index++) {
-    let inside = pipe[index].pressed(targ.x, targ.y, cellS, cellS);
+    let inside = pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS);
   
     if (inside == false && mouseIsPressed) {
       isDraging= true;
-    
-      // console.log(pipe[index].pressed(targ.x, targ.y, cellS, cellS));
     }
     if(isDraging== true){
-      targ = grid.snap(mouseX, mouseY);
+      targ[index] = grid.snap(mouseX, mouseY);
     }
     if(mouseIsPressed == false){
       isDraging= false;
     }
-   
-    // else if (mouseIsPressed && isDraging) {
-     
-    // }
-  
   }
-}
-
-function mousePressed() {
-  //Reset grid.snap xy
-  // targ = grid.snap(mouseX, mouseY);
-
-  // for (let index = 0; index < pipe.length; index++) {
-  // let inside =  pipe[index].pressed(targ.x, targ.y, cellS, cellS);
-  // console.log(pipe[index].pressed(targ.x, targ.y, cellS, cellS));
-  // }
-  // let x=  pipe.snap(mouseX,gridSpace, gridOffset);
-  // let y=  pipe.snap(mouseY,gridSpace, gridOffset);
-  // pipe.pressed(x,y);
-}
-
-function mouseReleased() {
-
 }
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
