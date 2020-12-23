@@ -51,17 +51,17 @@ function draw() {
   for (let index = 0; index < pipe.length; index++) {
     // SHOW DOORS PIPES
     pipe[index].show(targ[index].x, targ[index].y, cellS, cellS);
-    let inside = pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS);
+    // let inside = pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS);
 
 //
-    // if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed) {
-    if (inside == false && mouseIsPressed) {
+    if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed) {
+    // if (inside == false && mouseIsPressed) {
       isDraging = true;
-    // targ[index]= pipe[index].drag();
-    // console.log(pipe[index].drag(), index);
     }
     if (isDraging == true) {
-      targ[index] = grid.snap(mouseX, mouseY);
+      console.log(index)
+      targ[index]= pipe[index].drag();
+      // targ[index] = grid.snap(mouseX, mouseY);
     }
     if (mouseIsPressed == false) {
       isDraging = false;
