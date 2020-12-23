@@ -22,7 +22,7 @@ class Pipe {
     this.py;
 
     //interaction element
-    this.isDrag;
+    this.isDrag = false;
   }
 
   update() {
@@ -55,7 +55,6 @@ class Pipe {
   }
   drag() {
     this.dragElement = grid.snap(mouseX, mouseY);
-    // console.log(grid.snap(mouseX, mouseY));
     return this.dragElement
   }
   // clicked() {
