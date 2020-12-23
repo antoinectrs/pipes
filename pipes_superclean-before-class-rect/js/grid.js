@@ -14,7 +14,9 @@ class Grid {
     stroke(this.strokeC);
     for (let col = 0; col < this.nCols; col++) {
       for (let row = 0; row < this.nRows; row++) {
-        rect(col * this.cellSize, row * this.cellSize, this.cellSize, this.cellSize);
+        // console.log(rectGrid[0].show());
+        rectGrid[row].show()
+        // rect(col * this.cellSize, row * this.cellSize, this.cellSize, this.cellSize);
       }
     }
   }

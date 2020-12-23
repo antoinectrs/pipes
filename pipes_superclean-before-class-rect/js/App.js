@@ -12,6 +12,9 @@ let cellS;
 let targ = [];
 let p_01;
 let p_02;
+
+// GRID RECT VALUE
+let rectGrid = [];
 function preload() {
   // for (let i = 0; i < imageNumber; i++) {
   p_01 = loadImage("pipes_folder/pipes_02_scale.png");
@@ -24,9 +27,18 @@ function setup() {
   let height = windowHeight;
   let canvas = createCanvas(width, height);
 
+
   //new grid class
   grid = new Grid(gridSpace);
   cellS = grid.computeGrid();
+
+  //RECT GRID SETUP
+  for (let col = 0; col < grid.nCols; col++) {
+    for (let row = 0; row < grid.nRows; row++) {
+      rectGrid.push(new Rect(row, grid.cellSize, row));
+    }
+  }
+ 
 
   grid.drawGrid();
   // pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * 3, p_01));
@@ -41,7 +53,7 @@ function setup() {
 }
 let isDraging = false;
 function draw() {
-  background(255, 20);
+  background(255);
   grid.drawGrid();
 
   //show grid class
