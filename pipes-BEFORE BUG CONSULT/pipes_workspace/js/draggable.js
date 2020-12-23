@@ -35,9 +35,10 @@ class Draggable {
     }
   
     pressed() {
-        
+      console.log("inside");
       // Did I click on the rectangle?
       if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
+       
         this.dragging = true;
         // If so, keep track of relative location of click to corner of rectangle
         this.offsetX = this.x - mouseX;

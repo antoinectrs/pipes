@@ -12,10 +12,20 @@ let cellS;
 let targ;
 // PRELOAD
 // let pLevel;
+// function preload() {
+
+// }
+let p_01;
+let p_02;
 function preload() {
-  
+  // for (let i = 0; i < imageNumber; i++) {
+  p_01 = loadImage("pipes_folder/pipes_02_scale.png");
+  p_02 = loadImage("pipes_folder/door.png");
+  pLevel = loadJSON("./js/position.json")
+  // }
 }
-// function preload(){
+
+// function preload() {
 // pLevel = loadJSON("./js/position.json")
 // }
 //SET UP
@@ -31,12 +41,13 @@ function setup() {
   grid.drawGrid();
   pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * 3, p_01));
   pipe.push(new Pipe(width / 2, height / 2, cellS, cellS, p_02));
-  targ = grid.snap(47, 331);
+  targ = grid.snap(40, 330);
 }
 let isDraging = false;
 function draw() {
   background(255, 20);
   grid.drawGrid();
+ 
   //show grid class
   strokeWeight(2);
   stroke(0);
@@ -67,8 +78,7 @@ function draw() {
     // else if (mouseIsPressed && isDraging) {
      
     // }
-    
-    
+  
   }
 }
 

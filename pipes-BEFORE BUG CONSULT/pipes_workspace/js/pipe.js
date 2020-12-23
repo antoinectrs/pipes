@@ -1,14 +1,8 @@
 // let images = [];
-let p_01;
-let p_02;
+
 let imageNumber = 1;
 let insideShape = false;
-function preload() {
-  // for (let i = 0; i < imageNumber; i++) {
-    p_01 = loadImage("pipes_folder/pipes_02_scale.png");
-   p_02 = loadImage("pipes_folder/door.png");
-  // }
-}
+
 
 class Pipe {
   constructor(x, y, w, h,src) {
@@ -37,20 +31,33 @@ class Pipe {
     }
   }
   show(px,py,w,h) {
-    imageMode(CENTER);
+     imageMode(CENTER);
     // this.image = image(this.src, px, py, w, h);
     this.image = image(this.src, px, py, w, h);
+    
+
   }
 
   pressed(px,py,w,h) {
     //slide in rectangle zone
     //** BUG SIZE **
   
+    // if (
+    //   mouseX > px-px/2 &&
+    //   mouseX < px-px/4 + w &&
+    //   mouseY > py-px/4 &&
+    //   mouseY < py-py/8 + h
+    // ) {
+    //   console.log("inside");
+    //   insideShape = !insideShape;
+    //   return insideShape;
+    // }
+
     if (
-      mouseX > px-px/2 &&
-      mouseX < px-px/4 + w &&
-      mouseY > py-px/4 &&
-      mouseY < py-py/8 + h
+      mouseX > px -w/2 &&
+      mouseX < px + w/2 &&
+      mouseY > py - h/2 &&
+      mouseY < py + h/2
     ) {
       insideShape = !insideShape;
       return insideShape;
