@@ -30,11 +30,12 @@ class Grid {
     let centerCell = this.cellSize / 2;
     let x = round((windowX - centerCell) / width * this.nCols) * this.cellSize + centerCell;
     let y = round((windowY - centerCell) / height * this.nRows) * this.cellSize + centerCell;
-    let totalPixel = (x *this.nRows)/(width-this.cellSize / 2);
-    if(x > ((width-this.cellSize / 2)/5)*4 ){
-  console.log("full");
-    }
-    // console.log(x," "+width-this.cellSize / 2+ "   "+totalPixel);
+    let uniqueCase = (width-(this.cellSize / 2))/this.nRows;
+    let totalPixel = round((x *this.nCols)/(width-this.cellSize / 2));
+  //   if(x > (width-this.cellSize / 2)/5 ){
+  // console.log("full");
+  //   }
+    console.log(totalPixel," "+uniqueCase );
     return { x, y }; // {x: x, y: y}
   }
   // position(){
