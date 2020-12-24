@@ -15,6 +15,7 @@ let p_02;
 
 // GRID RECT VALUE
 let rectGrid = [];
+let game;
 function preload() {
   // for (let i = 0; i < imageNumber; i++) {
   p_01 = loadImage("pipes_folder/pipes_02_scale.png");
@@ -29,8 +30,10 @@ function setup() {
 
 
   //new grid class
+
   grid = new Grid(gridSpace);
   cellS = grid.computeGrid();
+  game = new Game();
 
   //RECT GRID SETUP
   for (let col = 0; col < grid.nCols; col++) {
@@ -75,7 +78,10 @@ function draw() {
     // DRAG PIPE
     if (pipe[index].isDrag == true && isDraging == true) {
       targ[index] = pipe[index].drag();
-      console.log(pipe[index].drag().casePosition)
+
+      //RECUP 
+      game.checkPosition(pipe[index]);
+      // console.log(pipe[index].drag().casePosition)
     }
     if (mouseIsPressed == false) {
     // console.log(pipe[index].drag()) ;
