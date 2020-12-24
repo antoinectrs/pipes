@@ -44,15 +44,15 @@ function setup() {
  
   //SET UP DOOR PIPE
   pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[0][3], p_02,));
-  // pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[1][3], p_02,));
-  // pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[2][3], p_01,));
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[1][3], p_02,));
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[2][3], p_01,));
 
 
   //push tarf into targ x y position
   targ.push(grid.snap(pLevel.level1[0][0], pLevel.level1[0][1]));
-  // targ.push(grid.snap(pLevel.level1[1][0], pLevel.level1[1][1]));
+  targ.push(grid.snap(pLevel.level1[1][0], pLevel.level1[1][1]));
 
-  // targ.push(grid.snap(pLevel.level1[2][0], pLevel.level1[2][1]));
+  targ.push(grid.snap(pLevel.level1[2][0], pLevel.level1[2][1]));
 }
 let isDraging = false;
 function draw() {
