@@ -15,7 +15,7 @@ class Grid {
     for (let col = 0; col < this.nCols; col++) {
       for (let row = 0; row < this.nRows; row++) {
         // console.log(rectGrid[0].show());
-        rectGrid[row*col].show(col, row);
+        rectGrid[row].show(col, row);
         // console.log(row*col)
         // rect(col * this.cellSize, row * this.cellSize, this.cellSize, this.cellSize);
       }

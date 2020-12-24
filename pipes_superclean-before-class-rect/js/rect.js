@@ -10,4 +10,7 @@ class Rect {
     rect(col * this.cellSize, row * this.cellSize, this.cellSize, this.cellSize);
     // return 0;
   }
+  checkTake(){
+   
+  }
 }

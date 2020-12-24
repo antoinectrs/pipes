@@ -63,27 +63,27 @@ function draw() {
   for (let index = 0; index < pipe.length; index++) {
     // SHOW DOORS PIPES
     pipe[index].show(targ[index].x, targ[index].y, cellS, cellS);
-    // let inside = pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS);
-
 
     if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed) {
-      // if (inside == false && mouseIsPressed) {
       isDraging = true;
       pipe[index].isDrag = true;
-      // console.log(  pipe[index].isDrag);
-      // dragElement = index;
+     
     }
+    // DRAG PIPE
     if (pipe[index].isDrag == true && isDraging == true) {
-      // console.log(index)
       targ[index] = pipe[index].drag();
-      // targ[index] = grid.snap(mouseX, mouseY);
     }
     if (mouseIsPressed == false) {
+    // console.log(pipe[index].drag()) ;
+    if(pipe[index].drag().x == pLevel.level1[2][0] && pipe[index].drag().y == pLevel.level1[2][1]){
+      console.log("win");
+    }
+       console.log();
       isDraging = false;
       pipe[index].isDrag = false;
     }
+
   }
-  // index = 0;
 }
 
 function windowResized() {

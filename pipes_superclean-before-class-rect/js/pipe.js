@@ -36,8 +36,6 @@ class Pipe {
     imageMode(CENTER);
     // this.image = image(this.src, px, py, w, h);
     this.image = image(this.src, px, py, w, h);
-
-
   }
 
   pressed(px, py, w, h) {
