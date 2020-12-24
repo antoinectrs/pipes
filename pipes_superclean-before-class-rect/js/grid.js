@@ -14,13 +14,10 @@ class Grid {
     stroke(this.strokeC);
     for (let col = 0; col < this.nCols; col++) {
       for (let row = 0; row < this.nRows; row++) {
-        // console.log(rectGrid[0].show());
         rectGrid[row].show(col, row);
-        // console.log(row*col)
         // rect(col * this.cellSize, row * this.cellSize, this.cellSize, this.cellSize);
       }
     }
-
   }
   computeGrid() {
     this.cellSize = width * this.targetCellSize;
@@ -33,6 +30,14 @@ class Grid {
     let centerCell = this.cellSize / 2;
     let x = round((windowX - centerCell) / width * this.nCols) * this.cellSize + centerCell;
     let y = round((windowY - centerCell) / height * this.nRows) * this.cellSize + centerCell;
+    let totalPixel = (x *this.nRows)/(width-this.cellSize / 2);
+    if(x > ((width-this.cellSize / 2)/5)*4 ){
+  console.log("full");
+    }
+    // console.log(x," "+width-this.cellSize / 2+ "   "+totalPixel);
     return { x, y }; // {x: x, y: y}
   }
+  // position(){
+    
+  // }
 }
