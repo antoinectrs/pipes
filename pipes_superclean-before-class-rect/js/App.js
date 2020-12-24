@@ -75,11 +75,12 @@ function draw() {
     // DRAG PIPE
     if (pipe[index].isDrag == true && isDraging == true) {
       targ[index] = pipe[index].drag();
+      console.log(pipe[index].drag().casePosition)
     }
     if (mouseIsPressed == false) {
     // console.log(pipe[index].drag()) ;
     if(pipe[index].drag().x == pLevel.level1[3][0] && pipe[index].drag().y == pLevel.level1[3][1]){
-      console.log("win");
+      // console.log("win");
     }
        console.log();
       isDraging = false;
