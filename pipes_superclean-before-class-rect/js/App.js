@@ -81,7 +81,7 @@ function draw() {
 
       //RECUP 
       game.checkPosition(pipe[index]);
-      // console.log(pipe[index].drag().casePosition)
+      console.log(pipe[index].drag().pixelPosition)
     }
     if (mouseIsPressed == false) {
     // console.log(pipe[index].drag()) ;

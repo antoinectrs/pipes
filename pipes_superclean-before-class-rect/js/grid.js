@@ -33,11 +33,12 @@ class Grid {
     
     // CALCUL ON CASE
     // let uniqueCase = (width-(this.cellSize / 2))/this.nRows;
-
-    let casePosition = {x: round((x *this.nCols)/(width-this.cellSize / 2)), y: round((y *this.nRows)/(height-this.cellSize / 2)) };
-
-    // console.log(casePosition);
-    return { x, y , casePosition}; // {x: x, y: y}
+    const totalW = width-this.cellSize / 2;
+    const totalH = height-this.cellSize / 2;
+    let casePosition = {x: round((x *this.nCols)/totalW), y: round((y *this.nRows)/totalH) };
+    let pixelPosition =  {x:round((casePosition.x*totalW)/this.nCols), y:round((casePosition.y*totalH)/this.nRows)};
+    // console.log(pixelPosition);
+    return { x, y , casePosition, pixelPosition}; // {x: x, y: y}
   }
   // position(){
     
