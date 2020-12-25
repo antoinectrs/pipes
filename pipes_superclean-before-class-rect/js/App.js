@@ -69,11 +69,12 @@ function draw() {
   strokeWeight(2);
   stroke(0);
   // let dragElement;
+
   for (let index = 0; index < pipe.length; index++) {
     // SHOW PIPES
     pipe[index].show(targ[index].x, targ[index].y, cellS, cellS* pLevel.level1[index][2]);
 
-    if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed) {
+    if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed &&  pLevel.level1[index][3]=="true") {
       isDraging = true;
       pipe[index].isDrag = true;
      
@@ -88,7 +89,7 @@ function draw() {
     }
     if (mouseIsPressed == false) {
     // console.log(pipe[index].drag()) ;
-    if(pipe[index].drag().x == pLevel.level1[3][0] && pipe[index].drag().y == pLevel.level1[3][1]){
+    if(pipe[index].drag().x == pLevel.level1[2][0] && pipe[index].drag().y == pLevel.level1[3][1]){
       // console.log("win");
     }
        console.log();
