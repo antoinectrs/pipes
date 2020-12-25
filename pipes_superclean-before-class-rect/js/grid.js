@@ -36,9 +36,21 @@ class Grid {
     const totalW = width-this.cellSize / 2;
     const totalH = height-this.cellSize / 2;
     let casePosition = {x: round((x *this.nCols)/totalW), y: round((y *this.nRows)/totalH) };
-    let pixelPosition =  {x:round((casePosition.x*totalW)/this.nCols), y:round((casePosition.y*totalH)/this.nRows)};
-    // console.log(pixelPosition);
-    return { x, y , casePosition, pixelPosition}; // {x: x, y: y}
+    // let pixelPosition =  {x:round((casePosition.x*totalW)/this.nCols), y:round((casePosition.y*totalH)/this.nRows)};
+    // let pixelPosition =  {x:round((2*totalW)/this.nCols), y:round((2*totalH)/this.nRows)};
+    // console.log(x, " ",pixelPosition);
+    return { x, y , casePosition}; // {x: x, y: y}
+  }
+  snapSetUp(initX, initY){
+    let centerCell = this.cellSize / 2;
+    const totalW = width-this.cellSize / 2;
+    const totalH = height-this.cellSize / 2;
+   let x = round((initX*totalW)/this.nCols);
+   let y = round((initY*totalH)/this.nRows);
+
+    x = round((x - centerCell) / width * this.nCols) * this.cellSize + centerCell;
+    y = round((y - centerCell) / height * this.nRows) * this.cellSize + centerCell;
+    return {x,y};
   }
   // position(){
     
