@@ -78,8 +78,20 @@ function draw() {
     if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed &&  pLevel.level1[index][3]=="true") {
       isDraging = true;
       pipe[index].isDrag = true;
-      // console.log(rectGrid[index].row);
-      console.log(grid.snap(targ[index].x, targ[index].y).casePosition);
+
+      let pipeP = grid.snap(targ[index].x, targ[index].y).casePosition;
+      // console.log(pipeP.x);
+      for (let col = 0; col < grid.nCols; col++) {
+        for (let row = 0; row < grid.nRows; row++) {
+      //     // rectGrid.push(new Rect(col, grid.cellSize, row));
+      // console.log( rectGrid[col].row);
+         
+          if(rectGrid[col].row == pipeP.x){
+            console.log(rectGrid[col].row);
+            // console.log(rectGrid[col].row);
+          }
+        }
+      }
     }
     // DRAG PIPE
     if (pipe[index].isDrag == true && isDraging == true) {
