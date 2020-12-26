@@ -11,6 +11,7 @@ class Rect {
     // return 0;
   }
   checkTake(){
-   
+    this.isTaken =  !this.isTaken
+   return this.isTaken;
   }
 }

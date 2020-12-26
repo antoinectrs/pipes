@@ -39,9 +39,10 @@ function setup() {
   for (let col = 0; col < grid.nCols; col++) {
     for (let row = 0; row < grid.nRows; row++) {
       rectGrid.push(new Rect(col, grid.cellSize, row));
+      // console.log(rectGrid[col].row)
     }
   }
-  console.log(rectGrid.length)
+
 
   grid.drawGrid();
  
@@ -52,8 +53,6 @@ function setup() {
 
   //push tarf into targ x y position
   // console.log(grid.snap(pLevel.level1[0][0], pLevel.level1[0][1]).pixelPosition)
-  console.log(grid.snapSetUp(pLevel.level1[0][2], pLevel.level1[0][2]));
-  console.log(grid.snap(pLevel.level1[0][0], pLevel.level1[0][1]));
   // targ.push(grid.snap(pLevel.level1[0][0], pLevel.level1[0][1]));
   targ.push(grid.snapSetUp(pLevel.level1[0][0], pLevel.level1[0][1]));
   targ.push(grid.snapSetUp(pLevel.level1[1][0], pLevel.level1[1][1]));
@@ -63,7 +62,9 @@ function setup() {
 let isDraging = false;
 function draw() {
   background(255);
+
   grid.drawGrid();
+
 
   //show grid class
   strokeWeight(2);
@@ -77,7 +78,8 @@ function draw() {
     if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed &&  pLevel.level1[index][3]=="true") {
       isDraging = true;
       pipe[index].isDrag = true;
-     
+      // console.log(rectGrid[index].row);
+      console.log(grid.snap(targ[index].x, targ[index].y).casePosition);
     }
     // DRAG PIPE
     if (pipe[index].isDrag == true && isDraging == true) {
