@@ -6,7 +6,6 @@ class Rect {
     this.isTaken = false
   }
   show(col, row) {
-    // console.log(this.col,this.cellSize, this.row);
     rect(col * this.cellSize, row * this.cellSize, this.cellSize, this.cellSize);
     // return 0;
   }

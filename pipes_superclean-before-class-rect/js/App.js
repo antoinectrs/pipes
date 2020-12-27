@@ -36,10 +36,13 @@ function setup() {
   game = new Game();
 
   //RECT GRID SETUP
-  for (let col = 0; col < grid.nCols; col++) {
-    for (let row = 0; row < grid.nRows; row++) {
-      rectGrid.push(new Rect(col, grid.cellSize, row));
-      // console.log(rectGrid[col].row)
+    //  console.log(grid.nRows);
+  let index= 0;
+  for (let col1 = 0; col1 < grid.nCols; col1++) {
+    for (let row1 = 0; row1 < grid.nRows; row1++) {
+      rectGrid.push(new Rect(col1, grid.cellSize, row1));
+      // console.log( index, rectGrid[index])
+      index++;
     }
   }
 
@@ -63,8 +66,7 @@ let isDraging = false;
 function draw() {
   background(255);
 
-  grid.drawGrid();
-
+  grid.drawGrid();  
 
   //show grid class
   strokeWeight(2);
@@ -81,15 +83,17 @@ function draw() {
 
       let pipeP = grid.snap(targ[index].x, targ[index].y).casePosition;
       // console.log(pipeP.x);
-      for (let col = 0; col < grid.nCols; col++) {
-        for (let row = 0; row < grid.nRows; row++) {
-      //     // rectGrid.push(new Rect(col, grid.cellSize, row));
-      // console.log( rectGrid[col].row);
-         
-          if(rectGrid[col].row == pipeP.x){
-            console.log(rectGrid[col].row);
-            // console.log(rectGrid[col].row);
+      let indexR= 0;
+      for (let col1 = 0; col1 < grid.nCols; col1++) {
+        for (let row1 = 0; row1 < grid.nRows; row1++) {
+          // console.log(rectGrid[indexR]);
+          if(rectGrid[indexR].row == pipeP.y ){
+            console.log(rectGrid[indexR].row);
           }
+          if(rectGrid[indexR].col == pipeP.x){
+            console.log(rectGrid[indexR].col);
+          }
+          indexR++;
         }
       }
     }
@@ -106,7 +110,6 @@ function draw() {
     if(pipe[index].drag().x == pLevel.level1[2][0] && pipe[index].drag().y == pLevel.level1[3][1]){
       // console.log("win");
     }
-       console.log();
       isDraging = false;
       pipe[index].isDrag = false;
     }
