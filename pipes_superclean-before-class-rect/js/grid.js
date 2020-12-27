@@ -14,6 +14,9 @@ class Grid {
     stroke(this.strokeC);
     for (let col = 0; col < this.nCols; col++) {
       for (let row = 0; row < this.nRows; row++) {
+        if(rectGrid[row].isTaken == true){
+          rectGrid[row].color = 20;
+        }
         rectGrid[row].show(col, row);
         // rectGrid[col].show(col, row);
         // console.log( rectGrid[col]);
@@ -56,18 +59,28 @@ class Grid {
 
   rectState(rectGrid, pipePy, pipePx) {
     let indexR = 0;
+    // console.log( pipePx);
+    // CHECK TOUTE LES COLONNES ET LINES
     for (let col1 = 0; col1 < this.nCols; col1++) {
+      let checkCol = false;
+      if (rectGrid[indexR].col == pipePx) {
+        checkCol = true;
+        // let o = rectGrid[indexR].take();
+      }
       for (let row1 = 0; row1 < this.nRows; row1++) {
-        // console.log(rectGrid[indexR]);
+       let checkRow = false;
         if (rectGrid[indexR].row == pipePy) {
-          let o = rectGrid[indexR].take();
-          console.log(o);
+          checkRow=true;
+          // console.log(rectGrid[indexR], pipePx);
         }
-        if (rectGrid[indexR].col == pipePx) {
-          // console.log(rectGrid[indexR].col);
+        if(checkRow && checkCol){
+          console.log(rectGrid[indexR])
+         rectGrid[indexR].take();  
         }
+       
         indexR++;
       }
     }
+    return
   }
 }
