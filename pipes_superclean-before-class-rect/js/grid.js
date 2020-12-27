@@ -12,14 +12,16 @@ class Grid {
   drawGrid() {
     strokeWeight(this.strokeW);
     stroke(this.strokeC);
+    let indexR = 0;
     for (let col = 0; col < this.nCols; col++) {
       for (let row = 0; row < this.nRows; row++) {
-        if(rectGrid[row].isTaken == true){
-          rectGrid[row].color = 20;
+        if(rectGrid[indexR].isTaken == true){
+          rectGrid[indexR].color = 20;
         }
-        rectGrid[row].show(col, row);
+        rectGrid[indexR].show(col, row);
         // rectGrid[col].show(col, row);
         // console.log( rectGrid[col]);
+        indexR++;
       }
     }
   }
@@ -74,8 +76,8 @@ class Grid {
           // console.log(rectGrid[indexR], pipePx);
         }
         if(checkRow && checkCol){
-          console.log(rectGrid[indexR])
          rectGrid[indexR].take();  
+         console.log(rectGrid[indexR])
         }
        
         indexR++;
