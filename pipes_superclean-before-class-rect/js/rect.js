@@ -9,8 +9,9 @@ class Rect {
     rect(col * this.cellSize, row * this.cellSize, this.cellSize, this.cellSize);
     // return 0;
   }
-  checkTake(){
-    this.isTaken =  !this.isTaken
+  take(){
+
+    this.isTaken = true;
    return this.isTaken;
   }
 }
