@@ -50,17 +50,16 @@ function setup() {
 
   //push tarf into targ x y position
   // targ.push(grid.snap(pLevel.level1[0][0], pLevel.level1[0][1]));
+
   targ.push(grid.snapSetUp(pLevel.level1[0][0], pLevel.level1[0][1]));
   targ.push(grid.snapSetUp(pLevel.level1[1][0], pLevel.level1[1][1]));
 
   targ.push(grid.snapSetUp(pLevel.level1[2][0], pLevel.level1[2][1]));
-
   // SETUP RESTRICTION RECT SNAP
   // CHAQUE SHAPE DETECT SON OCCUPATION SUR LES RECTANGLES
   for (let i = 0; i < targ.length; i++) {
     // RECUP LES CORDONNES DU PIPES APPLIQUEE SUR RECT RESPECTIF
     const targP = { x: pLevel.level1[i][0], y: pLevel.level1[i][1] };
-    // console.log(targP)
     grid.rectState(rectGrid, targP.y, targP.x)
   }
 
@@ -92,21 +91,19 @@ function draw() {
 
       //DETECT CASE NUMBER
       let pipeP = grid.snap(targ[index].x, targ[index].y).casePosition;
-      console.log(pipeP);
+      // console.log(pipeP);
 
       //SHECK RECT
-      // indexT =0;
-      // for (let col1 = 0; col1 < grid.nCols; col1++) {
-      //   for (let row1 = 0; row1 < grid.nRows; row1++) {
-      //     // rectGrid.push(new Rect(col1, grid.cellSize, row1));
-      //     if(rectGrid[indexT].isTaken == true){
-      //      console.log(rectGrid[indexT]);
-      //     }
-         
-      //     console.log();
-      //     indexT++;
-      //   }
-      // }
+      indexT =0;
+      for (let col1 = 0; col1 < grid.nCols; col1++) {
+        for (let row1 = 0; row1 < grid.nRows; row1++) {
+          // rectGrid.push(new Rect(col1, grid.cellSize, row1));
+          if(rectGrid[indexT].isTaken == true){
+           console.log(rectGrid[indexT]);
+          }
+          indexT++;
+        }
+      }
     
 
       for (let i = 0; i < targ.length; i++) {
