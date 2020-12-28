@@ -12,6 +12,7 @@ let cellS;
 let targ = [];
 let p_01;
 let p_02;
+let p_03;
 
 // GRID RECT VALUE
 let rectGrid = [];
@@ -21,6 +22,7 @@ function preload() {
   // for (let i = 0; i < imageNumber; i++) {
   p_01 = loadImage("pipes_folder/pipes_02_scale.png");
   p_02 = loadImage("pipes_folder/door.png");
+  p_03 = loadImage("pipes_folder/pipes_03_scale.png");
   pLevel = loadJSON("./js/position.json")
   // }
 }
@@ -44,16 +46,18 @@ function setup() {
   }
   grid.drawGrid();
   //SET UP DOOR PIPE
-  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[0][3], p_02));
-  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[1][3], p_02));
-  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[2][3], p_01));
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[0][3], p_02, pLevel.level1[0][4]));
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[1][3], p_02, pLevel.level1[1][4]));
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[2][3], p_01, pLevel.level1[2][4]));
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[3][3], p_03, pLevel.level1[3][4]));
 
   //push tarf into targ x y position
   // targ.push(grid.snap(pLevel.level1[0][0], pLevel.level1[0][1]));
   targ.push(grid.snapSetUp(pLevel.level1[0][0], pLevel.level1[0][1]));
   targ.push(grid.snapSetUp(pLevel.level1[1][0], pLevel.level1[1][1]));
-
   targ.push(grid.snapSetUp(pLevel.level1[2][0], pLevel.level1[2][1]));
+  targ.push(grid.snapSetUp(pLevel.level1[3][0], pLevel.level1[3][1]));
+  
   // SETUP RESTRICTION RECT SNAP
   // CHAQUE SHAPE DETECT SON OCCUPATION SUR LES RECTANGLES
   for (let i = 0; i < targ.length; i++) {
@@ -64,7 +68,6 @@ function setup() {
     if (grid.rectState(rectGrid, targP.y, targP.x).statut == true) {
       rectGrid[grid.rectState(rectGrid, targP.y, targP.x).ind].take();
     }
-
   }
 }
 let isDraging = false;
@@ -84,18 +87,23 @@ function draw() {
       pipe[index].isDrag = true;
       targ[index] = pipe[index].drag(mouseX, mouseY);
       game.lastPosition = {x:targ[index].x,y:targ[index].y,index:index};
-      // grid.rectState(rectGrid,pipeP.y,pipeP.x);
     }
     //DETECT CASE NUMBER
     pipeP = grid.snap(targ[index].x, targ[index].y).casePosition;
     // DRAG PIPE
     if (pipe[index].isDrag == true && isDraging == true) {
-    
-
+       //DRAG NO LIMIT
       targ[index] = pipe[index].drag(mouseX, mouseY);
-      if(grid.calculLimit(rectGrid,targ[game.lastPosition.index].casePosition, pipeP.x, pipeP.y)==true){
-        targ[game.lastPosition.index] = pipe[game.lastPosition.index].drag(game.lastPosition.x, game.lastPosition.y);
+      //REDRAG WITH LIMIT
+      // console.log(pipe[index].shape[0],pipe[index].shape[1])
+      for(let i = 0; i<pipe[index].shape.length;i++){
+        let cx =(pipeP.x)-(pipe[index].shape[0]);
+        if(grid.calculLimit(rectGrid,targ[game.lastPosition.index].casePosition, pipeP.x, pipeP.y)==true){
+          targ[game.lastPosition.index] = pipe[game.lastPosition.index].drag(game.lastPosition.x, game.lastPosition.y);
+          // console.log(cx,cy,pipeP.x)
+        }
       }
+      
       for (let i = 0; i < targ.length; i++) {
         const targP = { x: pLevel.level1[i][0], y: pLevel.level1[i][1] };
       }

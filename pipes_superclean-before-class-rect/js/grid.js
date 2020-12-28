@@ -16,11 +16,9 @@ class Grid {
     for (let col = 0; col < this.nCols; col++) {
       for (let row = 0; row < this.nRows; row++) {
         if(rectGrid[indexR].isTaken == true){
-          rectGrid[indexR].color = 20;
+          rectGrid[indexR].color = 230;
         }
         rectGrid[indexR].show(col, row);
-        // rectGrid[col].show(col, row);
-        // console.log( rectGrid[col]);
         indexR++;
       }
     }
@@ -97,7 +95,7 @@ class Grid {
     // CHECK TOUTE LES COLONNES ET LINES
     for (let col1 = 0; col1 < this.nCols; col1++) {
       for (let row1 = 0; row1 < this.nRows; row1++) {
-        if(rectGrid[indexR].col == casePosBefore.x && rectGrid[indexR].row == casePosBefore.y && rectGrid[indexR].isTaken == true){
+        if((rectGrid[indexR].col) == casePosBefore.x && (rectGrid[indexR].row) == casePosBefore.y && rectGrid[indexR].isTaken == true){
           rectTaken = true;
         }
         indexR++;

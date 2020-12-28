@@ -4,13 +4,14 @@ let imageNumber = 1;
 let insideShape = false;
 
 class Pipe {
-  constructor(x, y, w, h, src) {
+  constructor(x, y, w, h, src, shape) {
     this.dragging = false; // Is the object being dragged?
     this.rollover = false; // Is the mouse over the ellipse?
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
+    this.shape= shape;
 
     this.offsetX = 0;
     this.offsetY = 0;
