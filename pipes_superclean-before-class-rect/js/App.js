@@ -40,9 +40,7 @@ function setup() {
       indexT++;
     }
   }
-
   grid.drawGrid();
-
   //SET UP DOOR PIPE
   pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[0][3], p_02));
   pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[1][3], p_02));
@@ -50,7 +48,6 @@ function setup() {
 
   //push tarf into targ x y position
   // targ.push(grid.snap(pLevel.level1[0][0], pLevel.level1[0][1]));
-
   targ.push(grid.snapSetUp(pLevel.level1[0][0], pLevel.level1[0][1]));
   targ.push(grid.snapSetUp(pLevel.level1[1][0], pLevel.level1[1][1]));
 
@@ -62,14 +59,10 @@ function setup() {
     const targP = { x: pLevel.level1[i][0], y: pLevel.level1[i][1] };
     grid.rectState(rectGrid, targP.y, targP.x)
   }
-
-
-
 }
 let isDraging = false;
 function draw() {
   background(255);
-
   grid.drawGrid();
 
   //show grid class
@@ -82,39 +75,29 @@ function draw() {
     if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && pLevel.level1[index][3] == "true") {
       isDraging = true;
       pipe[index].isDrag = true;
-
       // grid.rectState(rectGrid,pipeP.y,pipeP.x);
     }
+    //DETECT CASE NUMBER
+    let pipeP = grid.snap(targ[index].x, targ[index].y).casePosition;
     // DRAG PIPE
     if (pipe[index].isDrag == true && isDraging == true) {
-      targ[index] = pipe[index].drag();
-
-      //DETECT CASE NUMBER
-      let pipeP = grid.snap(targ[index].x, targ[index].y).casePosition;
-      // console.log(pipeP);
-
-      //SHECK RECT
-      indexT =0;
+      //SHECK RECT FREE
+      console.log(pipeP)
+      indexT = 0;
       for (let col1 = 0; col1 < grid.nCols; col1++) {
         for (let row1 = 0; row1 < grid.nRows; row1++) {
-          // rectGrid.push(new Rect(col1, grid.cellSize, row1));
-          if(rectGrid[indexT].isTaken == true){
-           console.log(rectGrid[indexT]);
+          if (rectGrid[indexT].isTaken == true) {
+            let forbid = { x: rectGrid[indexT].col, y: rectGrid[indexT].row }
+            // console.log("you can't");
           }
           indexT++;
         }
       }
-    
+      targ[index] = pipe[index].drag();
 
       for (let i = 0; i < targ.length; i++) {
         const targP = { x: pLevel.level1[i][0], y: pLevel.level1[i][1] };
-        //  console.log(targP);
       }
-      // if(pipeP.x == ){
-
-      // }
-      // console.log(pipeP)
-
       //RECUP 
       game.checkPosition(pipe[index]);
     }
@@ -128,7 +111,6 @@ function draw() {
   }
 }
 function mouseReleased() {
-  // console.log("reales")
 }
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
