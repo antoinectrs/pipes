@@ -111,14 +111,13 @@ function draw() {
   }
 }
 function mouseReleased() {
- 
-  if(grid.calculLimit(rectGrid, pipeP.x, pipeP.y)==true){
-   
-    // pipe[].snap(game.lastPosition.x, game.lastPosition.y);
-    // pipe[game.lastPosition.index].drag(0,200)
+  // console.log(targ[game.lastPosition.index].casePosition, rectGrid[game.lastPosition.index], pipeP.x, pipeP.y)
+  if(grid.calculLimit(rectGrid,targ[game.lastPosition.index].casePosition, pipeP.x, pipeP.y)==true){
+    // console.log(game.lastPosition.x, game.lastPosition.y, targ[game.lastPosition.index].x,targ[game.lastPosition.index].y)
+   console.log("inside");
     targ[game.lastPosition.index] = pipe[game.lastPosition.index].drag(game.lastPosition.x, game.lastPosition.y);
   }
-  console.log(game.lastPosition.x);
+  // console.log(game.lastPosition.x);
 }
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
