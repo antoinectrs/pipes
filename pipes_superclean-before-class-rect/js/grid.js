@@ -99,7 +99,6 @@ class Grid {
       for (let row1 = 0; row1 < this.nRows; row1++) {
         if(rectGrid[indexR].col == casePosBefore.x && rectGrid[indexR].row == casePosBefore.y && rectGrid[indexR].isTaken == true){
           rectTaken = true;
-          console.log("inside");
         }
         indexR++;
       }
