@@ -3,6 +3,7 @@ let pipe = [];
 let shape1;
 let pipeNumber = 2;
 let pipeElement;
+let pipeP;
 
 //GRID GLOBAL VALUE
 let gridSpace = 100;
@@ -14,7 +15,8 @@ let p_02;
 
 // GRID RECT VALUE
 let rectGrid = [];
-let game;
+
+//PLAYER
 function preload() {
   // for (let i = 0; i < imageNumber; i++) {
   p_01 = loadImage("pipes_folder/pipes_02_scale.png");
@@ -59,10 +61,10 @@ function setup() {
     const targP = { x: pLevel.level1[i][0], y: pLevel.level1[i][1] };
 
     //ASSIGN STATUT FULL TO RECT
-    if(grid.rectState(rectGrid, targP.y, targP.x).statut==true){
+    if (grid.rectState(rectGrid, targP.y, targP.x).statut == true) {
       rectGrid[grid.rectState(rectGrid, targP.y, targP.x).ind].take();
     }
-  
+
   }
 }
 let isDraging = false;
@@ -77,30 +79,21 @@ function draw() {
     // SHOW PIPES
     pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * pLevel.level1[index][2]);
 
-    if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && pLevel.level1[index][3] == "true") {
+    if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && pLevel.level1[index][3] == "true") {  
       isDraging = true;
       pipe[index].isDrag = true;
+      targ[index] = pipe[index].drag(mouseX, mouseY);
+      game.lastPosition = {x:targ[index].x,y:targ[index].y,index:index};
       // grid.rectState(rectGrid,pipeP.y,pipeP.x);
     }
     //DETECT CASE NUMBER
-    let pipeP = grid.snap(targ[index].x, targ[index].y).casePosition;
+    pipeP = grid.snap(targ[index].x, targ[index].y).casePosition;
     // DRAG PIPE
     if (pipe[index].isDrag == true && isDraging == true) {
-      //SHECK RECT FREE
-// console.log(grid.calculLimit(rectGrid,pipeP.x,pipeP.y));
-grid.calculLimit(rectGrid,pipeP.x,pipeP.y)
-      // rectGrid[grid.rectState(rectGrid, targP.y, targP.x).ind].take();
-      indexT = 0;
-      for (let col1 = 0; col1 < grid.nCols; col1++) {
-        for (let row1 = 0; row1 < grid.nRows; row1++) {
-          if (rectGrid[indexT].isTaken == true) {
-            let forbid = { x: rectGrid[indexT].col, y: rectGrid[indexT].row }
-            // console.log("you can't");
-          }
-          indexT++;
-        }
-      }
-      targ[index] = pipe[index].drag();
+    
+
+      targ[index] = pipe[index].drag(mouseX, mouseY);
+      // game.lastPosition = {x:targ[index].x,y:targ[index].y,index:index};
 
       for (let i = 0; i < targ.length; i++) {
         const targP = { x: pLevel.level1[i][0], y: pLevel.level1[i][1] };
@@ -118,6 +111,14 @@ grid.calculLimit(rectGrid,pipeP.x,pipeP.y)
   }
 }
 function mouseReleased() {
+ 
+  if(grid.calculLimit(rectGrid, pipeP.x, pipeP.y)==true){
+   
+    // pipe[].snap(game.lastPosition.x, game.lastPosition.y);
+    // pipe[game.lastPosition.index].drag(0,200)
+    targ[game.lastPosition.index] = pipe[game.lastPosition.index].drag(game.lastPosition.x, game.lastPosition.y);
+  }
+  console.log(game.lastPosition.x);
 }
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);

@@ -51,8 +51,8 @@ class Pipe {
       return insideShape;
     }
   }
-  drag() {
-    this.dragElement = grid.snap(mouseX, mouseY);
+  drag(x,y) {
+    this.dragElement = grid.snap(x,y);
     return this.dragElement
   }
   // clicked() {

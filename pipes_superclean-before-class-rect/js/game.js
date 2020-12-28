@@ -1,6 +1,7 @@
 class Game {
     constructor() {
     this.gameState = false;
+    this.lastPosition;
     }
     checkPosition(pipeElement) {
         // console.log(pipeElement.drag().casePosition)
