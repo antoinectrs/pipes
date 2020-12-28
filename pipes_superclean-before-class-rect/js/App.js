@@ -57,7 +57,12 @@ function setup() {
   for (let i = 0; i < targ.length; i++) {
     // RECUP LES CORDONNES DU PIPES APPLIQUEE SUR RECT RESPECTIF
     const targP = { x: pLevel.level1[i][0], y: pLevel.level1[i][1] };
-    grid.rectState(rectGrid, targP.y, targP.x)
+
+    //ASSIGN STATUT FULL TO RECT
+    if(grid.rectState(rectGrid, targP.y, targP.x).statut==true){
+      rectGrid[grid.rectState(rectGrid, targP.y, targP.x).ind].take();
+    }
+  
   }
 }
 let isDraging = false;
@@ -82,7 +87,7 @@ function draw() {
     // DRAG PIPE
     if (pipe[index].isDrag == true && isDraging == true) {
       //SHECK RECT FREE
-      console.log(pipeP)
+      // console.log(pipeP)
       indexT = 0;
       for (let col1 = 0; col1 < grid.nCols; col1++) {
         for (let row1 = 0; row1 < grid.nRows; row1++) {

@@ -60,7 +60,7 @@ class Grid {
     let y = round((initY * totalH) / this.nRows);
 
     
-    console.log(initX,initY)
+    // console.log(initX,initY)
     x = round((x - centerCell) / width * this.nCols) * this.cellSize + centerCell;
     y = round((y - centerCell) / height * this.nRows) * this.cellSize + centerCell;
 
@@ -69,6 +69,7 @@ class Grid {
 
   rectState(rectGrid, pipePy, pipePx) {
     let indexR = 0;
+    let rectFull = {statut:false, ind:indexR};
     // console.log( pipePx);
     // CHECK TOUTE LES COLONNES ET LINES
     for (let col1 = 0; col1 < this.nCols; col1++) {
@@ -84,12 +85,13 @@ class Grid {
           // console.log(rectGrid[indexR], pipePx);
         }
         if(checkRow && checkCol){
-         rectGrid[indexR].take();  
-         console.log(rectGrid[indexR])
+         rectFull= {statut:true, ind:indexR};
+        //  rectGrid[indexR].take();  
+        //  console.log(rectGrid[indexR])
         }
         indexR++;
       }
     }
-    return
+    return rectFull;
   }
 }
