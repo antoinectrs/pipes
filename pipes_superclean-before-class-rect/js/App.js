@@ -87,7 +87,9 @@ function draw() {
     // DRAG PIPE
     if (pipe[index].isDrag == true && isDraging == true) {
       //SHECK RECT FREE
-      // console.log(pipeP)
+console.log(grid.calculLimit(rectGrid,pipeP.x,pipeP.y));
+grid.calculLimit(rectGrid,pipeP.x,pipeP.y)
+      // rectGrid[grid.rectState(rectGrid, targP.y, targP.x).ind].take();
       indexT = 0;
       for (let col1 = 0; col1 < grid.nCols; col1++) {
         for (let row1 = 0; row1 < grid.nRows; row1++) {

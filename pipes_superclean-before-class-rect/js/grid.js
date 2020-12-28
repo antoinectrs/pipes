@@ -76,18 +76,44 @@ class Grid {
       let checkCol = false;
       if (rectGrid[indexR].col == pipePx) {
         checkCol = true;
-        // let o = rectGrid[indexR].take();
       }
       for (let row1 = 0; row1 < this.nRows; row1++) {
        let checkRow = false;
         if (rectGrid[indexR].row == pipePy) {
           checkRow=true;
-          // console.log(rectGrid[indexR], pipePx);
         }
         if(checkRow && checkCol){
          rectFull= {statut:true, ind:indexR};
-        //  rectGrid[indexR].take();  
-        //  console.log(rectGrid[indexR])
+        }
+        indexR++;
+      }
+    }
+    return rectFull;
+  }
+
+  calculLimit(rectGrid, pipePy, pipePx) {
+    let indexR = 0;
+    let rectFull = {statut:false, ind:indexR,co: 0,ro: 0};
+    // console.log( pipePx);
+    // CHECK TOUTE LES COLONNES ET LINES
+    for (let col1 = 0; col1 < this.nCols; col1++) {
+      let checkCol = false;
+    
+      if (rectGrid[indexR].col == pipePy ) {
+        checkCol = true;
+        rectFull.co = col1;
+        // console.log( pipePy, pipePx,rectGrid[indexR].col)
+      }
+      for (let row1 = 0; row1 < this.nRows; row1++) {
+       let checkRow = false;
+
+        if (rectGrid[indexR].row == pipePx) {
+          checkRow=true;
+          rectFull.ro = row1;
+        }
+        if(checkRow && checkCol){
+         rectFull.statut = true;
+         rectFull.ind= indexR;
         }
         indexR++;
       }

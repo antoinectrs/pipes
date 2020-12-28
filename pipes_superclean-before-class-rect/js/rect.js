@@ -7,7 +7,7 @@ class Rect {
     this.color = 255;
   }
   show(col, row) {
-    fill(this.color); 
+    fill(this.color);
     rect(col * this.cellSize, row * this.cellSize, this.cellSize, this.cellSize);
     // return 0;
   }
