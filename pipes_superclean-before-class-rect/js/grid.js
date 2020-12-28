@@ -94,23 +94,13 @@ class Grid {
   calculLimit(rectGrid,casePosBefore, pipePy, pipePx) {
     let indexR = 0;
     let rectTaken = false;
-    let checkRow = false;
-    let checkCol = false;
     // CHECK TOUTE LES COLONNES ET LINES
     for (let col1 = 0; col1 < this.nCols; col1++) {
-      if (rectGrid[indexR].col == casePosBefore.x) {
-        checkCol = true;
-      }
       for (let row1 = 0; row1 < this.nRows; row1++) {
-        if (rectGrid[indexR].row == casePosBefore.y) {
-          checkCol = true;
-        }
-        if(checkCol == true && checkCol==true && rectGrid[indexR].isTaken == true){
+        if(rectGrid[indexR].col == casePosBefore.x && rectGrid[indexR].row == casePosBefore.y && rectGrid[indexR].isTaken == true){
           rectTaken = true;
+          console.log("inside");
         }
-        // console.log(pipePy, pipePx)
-        // if (casePosBefore[indexR].x == pipePx && casePosBefore[indexR].y == pipePy && rectGrid[indexR].isTaken ==true) {
-        
         indexR++;
       }
     }
