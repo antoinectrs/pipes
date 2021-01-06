@@ -46,18 +46,23 @@ function setup() {
   }
   grid.drawGrid();
   //SET UP DOOR PIPE
-  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[0][3], p_02, pLevel.level1[0][4]));
-  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[1][3], p_02, pLevel.level1[1][4]));
-  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[2][3], p_01, pLevel.level1[2][4]));
-  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[3][3], p_03, pLevel.level1[3][4]));
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[0][3], p_02, pLevel.level1[0][4], pLevel.level1[0][5]));
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[1][3], p_02, pLevel.level1[1][4], pLevel.level1[1][5]));
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[2][3], p_01, pLevel.level1[2][4], pLevel.level1[2][5]));
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[3][3], p_03, pLevel.level1[3][4], pLevel.level1[3][5]));
 
   //push tarf into targ x y position
   // targ.push(grid.snap(pLevel.level1[0][0], pLevel.level1[0][1]));
-  targ.push(grid.snapSetUp(pLevel.level1[0][0], pLevel.level1[0][1]));
-  targ.push(grid.snapSetUp(pLevel.level1[1][0], pLevel.level1[1][1]));
-  targ.push(grid.snapSetUp(pLevel.level1[2][0], pLevel.level1[2][1]));
-  targ.push(grid.snapSetUp(pLevel.level1[3][0], pLevel.level1[3][1]));
-  
+  for(let i= 0; i<pipe.length; i++){
+    pipe[i].rotatePipe();
+    console.log( pipe[i].rotatePipe());
+    // bug define shape 2 in grid
+    if((pLevel.level1[i][2])%2 == 0 ){
+      console.log(pipe[i])
+    }
+    targ.push(grid.snapSetUp(pLevel.level1[i][0], pLevel.level1[i][1]));
+  }
+
   // SETUP RESTRICTION RECT SNAP
   // CHAQUE SHAPE DETECT SON OCCUPATION SUR LES RECTANGLES
   for (let i = 0; i < targ.length; i++) {

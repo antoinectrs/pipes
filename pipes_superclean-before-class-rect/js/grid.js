@@ -57,7 +57,7 @@ class Grid {
     let x = round((initX * totalW) / this.nCols);
     let y = round((initY * totalH) / this.nRows);
 
-    
+   
     // console.log(initX,initY)
     x = round((x - centerCell) / width * this.nCols) * this.cellSize + centerCell;
     y = round((y - centerCell) / height * this.nRows) * this.cellSize + centerCell;

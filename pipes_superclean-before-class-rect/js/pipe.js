@@ -4,20 +4,22 @@ let imageNumber = 1;
 let insideShape = false;
 
 class Pipe {
-  constructor(x, y, w, h, src, shape) {
+  constructor(x, y, w, h, src, shape, rot) {
     this.dragging = false; // Is the object being dragged?
     this.rollover = false; // Is the mouse over the ellipse?
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
-    this.shape= shape;
+    this.shape = shape;
 
     this.offsetX = 0;
     this.offsetY = 0;
     this.image;
     this.src = src;
 
+    //ROTATION PIPE
+    this.rot = rot;
     //SNAP
     this.px;
     this.py;
@@ -33,10 +35,25 @@ class Pipe {
       this.y = mouseY + this.offsetY;
     }
   }
+  rotatePipe() {
+    angleMode(DEGREES);
+    rotate(this.rot);
+    return this.rot;
+  }
   show(px, py, w, h) {
+    push();
+    translate(px, py);
+    angleMode(DEGREES);
+    rotate(this.rot);
+    // rect(px, py,50,50)
+
+   
     imageMode(CENTER);
+ 
+
     // this.image = image(this.src, px, py, w, h);
-    this.image = image(this.src, px, py, w, h);
+    this.image = image(this.src, 0,0, w, h);
+    pop();
   }
 
   pressed(px, py, w, h) {
@@ -52,8 +69,8 @@ class Pipe {
       return insideShape;
     }
   }
-  drag(x,y) {
-    this.dragElement = grid.snap(x,y);
+  drag(x, y) {
+    this.dragElement = grid.snap(x, y);
     return this.dragElement
   }
   // clicked() {
