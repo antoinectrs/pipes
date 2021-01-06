@@ -24,6 +24,9 @@ function preload() {
   p_02 = loadImage("pipes_folder/door.png");
   p_03 = loadImage("pipes_folder/pipes_03_scale.png");
   pLevel = loadJSON("./js/position.json")
+
+  p_big_01 = loadImage("pipes_folder/pipes01.png");
+  p_big_02 = loadImage("pipes_folder/pipes02.png");
   // }
 }
 function setup() {
@@ -48,7 +51,8 @@ function setup() {
   //SET UP DOOR PIPE
   pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[0][3], p_02, pLevel.level1[0][4], pLevel.level1[0][5]));
   pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[1][3], p_02, pLevel.level1[1][4], pLevel.level1[1][5]));
-  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[2][3], p_01, pLevel.level1[2][4], pLevel.level1[2][5]));
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[2][3], p_big_01, pLevel.level1[2][4], pLevel.level1[2][5], pLevel.level1[2][6],pLevel.level1[2][7]));
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[2][3], p_big_02, pLevel.level1[3][4], pLevel.level1[3][5], pLevel.level1[3][6],pLevel.level1[3][7]));
   // pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[3][3], p_03, pLevel.level1[3][4], pLevel.level1[3][5]));
 
   //push tarf into targ x y position
@@ -100,7 +104,6 @@ function draw() {
       //DETECT IF IN SHARE PIPE
       if(pipeP.y< 5){
         pipe[index].rot = 0;
-        console.log((pipe[index].rot));
       }else{
         pipe[index].rot = 90;
       }
@@ -121,18 +124,23 @@ function draw() {
         const targP = { x: pLevel.level1[i][0], y: pLevel.level1[i][1] };
       }
       //RECUP 
-      game.checkPosition(pipe[index]);
+     
     }
     if (mouseIsPressed == false) {
-      if (pipe[index].drag().x == pLevel.level1[2][0] && pipe[index].drag().y == pLevel.level1[3][1]) {
-        // console.log("win");
-      }
+      // if (pipe[index].drag().x == pLevel.level1[2][0] && pipe[index].drag().y == pLevel.level1[3][1]) {
+      //   // console.log("win");
+      // }
       isDraging = false;
       pipe[index].isDrag = false;
     }
   }
 }
 function mouseReleased() {
+  //CHECK IS WIN
+  // for (let i = 0; i < targ.length; i++) {
+    //  console.log(pipeP);
+  game.checkPosition(pipeP);
+  // }
   if(grid.calculLimit(rectGrid,targ[game.lastPosition.index].casePosition, pipeP.x, pipeP.y)==true){
     targ[game.lastPosition.index] = pipe[game.lastPosition.index].drag(game.lastPosition.x, game.lastPosition.y);
   }

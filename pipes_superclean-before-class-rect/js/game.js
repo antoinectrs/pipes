@@ -4,12 +4,17 @@ class Game {
     this.lastPosition;
     }
     checkPosition(pipeElement) {
-        // console.log(pipeElement.drag().casePosition)
-        // console.log(pLevel.level1[0][2])
-      let target =  pipeElement.drag().casePosition
-        if(target.x == pLevel.level1[0][2] && target.y == pLevel.level1[0][2]){
+        //TARGET X Y en fonction du JSON
+
+        if(pipeElement.x ==pLevel.level1[2][6] && pipeElement.y ==  pLevel.level1[2][7]){
             console.log("win")
         }
+        // switch (mode) {
+        //   case 0:
+        //     break;
+        //   case 1:
+        //     scene1();
+        //     break;
+        // }
     }
-    
   }

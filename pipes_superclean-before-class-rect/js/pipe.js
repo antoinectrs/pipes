@@ -4,7 +4,7 @@ let imageNumber = 1;
 let insideShape = false;
 
 class Pipe {
-  constructor(x, y, w, h, src, shape, rot) {
+  constructor(x, y, w, h, src, shape, rot,winPosition) {
     this.dragging = false; // Is the object being dragged?
     this.rollover = false; // Is the mouse over the ellipse?
     this.x = x;
@@ -26,6 +26,8 @@ class Pipe {
 
     //interaction element
     this.isDrag = false;
+
+    this.winPosition = winPosition;
   }
 
   update() {
