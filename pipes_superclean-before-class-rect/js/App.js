@@ -49,13 +49,11 @@ function setup() {
   pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[0][3], p_02, pLevel.level1[0][4], pLevel.level1[0][5]));
   pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[1][3], p_02, pLevel.level1[1][4], pLevel.level1[1][5]));
   pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[2][3], p_01, pLevel.level1[2][4], pLevel.level1[2][5]));
-  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[3][3], p_03, pLevel.level1[3][4], pLevel.level1[3][5]));
+  // pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[3][3], p_03, pLevel.level1[3][4], pLevel.level1[3][5]));
 
   //push tarf into targ x y position
   // targ.push(grid.snap(pLevel.level1[0][0], pLevel.level1[0][1]));
   for(let i= 0; i<pipe.length; i++){
-    pipe[i].rotatePipe();
-    console.log( pipe[i].rotatePipe());
     // bug define shape 2 in grid
     if((pLevel.level1[i][2])%2 == 0 ){
       console.log(pipe[i])
@@ -85,8 +83,8 @@ function draw() {
   stroke(0);
   for (let index = 0; index < pipe.length; index++) {
     // SHOW PIPES
+ 
     pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * pLevel.level1[index][2]);
-
     if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && pLevel.level1[index][3] == "true") {  
       isDraging = true;
       pipe[index].isDrag = true;
@@ -94,9 +92,19 @@ function draw() {
       game.lastPosition = {x:targ[index].x,y:targ[index].y,index:index};
     }
     //DETECT CASE NUMBER
-    pipeP = grid.snap(targ[index].x, targ[index].y).casePosition;
+    
+
     // DRAG PIPE
     if (pipe[index].isDrag == true && isDraging == true) {
+      pipeP = grid.snap(targ[index].x, targ[index].y).casePosition;
+      //DETECT IF IN SHARE PIPE
+      if(pipeP.y< 5){
+        pipe[index].rot = 0;
+        console.log((pipe[index].rot));
+      }else{
+        pipe[index].rot = 90;
+      }
+      // console.log(pipeP.y)
        //DRAG NO LIMIT
       targ[index] = pipe[index].drag(mouseX, mouseY);
       //REDRAG WITH LIMIT
@@ -105,7 +113,7 @@ function draw() {
         let cx =(pipeP.x)-(pipe[index].shape[0]);
         if(grid.calculLimit(rectGrid,targ[game.lastPosition.index].casePosition, pipeP.x, pipeP.y)==true){
           targ[game.lastPosition.index] = pipe[game.lastPosition.index].drag(game.lastPosition.x, game.lastPosition.y);
-          // console.log(cx,cy,pipeP.x)
+          // console.log(pipeP.x)
         }
       }
       

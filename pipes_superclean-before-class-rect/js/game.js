@@ -11,4 +11,5 @@ class Game {
             console.log("win")
         }
     }
+    
   }

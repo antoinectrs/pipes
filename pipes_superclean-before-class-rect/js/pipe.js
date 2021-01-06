@@ -35,22 +35,12 @@ class Pipe {
       this.y = mouseY + this.offsetY;
     }
   }
-  rotatePipe() {
-    angleMode(DEGREES);
-    rotate(this.rot);
-    return this.rot;
-  }
   show(px, py, w, h) {
     push();
     translate(px, py);
     angleMode(DEGREES);
     rotate(this.rot);
-    // rect(px, py,50,50)
-
-   
     imageMode(CENTER);
- 
-
     // this.image = image(this.src, px, py, w, h);
     this.image = image(this.src, 0,0, w, h);
     pop();
