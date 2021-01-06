@@ -20,6 +20,7 @@ let rectGrid = [];
 
 //ANIMATION GAME ARRAY
 let animationGame = [];
+let speed = 0;
 //PLAYER
 
 function preload() {
@@ -96,6 +97,12 @@ function draw() {
 
   //show grid class
   // strokeWeight(2);
+
+  if(game.win01 == true && speed <1){
+    speed+=0.01;
+    game.animationWin(speed);
+  } 
+
   stroke(0);
   for (let index = 0; index < pipe.length; index++) {
     // SHOW PIPES
@@ -146,14 +153,6 @@ function draw() {
       pipe[index].isDrag = false;
     }
   }
-
-  for (let index = 0; index < animationGame.length; index++) {
-    // animationGame.push(grid.snapSetUp(pLevel.level1animation[index][0], pLevel.level1animation[index][1]))
-    console.log(animationGame[0].x)
-    fill(255, 0, 0)
-    ellipse(animationGame[index].x, animationGame[index].y, 50)
-  }
-
 }
 function mouseReleased() {
   //CHECK IS WIN
