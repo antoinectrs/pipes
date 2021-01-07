@@ -1,12 +1,12 @@
-class sharePipe {
-  constructor(pipes, y, w, h, ctx) {
+class Player {
+  constructor(ID) {
 //     this.x = x;
 //     this.y = y;
 //     this.w = w;
 //     this.h = h;
 //     this.ctx = ctx;
 //     this.color = "black";
-//     this.ID = Math.random() * 10;
+    this.ID = ID;
 //     console.log(this.ID);
 //     document.addEventListener("click", this.send.bind(this));
 //   }

@@ -17,7 +17,8 @@ let p_03;
 // GRID RECT VALUE
 let rectGrid = [];
 
-
+//PLAYER TAB
+let player = [];
 //ANIMATION GAME ARRAY
 let animationGame = [];
 
@@ -52,11 +53,12 @@ function setup() {
     }
   }
 
-  let url = window.location.href;
-  if (url.split('/').pop() == "#01") // This doesn't work, any suggestions?
+  let checkID = window.location.href.split('/').pop();
+  if (checkID == "#01") // This doesn't work, any suggestions?
   {
-    alert("your player is #01");
-  } else if (url.split('/').pop() == "#02") {
+    player.push(new Player(checkID))
+console.log(player[0].ID);
+  } else if (checkID == "#02") {
     alert("your player is #02");
   }
   grid.drawGrid();
