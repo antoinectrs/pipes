@@ -22,7 +22,6 @@ let rectGrid = [];
 let animationGame = [];
 
 //PLAYER
-
 function preload() {
   // for (let i = 0; i < imageNumber; i++) {
   p_01 = loadImage("pipes_folder/pipes_02_scale.png");
@@ -52,6 +51,14 @@ function setup() {
       indexT++;
     }
   }
+
+  let url = window.location.href;
+  if (url.split('/').pop() == "#01") // This doesn't work, any suggestions?
+  {
+    alert("your player is #01");
+  } else if (url.split('/').pop() == "#02") {
+    alert("your player is #02");
+  }
   grid.drawGrid();
   //SET UP DOOR PIPE
   pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[0][3], p_02, pLevel.level1[0][4], pLevel.level1[0][5]));
@@ -66,7 +73,7 @@ function setup() {
     animationGame.push(grid.snapSetUp(pLevel.level1animation[index][1], pLevel.level1animation[index][0]))
 
   }
-  console.log(animationGame);
+  // console.log(animationGame);
 
   //push tarf into targ x y position
   // targ.push(grid.snap(pLevel.level1[0][0], pLevel.level1[0][1]));
@@ -88,33 +95,29 @@ function setup() {
       rectGrid[grid.rectState(rectGrid, targP.y, targP.x).ind].take();
     }
   }
-  console.log(pLevel)
 }
 let isDraging = false;
 function draw() {
-  if(game.win01 == false){
+  if (game.win01 == false) {
     background(255);
   }
- 
   grid.drawGrid();
-
   //show grid class
   // strokeWeight(2);
 
-// FAIRE UN SWITCH POUR LES PROCHAIN NIVEAU
-  if(game.win01 == true ){
+  // FAIRE UN SWITCH POUR LES PROCHAIN NIVEAU
+  if (game.win01 == true) {
     game.animationWin();
-    if(game.posAnimation <1){
-      game.posAnimation+=game.speedAnimation;
-    }else if (game.setCounter< pLevel.level1animation.length-2){
+    if (game.posAnimation < 1) {
+      game.posAnimation += game.speedAnimation;
+    } else if (game.setCounter < pLevel.level1animation.length - 2) {
       game.setCounter++;
-      game.posAnimation =0;
-    }else{
-      game.win01= !game.win01;
+      game.posAnimation = 0;
+    } else {
+      game.win01 = !game.win01;
     }
-    
-  } 
-  console.log( pLevel.level1animation.length)
+  }
+  // console.log( pLevel.level1animation.length)
 
   stroke(0);
   for (let index = 0; index < pipe.length; index++) {
@@ -127,9 +130,6 @@ function draw() {
       targ[index] = pipe[index].drag(mouseX, mouseY);
       game.lastPosition = { x: targ[index].x, y: targ[index].y, index: index };
     }
-    //DETECT CASE NUMBER
-
-
     // DRAG PIPE
     if (pipe[index].isDrag == true && isDraging == true) {
       pipeP = grid.snap(targ[index].x, targ[index].y).casePosition;
@@ -151,12 +151,10 @@ function draw() {
           // console.log(pipeP.x)
         }
       }
-
       for (let i = 0; i < targ.length; i++) {
         const targP = { x: pLevel.level1[i][0], y: pLevel.level1[i][1] };
       }
       //RECUP 
-
     }
     if (mouseIsPressed == false) {
       // if (pipe[index].drag().x == pLevel.level1[2][0] && pipe[index].drag().y == pLevel.level1[3][1]) {
@@ -170,11 +168,10 @@ function draw() {
 function mouseReleased() {
   //CHECK IS WIN
   // for (let i = 0; i < targ.length; i++) {
-  console.log(game.checkPosition(pipeP));
+  // console.log(game.checkPosition(pipeP));
   if (game.checkPosition(pipeP)) {
     game.animationWin();
   }
-
   // }
   if (grid.calculLimit(rectGrid, targ[game.lastPosition.index].casePosition, pipeP.x, pipeP.y) == true) {
     targ[game.lastPosition.index] = pipe[game.lastPosition.index].drag(game.lastPosition.x, game.lastPosition.y);

@@ -12,22 +12,21 @@ class Pipe {
     this.w = w;
     this.h = h;
     this.shape = shape;
-
     this.offsetX = 0;
     this.offsetY = 0;
     this.image;
     this.src = src;
-
     //ROTATION PIPE
     this.rot = rot;
     //SNAP
     this.px;
     this.py;
-
     //interaction element
     this.isDrag = false;
-
     this.winPosition = winPosition;
+
+    //SHARE PIPE
+    this.onSharePipe = true;
   }
 
   update() {

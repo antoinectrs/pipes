@@ -16,7 +16,7 @@ firebase.initializeApp(firebaseConfig);
 
 // SIGN ANONYMOUS USER ----
 firebase.auth().onAuthStateChanged((user) => {
-  console.log("onAuthStateChanged");
+  // console.log("onAuthStateChanged");
   if (user) {
     console.log(user);
     // User is signed in.
