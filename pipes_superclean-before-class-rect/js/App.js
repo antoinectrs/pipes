@@ -20,7 +20,7 @@ let rectGrid = [];
 
 //ANIMATION GAME ARRAY
 let animationGame = [];
-let speed = 0;
+
 //PLAYER
 
 function preload() {
@@ -77,7 +77,6 @@ function setup() {
     // }
     targ.push(grid.snapSetUp(pLevel.level1[i][0], pLevel.level1[i][1]));
   }
-
   // SETUP RESTRICTION RECT SNAP
   // CHAQUE SHAPE DETECT SON OCCUPATION SUR LES RECTANGLES
   for (let i = 0; i < targ.length; i++) {
@@ -89,19 +88,33 @@ function setup() {
       rectGrid[grid.rectState(rectGrid, targP.y, targP.x).ind].take();
     }
   }
+  console.log(pLevel)
 }
 let isDraging = false;
 function draw() {
-  background(255);
+  if(game.win01 == false){
+    background(255);
+  }
+ 
   grid.drawGrid();
 
   //show grid class
   // strokeWeight(2);
 
-  if(game.win01 == true && speed <1){
-    speed+=0.01;
-    game.animationWin(speed);
+// FAIRE UN SWITCH POUR LES PROCHAIN NIVEAU
+  if(game.win01 == true ){
+    game.animationWin();
+    if(game.posAnimation <1){
+      game.posAnimation+=game.speedAnimation;
+    }else if (game.setCounter< pLevel.level1animation.length-2){
+      game.setCounter++;
+      game.posAnimation =0;
+    }else{
+      game.win01= !game.win01;
+    }
+    
   } 
+  console.log( pLevel.level1animation.length)
 
   stroke(0);
   for (let index = 0; index < pipe.length; index++) {

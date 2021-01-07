@@ -4,10 +4,11 @@ class Rect {
     this.cellSize = cellSize,
     this.row = row,
     this.isTaken = false
-    this.color = 255;
+    this.color = 125;
   }
   show(col, row) {
-    fill(this.color);
+    // fill(this.color);
+    noFill();
     rect(col * this.cellSize, row * this.cellSize, this.cellSize, this.cellSize);
     // return 0;
   }

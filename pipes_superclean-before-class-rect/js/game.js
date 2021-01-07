@@ -2,7 +2,9 @@ class Game {
   constructor() {
     this.gameState = false;
     this.lastPosition;
-    this.speedAnimation = 0.05;
+    this.posAnimation = 0;
+    this.speedAnimation = 0.03;
+    this.setCounter = 0;
     this.win01 = false;
   }
   checkPosition(pipeElement) {
@@ -19,11 +21,15 @@ class Game {
     //     break;
     // }
   }
-  animationWin(speed) {
-    let x = lerp(animationGame[0].x,animationGame[1].x, speed);
-    // let x = lerp(animationGame[0].x,animationGame[1].x, this.speedAnimation);
-    console.log(x)
-    ellipse(x, animationGame[0].y, 110)
+  animationWin() {
+    let x = lerp(animationGame[this.setCounter].x,animationGame[ this.setCounter+1].x, this.posAnimation);
+    let y = lerp(animationGame[this.setCounter].y,animationGame[ this.setCounter+1].y, this.posAnimation);
+    push();
+    noStroke();
+    fill(0)
+    // ellipse(x, y, 110);
+    ellipse(x, y, 180);
+    pop();
     // let y = lerp(50, mouseY, this.speedAnimation);
     //ELLIPSE LERP WIN
     // for (let index = 0; index < animationGame.length; index++) {
