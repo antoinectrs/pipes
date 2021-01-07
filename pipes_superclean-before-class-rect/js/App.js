@@ -124,7 +124,9 @@ function draw() {
   stroke(0);
   for (let index = 0; index < pipe.length; index++) {
     // SHOW PIPES
-
+    if(pipe[index].pipeIsUsed==true){
+      alert("FIRST PIPES VOLER")
+    }
     pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * pLevel.level1[index][2]);
     if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && pLevel.level1[index][3] == "true") {
       isDraging = true;

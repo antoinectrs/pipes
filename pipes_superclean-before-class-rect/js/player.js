@@ -1,27 +1,19 @@
 class Player {
   constructor(ID) {
-//     this.x = x;
-//     this.y = y;
-//     this.w = w;
-//     this.h = h;
-//     this.ctx = ctx;
-//     this.color = "black";
     this.ID = ID;
-//     console.log(this.ID);
-//     document.addEventListener("click", this.send.bind(this));
-//   }
+  }
 //   show() {
 //     this.ctx.fillStyle = this.color;
 //     this.ctx.fillRect(this.x, this.y, this.w, this.h);
-  }
+  // }
 
   send() {
-//     SEND_MESSAGE("COLOR_CHANGE", {
+    SEND_MESSAGE("COLOR_CHANGE", {
 //       color: `rgb(${Math.round(Math.random() * 255)},0,${Math.round(
 //         Math.random() * 255
 //       )})`,
-//       id: this.ID,
-//     });
+      id: this.ID,
+    });
   }
 
 //   changeColor(data) {

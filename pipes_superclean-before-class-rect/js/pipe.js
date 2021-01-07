@@ -26,7 +26,7 @@ class Pipe {
     this.winPosition = winPosition;
 
     //SHARE PIPE
-    this.onSharePipe = true;
+    this.pipeIsUsed = false;
   }
 
   update() {

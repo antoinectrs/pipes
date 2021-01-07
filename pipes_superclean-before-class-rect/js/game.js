@@ -9,7 +9,6 @@ class Game {
   }
   checkPosition(pipeElement) {
     //TARGET X Y en fonction du JSON
-
     if (pipeElement.x == pLevel.level1[2][6] && pipeElement.y == pLevel.level1[2][7]) {
       this.win01 = true;
     }
@@ -27,14 +26,7 @@ class Game {
     push();
     noStroke();
     fill(0)
-    // ellipse(x, y, 110);
     ellipse(x, y, 180);
     pop();
-    // let y = lerp(50, mouseY, this.speedAnimation);
-    //ELLIPSE LERP WIN
-    // for (let index = 0; index < animationGame.length; index++) {
-    //   fill(255, 0, 0)
-    //   ellipse(animationGame[index].x, animationGame[index].y, 110)
-    // }
   }
 }
