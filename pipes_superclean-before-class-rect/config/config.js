@@ -12,6 +12,9 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+
+
+
 // NE PAS OUBLIER DE CONFIGURER FIREBASE AUTH TO ANONYMOUS !!!
 
 // SIGN ANONYMOUS USER ----

@@ -39,6 +39,16 @@ function setup() {
   let height = windowHeight;
   let canvas = createCanvas(width, height);
 
+  //LISTENER FIREBASE
+  DATABASE.ref("player_1/position").on("value", (snap) => {
+    const position = snap.val()
+    console.log(position)
+  });
+  SEND_MESSAGE("player_1/position", {
+    color: "notOccuped",
+    id: Math.random() * 10,
+  });
+
   //new grid class
   grid = new Grid(gridSpace);
   cellS = grid.computeGrid();
@@ -57,7 +67,7 @@ function setup() {
   if (checkID == "#01") // This doesn't work, any suggestions?
   {
     player.push(new Player(checkID))
-console.log(player[0].ID);
+    console.log(player[0].ID);
   } else if (checkID == "#02") {
     alert("your player is #02");
   }
@@ -124,7 +134,8 @@ function draw() {
   stroke(0);
   for (let index = 0; index < pipe.length; index++) {
     // SHOW PIPES
-    if(pipe[index].pipeIsUsed==true){
+    //LISTER DU PIPE MODIFIER snapshot
+    if (pipe[index].pipeIsUsed == true) {
       alert("FIRST PIPES VOLER")
     }
     pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * pLevel.level1[index][2]);
@@ -170,6 +181,7 @@ function draw() {
   }
 }
 function mouseReleased() {
+  
   //CHECK IS WIN
   // for (let i = 0; i < targ.length; i++) {
   // console.log(game.checkPosition(pipeP));
@@ -185,3 +197,4 @@ function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   cellS = grid.computeGrid();
 }
+//METTRE LE LISTENER SNAPCHOT

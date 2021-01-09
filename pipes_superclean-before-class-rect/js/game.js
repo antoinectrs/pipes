@@ -6,6 +6,7 @@ class Game {
     this.speedAnimation = 0.03;
     this.setCounter = 0;
     this.win01 = false;
+    //mettre un listner du pipe
   }
   checkPosition(pipeElement) {
     //TARGET X Y en fonction du JSON
