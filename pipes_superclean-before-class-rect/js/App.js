@@ -24,6 +24,7 @@ let checkID = window.location.href.split('#').pop();
 let animationGame = [];
 
 //PLAYER
+const path = "player_"
 function preload() {
   // for (let i = 0; i < imageNumber; i++) {
   p_01 = loadImage("pipes_folder/pipes_02_scale.png");
@@ -39,11 +40,11 @@ function setup() {
   let width = windowWidth;
   let height = windowHeight;
   let canvas = createCanvas(width, height);
-
-  if (checkID == "1" || checkID == "2")
-  {
+  if (checkID == "1" || checkID == "2") {
     player.ID = checkID;
   }
+  if (player.ID == 1) { player.listenerDirection = path + 2 }
+  else if (player.ID == 2) { player.listenerDirection = path + 1 };
   //new grid class
   grid = new Grid(gridSpace);
   cellS = grid.computeGrid();
@@ -129,13 +130,26 @@ function draw() {
     // if (pipe[index].pipeIsUsed == true) {
     //   alert("FIRST PIPES VOLER")
     // }
-    pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * pLevel.level1[index][2]);
-    if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && pLevel.level1[index][3] == "true") {
-      isDraging = true;
-      pipe[index].isDrag = true;
-      targ[index] = pipe[index].drag(mouseX, mouseY);
-      game.lastPosition = { x: targ[index].x, y: targ[index].y, index: index };
+    if (pipe[index].pipeIsUsed == false) {
+      pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * pLevel.level1[index][2]);
+      if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && pLevel.level1[index][3] == "true") {
+        isDraging = true;
+        pipe[index].isDrag = true;
+        targ[index] = pipe[index].drag(mouseX, mouseY);
+        game.lastPosition = { x: targ[index].x, y: targ[index].y, index: index };
+      }
+    } else if (pipe[index].playerUsed == player.ID) {
+      pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * pLevel.level1[index][2]);
+      if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && pLevel.level1[index][3] == "true") {
+        isDraging = true;
+        pipe[index].isDrag = true;
+        targ[index] = pipe[index].drag(mouseX, mouseY);
+        game.lastPosition = { x: targ[index].x, y: targ[index].y, index: index };
+      }
     }
+
+
+
     // DRAG PIPE
     if (pipe[index].isDrag == true && isDraging == true) {
       pipeP = grid.snap(targ[index].x, targ[index].y).casePosition;
@@ -147,6 +161,7 @@ function draw() {
         pipe[index].rot = 0;
         //SENDMODIFICATION INSIDE
         let pipUse = pipe[index].pipeIsUsed = true;
+        pipe[index].playerUsed = player.ID;
         //CHANGE VALUE OUTSIDE ARRAY
         game.sendPipe[index].pipeIsUsed = pipe[index].pipeIsUsed;
         sendInit(player.ID, game.sendPipe);
@@ -199,17 +214,30 @@ function windowResized() {
 }
 //LISTENER FIREBASE
 //LIRE LE PLAYER INVERSE
-console.log(player)
-// let listenerDirection;
-// if(player.ID==1){listenerDirection=2}
-// else if(player.ID==2){listenerDirection=1};
-// console.log(listenerDirection)
 DATABASE.ref("/").on("value", (snap) => {
   const value = snap.val();
+  if (player.listenerDirection == "player_1") {
+    for (let index = 0; index < game.sendPipe.length; index++) {
+      if (value.player_1.pipe_statut[index].pipeIsUsed == true) {
+        console.log(value.player_1.id);
+        pipe[index].pipeIsUsed = true;
+        pipe[index].playerUsed = value.player_1.id;
+      }
+      // console.log(value.player_1.pipe_statut[index])
+    }
+
+  } else if (player.listenerDirection == "player_2") {
+
+  }
+  let pathFirebase = player.listenerDirection
+  let indexTest = 1;
+
+  // }
+
   // if (value.) {
 
   // }
-  console.log(value)
+  // console.log(value)
 });
 
 // function send(id_player, pipeOccuped) {
@@ -220,7 +248,6 @@ DATABASE.ref("/").on("value", (snap) => {
 //     id: player.ID,
 //   });
 // }
-
 function sendInit(id_player, allPipe) {
   let id = "player_" + id_player;
   SEND_MESSAGE(id, {

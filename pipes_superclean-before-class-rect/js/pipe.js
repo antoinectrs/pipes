@@ -27,6 +27,7 @@ class Pipe {
 
     //SHARE PIPE
     this.pipeIsUsed = false;
+    this.playerUsed;
   }
 
   update() {
