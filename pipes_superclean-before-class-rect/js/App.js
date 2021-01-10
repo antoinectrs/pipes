@@ -223,11 +223,14 @@ DATABASE.ref("/").on("value", (snap) => {
         pipe[index].pipeIsUsed = true;
         pipe[index].playerUsed = value.player_1.id;
       }
-      // console.log(value.player_1.pipe_statut[index])
     }
-
   } else if (player.listenerDirection == "player_2") {
-
+    for (let index = 0; index < game.sendPipe.length; index++) {
+      if (value.player_2.pipe_statut[index].pipeIsUsed == true) {
+        pipe[index].pipeIsUsed = true;
+        pipe[index].playerUsed = value.player_2.id;
+      }
+    }
   }
   let pathFirebase = player.listenerDirection
   let indexTest = 1;
