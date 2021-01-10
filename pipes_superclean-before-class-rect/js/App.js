@@ -18,7 +18,8 @@ let p_03;
 let rectGrid = [];
 
 //PLAYER TAB
-let player;
+let player = new Player();
+let checkID = window.location.href.split('#').pop();
 //ANIMATION GAME ARRAY
 let animationGame = [];
 
@@ -39,12 +40,9 @@ function setup() {
   let height = windowHeight;
   let canvas = createCanvas(width, height);
 
-  let checkID = window.location.href.split('#').pop();
-  if (checkID == "1") // This doesn't work, any suggestions?
+  if (checkID == "1" || checkID == "2")
   {
-    player = new Player(checkID);
-  } else if (checkID == "2") {
-    player = new Player(checkID);
+    player.ID = checkID;
   }
   //new grid class
   grid = new Grid(gridSpace);
@@ -80,14 +78,14 @@ function setup() {
     // }
 
     //PIPE DESTINATE TO INIT FIREBASE
-    let sharePipeInfo = {i:i,pipeIsUsed: pipe[i].pipeIsUsed};
+    let sharePipeInfo = { i: i, pipeIsUsed: pipe[i].pipeIsUsed };
     game.sendPipe.push(sharePipeInfo);
     //
 
     targ.push(grid.snapSetUp(pLevel.level1[i][0], pLevel.level1[i][1]));
   }
   //SEND TO les pipes 
-  sendInit(player.ID,game.sendPipe);
+  sendInit(player.ID, game.sendPipe);
 
   // SETUP RESTRICTION RECT SNAP
   // CHAQUE SHAPE DETECT SON OCCUPATION SUR LES RECTANGLES
@@ -147,23 +145,17 @@ function draw() {
       if (pipeP.y < 5 && pipe[index].pipeIsUsed == false) {
         //ROTATION
         pipe[index].rot = 0;
-
         //SENDMODIFICATION INSIDE
         let pipUse = pipe[index].pipeIsUsed = true;
-    //CHANGE VALUE OUTSIDE ARRAY
-    game.sendPipe[index].pipeIsUsed = pipe[index].pipeIsUsed;
-    console.log( game.sendPipe[index].pipeIsUsed);
-        // let sendObject = {index,pipUse}
-        sendInit(player.ID,game.sendPipe);
-        // console.log(game.sendPipe,pipe[index].pipeIsUsed);
-        // console.log(pipe[index].pipeIsUsed);
+        //CHANGE VALUE OUTSIDE ARRAY
+        game.sendPipe[index].pipeIsUsed = pipe[index].pipeIsUsed;
+        sendInit(player.ID, game.sendPipe);
       } else if (pipeP.y >= 5) {
-        pipe[index].pipeIsUsed = false;
         pipe[index].rot = 90;
-        // send(player.ID);
-        // console.log(pipe[index].pipeIsUsed);
+        pipe[index].pipeIsUsed = false;
+        game.sendPipe[index].pipeIsUsed = pipe[index].pipeIsUsed;
+        sendInit(player.ID, game.sendPipe);
       }
-
       // console.log(pipeP.y)
       //DRAG NO LIMIT
       targ[index] = pipe[index].drag(mouseX, mouseY);
@@ -179,7 +171,6 @@ function draw() {
       for (let i = 0; i < targ.length; i++) {
         const targP = { x: pLevel.level1[i][0], y: pLevel.level1[i][1] };
       }
-      //RECUP 
     }
     if (mouseIsPressed == false) {
       // if (pipe[index].drag().x == pLevel.level1[2][0] && pipe[index].drag().y == pLevel.level1[3][1]) {
@@ -206,13 +197,16 @@ function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   cellS = grid.computeGrid();
 }
-
-
 //LISTENER FIREBASE
+//LIRE LE PLAYER INVERSE
+console.log(player)
+// let listenerDirection;
+// if(player.ID==1){listenerDirection=2}
+// else if(player.ID==2){listenerDirection=1};
+// console.log(listenerDirection)
 DATABASE.ref("/").on("value", (snap) => {
   const value = snap.val();
-
-  // if(value.){
+  // if (value.) {
 
   // }
   console.log(value)
@@ -228,7 +222,7 @@ DATABASE.ref("/").on("value", (snap) => {
 // }
 
 function sendInit(id_player, allPipe) {
-  let id = "player_"+id_player;
+  let id = "player_" + id_player;
   SEND_MESSAGE(id, {
     pipe_statut: allPipe,
     id: player.ID,

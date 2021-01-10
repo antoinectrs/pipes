@@ -1,6 +1,6 @@
 class Player {
-  constructor(ID) {
-    this.ID = ID;
+  constructor() {
+    this.ID = null;
     this.winStatut = false;
   }
 
