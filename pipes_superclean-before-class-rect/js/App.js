@@ -18,7 +18,7 @@ let p_03;
 let rectGrid = [];
 
 //PLAYER TAB
-let player = [];
+let player;
 //ANIMATION GAME ARRAY
 let animationGame = [];
 
@@ -39,16 +39,13 @@ function setup() {
   let height = windowHeight;
   let canvas = createCanvas(width, height);
 
-  //LISTENER FIREBASE
-  DATABASE.ref("player_1/position").on("value", (snap) => {
-    const position = snap.val()
-    console.log(position)
-  });
-  SEND_MESSAGE("player_1/position", {
-    color: "notOccuped",
-    id: Math.random() * 10,
-  });
-
+  let checkID = window.location.href.split('#').pop();
+  if (checkID == "1") // This doesn't work, any suggestions?
+  {
+    player = new Player(checkID);
+  } else if (checkID == "2") {
+    player = new Player(checkID);
+  }
   //new grid class
   grid = new Grid(gridSpace);
   cellS = grid.computeGrid();
@@ -61,15 +58,6 @@ function setup() {
       rectGrid.push(new Rect(col1, grid.cellSize, row1));
       indexT++;
     }
-  }
-
-  let checkID = window.location.href.split('/').pop();
-  if (checkID == "#01") // This doesn't work, any suggestions?
-  {
-    player.push(new Player(checkID))
-    console.log(player[0].ID);
-  } else if (checkID == "#02") {
-    alert("your player is #02");
   }
   grid.drawGrid();
   //SET UP DOOR PIPE
@@ -94,6 +82,11 @@ function setup() {
     // if((pLevel.level1[i][2])%2 == 0 ){
     //   console.log(pipe[i])
     // }
+    //SEND TO les pipes 
+    let pipUse = pipe[i].pipeIsUsed;
+    let sendObject = {i,pipUse}
+    send(player.ID,sendObject);
+
     targ.push(grid.snapSetUp(pLevel.level1[i][0], pLevel.level1[i][1]));
   }
   // SETUP RESTRICTION RECT SNAP
@@ -135,9 +128,9 @@ function draw() {
   for (let index = 0; index < pipe.length; index++) {
     // SHOW PIPES
     //LISTER DU PIPE MODIFIER snapshot
-    if (pipe[index].pipeIsUsed == true) {
-      alert("FIRST PIPES VOLER")
-    }
+    // if (pipe[index].pipeIsUsed == true) {
+    //   alert("FIRST PIPES VOLER")
+    // }
     pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * pLevel.level1[index][2]);
     if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && pLevel.level1[index][3] == "true") {
       isDraging = true;
@@ -148,12 +141,23 @@ function draw() {
     // DRAG PIPE
     if (pipe[index].isDrag == true && isDraging == true) {
       pipeP = grid.snap(targ[index].x, targ[index].y).casePosition;
+
+
       //DETECT IF IN SHARE PIPE
-      if (pipeP.y < 5) {
+      if (pipeP.y < 5 && pipe[index].pipeIsUsed == false) {
         pipe[index].rot = 0;
-      } else {
+        let pipUse = pipe[index].pipeIsUsed = true;
+        let sendObject = {index,pipUse}
+        send(player.ID,sendObject);
+        console.log(sendObject)
+        // console.log(pipe[index].pipeIsUsed);
+      } else if (pipeP.y >= 5) {
+        pipe[index].pipeIsUsed = false;
         pipe[index].rot = 90;
+        // send(player.ID);
+        // console.log(pipe[index].pipeIsUsed);
       }
+
       // console.log(pipeP.y)
       //DRAG NO LIMIT
       targ[index] = pipe[index].drag(mouseX, mouseY);
@@ -181,7 +185,6 @@ function draw() {
   }
 }
 function mouseReleased() {
-  
   //CHECK IS WIN
   // for (let i = 0; i < targ.length; i++) {
   // console.log(game.checkPosition(pipeP));
@@ -197,4 +200,23 @@ function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   cellS = grid.computeGrid();
 }
-//METTRE LE LISTENER SNAPCHOT
+
+
+//LISTENER FIREBASE
+DATABASE.ref("/").on("value", (snap) => {
+  const value = snap.val();
+
+  // if(value.){
+
+  // }
+  console.log(value)
+});
+
+function send(id_player, pipeOccuped) {
+  console.log("send")
+  let id = "player_"+id_player;
+  SEND_MESSAGE(id, {
+    pipe_statut: pipeOccuped,
+    id: player.ID,
+  });
+}
