@@ -73,8 +73,6 @@ function setup() {
     animationGame.push(grid.snapSetUp(pLevel.level1animation[index][1], pLevel.level1animation[index][0]))
 
   }
-  
-  let sendPipes= [];
   for (let i = 0; i < pipe.length; i++) {
     // bug define shape 2 in grid
     // if((pLevel.level1[i][2])%2 == 0 ){
@@ -83,14 +81,13 @@ function setup() {
 
     //PIPE DESTINATE TO INIT FIREBASE
     let sharePipeInfo = {i:i,pipeIsUsed: pipe[i].pipeIsUsed};
-    sendPipes.push(sharePipeInfo);
+    game.sendPipe.push(sharePipeInfo);
+    //
+
     targ.push(grid.snapSetUp(pLevel.level1[i][0], pLevel.level1[i][1]));
   }
-console.log(sendPipes)
   //SEND TO les pipes 
-  
-  // let sendObject = {i,pipUse}
-  sendInit(player.ID,sendPipes);
+  sendInit(player.ID,game.sendPipe);
 
   // SETUP RESTRICTION RECT SNAP
   // CHAQUE SHAPE DETECT SON OCCUPATION SUR LES RECTANGLES
@@ -148,11 +145,17 @@ function draw() {
 
       //DETECT IF IN SHARE PIPE
       if (pipeP.y < 5 && pipe[index].pipeIsUsed == false) {
+        //ROTATION
         pipe[index].rot = 0;
+
+        //SENDMODIFICATION INSIDE
         let pipUse = pipe[index].pipeIsUsed = true;
-        let sendObject = {index,pipUse}
-        send(player.ID,sendObject);
-        console.log(sendObject)
+    //CHANGE VALUE OUTSIDE ARRAY
+    game.sendPipe[index].pipeIsUsed = pipe[index].pipeIsUsed;
+    console.log( game.sendPipe[index].pipeIsUsed);
+        // let sendObject = {index,pipUse}
+        sendInit(player.ID,game.sendPipe);
+        // console.log(game.sendPipe,pipe[index].pipeIsUsed);
         // console.log(pipe[index].pipeIsUsed);
       } else if (pipeP.y >= 5) {
         pipe[index].pipeIsUsed = false;
@@ -215,14 +218,14 @@ DATABASE.ref("/").on("value", (snap) => {
   console.log(value)
 });
 
-function send(id_player, pipeOccuped) {
-  console.log("send")
-  let id = "player_"+id_player;
-  SEND_MESSAGE(id, {
-    pipe_statut: pipeOccuped,
-    id: player.ID,
-  });
-}
+// function send(id_player, pipeOccuped) {
+//   console.log("send")
+//   let id = "player_"+id_player;
+//   SEND_MESSAGE(id, {
+//     pipe_statut: pipeOccuped,
+//     id: player.ID,
+//   });
+// }
 
 function sendInit(id_player, allPipe) {
   let id = "player_"+id_player;
@@ -230,6 +233,4 @@ function sendInit(id_player, allPipe) {
     pipe_statut: allPipe,
     id: player.ID,
   });
-
-
 }

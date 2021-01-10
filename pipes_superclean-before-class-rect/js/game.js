@@ -6,6 +6,8 @@ class Game {
     this.speedAnimation = 0.03;
     this.setCounter = 0;
     this.win01 = false;
+
+    this.sendPipe = [];
     //mettre un listner du pipe
   }
   checkPosition(pipeElement) {
