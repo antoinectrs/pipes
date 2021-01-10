@@ -25,6 +25,8 @@ let checkID = window.location.href.split('#').pop();
 let animationGame = [];
 
 //PLAYER
+// SOUND
+let winSound;
 const path = "player_"
 function preload() {
   // for (let i = 0; i < imageNumber; i++) {
@@ -38,8 +40,12 @@ function preload() {
 
   cross = loadImage("pipes_folder/cross.png");
   // }
+
+
 }
 function setup() {
+    //SOUND
+    winSound = loadSound('./sound/win.mp3');
   let width = windowWidth;
   let height = windowHeight;
   let canvas = createCanvas(width, height);
@@ -199,6 +205,13 @@ function draw() {
   }
 }
 function mouseReleased() {
+  //SOUND ANIMATION
+  winSound.play();
+  if(game.win01==true){
+    console.log("test")
+    winSound.play();
+  }
+
   //CHECK IS WIN
   // for (let i = 0; i < targ.length; i++) {
   // console.log(game.checkPosition(pipeP));

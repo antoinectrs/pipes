@@ -37,9 +37,9 @@ class Grid {
 
 
     // CALCUL ON CASE
-    // let uniqueCase = (width-(this.cellSize / 2))/this.nRows;
     const totalW = width - this.cellSize / 2;
     const totalH = height - this.cellSize / 2;
+    //LIMIT SCREEN
     if (x > totalW){
       x = totalW;
     }else if(round(x)<round(width/5- this.cellSize / 2)){
@@ -50,6 +50,8 @@ class Grid {
     }else if(round(y)<round(height/5- this.cellSize / 2)){
       y = height/9- this.cellSize / 2 ;
     }
+    //
+
     // -1 pour ajuster sur la grille a partir de 0
     let casePosition = { x: round((x * this.nCols) / totalW) - 1, y: round((y * this.nRows) / totalH) - 1 };
     // let casePosition = { x: round((x * this.nCols) / totalW)-1, y: round((y * this.nRows) / totalH)-1 };
