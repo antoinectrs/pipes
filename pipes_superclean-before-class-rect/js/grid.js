@@ -15,7 +15,7 @@ class Grid {
     let indexR = 0;
     for (let col = 0; col < this.nCols; col++) {
       for (let row = 0; row < this.nRows; row++) {
-        if(rectGrid[indexR].isTaken == true){
+        if (rectGrid[indexR].isTaken == true) {
           rectGrid[indexR].color = 230;
         }
         rectGrid[indexR].show(col, row);
@@ -35,17 +35,29 @@ class Grid {
     let x = round((windowX - centerCell) / width * this.nCols) * this.cellSize + centerCell;
     let y = round((windowY - centerCell) / height * this.nRows) * this.cellSize + centerCell;
 
+
     // CALCUL ON CASE
     // let uniqueCase = (width-(this.cellSize / 2))/this.nRows;
     const totalW = width - this.cellSize / 2;
     const totalH = height - this.cellSize / 2;
-
+    if (x > totalW){
+      x = totalW;
+    }else if(round(x)<round(width/5- this.cellSize / 2)){
+      x = width/5- this.cellSize / 2 ;
+    }
+    if (y > totalH){
+      y = totalH;
+    }else if(round(y)<round(height/5- this.cellSize / 2)){
+      y = height/9- this.cellSize / 2 ;
+    }
     // -1 pour ajuster sur la grille a partir de 0
-    let casePosition = { x: round((x * this.nCols) / totalW)-1, y: round((y * this.nRows) / totalH)-1 };
+    let casePosition = { x: round((x * this.nCols) / totalW) - 1, y: round((y * this.nRows) / totalH) - 1 };
+    // let casePosition = { x: round((x * this.nCols) / totalW)-1, y: round((y * this.nRows) / totalH)-1 };
     // let pixelPosition =  {x:round((casePosition.x*totalW)/this.nCols), y:round((casePosition.y*totalH)/this.nRows)};
     // let pixelPosition =  {x:round((2*totalW)/this.nCols), y:round((2*totalH)/this.nRows)};
-    // console.log(x, " ",pixelPosition);
-    return { x, y, casePosition}; // {x: x, y: y}
+
+
+    return { x, y, casePosition }; // {x: x, y: y}
   }
   snapSetUp(initX, initY) {
     initX++;
@@ -57,7 +69,7 @@ class Grid {
     let x = round((initX * totalW) / this.nCols);
     let y = round((initY * totalH) / this.nRows);
 
-   
+
 
     x = round((x - centerCell) / width * this.nCols) * this.cellSize + centerCell;
     y = round((y - centerCell) / height * this.nRows) * this.cellSize + centerCell;
@@ -66,7 +78,7 @@ class Grid {
 
   rectState(rectGrid, pipePy, pipePx) {
     let indexR = 0;
-    let rectFull = {statut:false, ind:indexR};
+    let rectFull = { statut: false, ind: indexR };
     // console.log( pipePx);
     // CHECK TOUTE LES COLONNES ET LINES
     for (let col1 = 0; col1 < this.nCols; col1++) {
@@ -75,12 +87,12 @@ class Grid {
         checkCol = true;
       }
       for (let row1 = 0; row1 < this.nRows; row1++) {
-       let checkRow = false;
+        let checkRow = false;
         if (rectGrid[indexR].row == pipePy) {
-          checkRow=true;
+          checkRow = true;
         }
-        if(checkRow && checkCol){
-         rectFull= {statut:true, ind:indexR};
+        if (checkRow && checkCol) {
+          rectFull = { statut: true, ind: indexR };
         }
         indexR++;
       }
@@ -88,13 +100,13 @@ class Grid {
     return rectFull;
   }
 
-  calculLimit(rectGrid,casePosBefore, pipePy, pipePx) {
+  calculLimit(rectGrid, casePosBefore, pipePy, pipePx) {
     let indexR = 0;
     let rectTaken = false;
     // CHECK TOUTE LES COLONNES ET LINES
     for (let col1 = 0; col1 < this.nCols; col1++) {
       for (let row1 = 0; row1 < this.nRows; row1++) {
-        if((rectGrid[indexR].col) == casePosBefore.x && (rectGrid[indexR].row) == casePosBefore.y && rectGrid[indexR].isTaken == true){
+        if ((rectGrid[indexR].col) == casePosBefore.x && (rectGrid[indexR].row) == casePosBefore.y && rectGrid[indexR].isTaken == true) {
           rectTaken = true;
         }
         indexR++;

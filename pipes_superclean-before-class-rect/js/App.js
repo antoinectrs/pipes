@@ -57,7 +57,7 @@ function setup() {
   let indexT = 0;
   for (let col1 = 0; col1 < grid.nCols; col1++) {
     for (let row1 = 0; row1 < grid.nRows; row1++) {
-      rectGrid.push(new Rect(col1, grid.cellSize, row1,cross));
+      rectGrid.push(new Rect(col1, grid.cellSize, row1, cross));
       indexT++;
     }
   }
@@ -126,7 +126,6 @@ function draw() {
   }
   // console.log( pLevel.level1animation.length)
 
-  // stroke(0);
   for (let index = 0; index < pipe.length; index++) {
     // SHOW PIPES
     //LISTER DU PIPE MODIFIER snapshot
@@ -154,6 +153,7 @@ function draw() {
 
 
     // DRAG PIPE
+
     if (pipe[index].isDrag == true && isDraging == true) {
       pipeP = grid.snap(targ[index].x, targ[index].y).casePosition;
 
@@ -176,14 +176,13 @@ function draw() {
       }
       // console.log(pipeP.y)
       //DRAG NO LIMIT
-      targ[index] = pipe[index].drag(mouseX, mouseY);
+        targ[index] = pipe[index].drag(mouseX, mouseY);
+
       //REDRAG WITH LIMIT
       // console.log(pipe[index].shape[0],pipe[index].shape[1])
       for (let i = 0; i < pipe[index].shape.length; i++) {
-        let cx = (pipeP.x) - (pipe[index].shape[0]);
         if (grid.calculLimit(rectGrid, targ[game.lastPosition.index].casePosition, pipeP.x, pipeP.y) == true) {
           targ[game.lastPosition.index] = pipe[game.lastPosition.index].drag(game.lastPosition.x, game.lastPosition.y);
-          // console.log(pipeP.x)
         }
       }
       for (let i = 0; i < targ.length; i++) {
