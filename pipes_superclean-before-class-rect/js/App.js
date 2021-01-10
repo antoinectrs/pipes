@@ -13,6 +13,7 @@ let targ = [];
 let p_01;
 let p_02;
 let p_03;
+let cross;
 
 // GRID RECT VALUE
 let rectGrid = [];
@@ -34,6 +35,8 @@ function preload() {
 
   p_big_01 = loadImage("pipes_folder/pipes01.png");
   p_big_02 = loadImage("pipes_folder/pipes02.png");
+
+  cross = loadImage("pipes_folder/cross.png");
   // }
 }
 function setup() {
@@ -54,7 +57,7 @@ function setup() {
   let indexT = 0;
   for (let col1 = 0; col1 < grid.nCols; col1++) {
     for (let row1 = 0; row1 < grid.nRows; row1++) {
-      rectGrid.push(new Rect(col1, grid.cellSize, row1));
+      rectGrid.push(new Rect(col1, grid.cellSize, row1,cross));
       indexT++;
     }
   }
@@ -123,7 +126,7 @@ function draw() {
   }
   // console.log( pLevel.level1animation.length)
 
-  stroke(0);
+  // stroke(0);
   for (let index = 0; index < pipe.length; index++) {
     // SHOW PIPES
     //LISTER DU PIPE MODIFIER snapshot
@@ -242,15 +245,6 @@ DATABASE.ref("/").on("value", (snap) => {
   // }
   // console.log(value)
 });
-
-// function send(id_player, pipeOccuped) {
-//   console.log("send")
-//   let id = "player_"+id_player;
-//   SEND_MESSAGE(id, {
-//     pipe_statut: pipeOccuped,
-//     id: player.ID,
-//   });
-// }
 function sendInit(id_player, allPipe) {
   let id = "player_" + id_player;
   SEND_MESSAGE(id, {
