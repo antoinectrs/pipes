@@ -73,22 +73,25 @@ function setup() {
     animationGame.push(grid.snapSetUp(pLevel.level1animation[index][1], pLevel.level1animation[index][0]))
 
   }
-  // console.log(animationGame);
-
-  //push tarf into targ x y position
-  // targ.push(grid.snap(pLevel.level1[0][0], pLevel.level1[0][1]));
+  
+  let sendPipes= [];
   for (let i = 0; i < pipe.length; i++) {
     // bug define shape 2 in grid
     // if((pLevel.level1[i][2])%2 == 0 ){
     //   console.log(pipe[i])
     // }
-    //SEND TO les pipes 
-    let pipUse = pipe[i].pipeIsUsed;
-    let sendObject = {i,pipUse}
-    send(player.ID,sendObject);
 
+    //PIPE DESTINATE TO INIT FIREBASE
+    let sharePipeInfo = {i:i,pipeIsUsed: pipe[i].pipeIsUsed};
+    sendPipes.push(sharePipeInfo);
     targ.push(grid.snapSetUp(pLevel.level1[i][0], pLevel.level1[i][1]));
   }
+console.log(sendPipes)
+  //SEND TO les pipes 
+  
+  // let sendObject = {i,pipUse}
+  sendInit(player.ID,sendPipes);
+
   // SETUP RESTRICTION RECT SNAP
   // CHAQUE SHAPE DETECT SON OCCUPATION SUR LES RECTANGLES
   for (let i = 0; i < targ.length; i++) {
@@ -219,4 +222,14 @@ function send(id_player, pipeOccuped) {
     pipe_statut: pipeOccuped,
     id: player.ID,
   });
+}
+
+function sendInit(id_player, allPipe) {
+  let id = "player_"+id_player;
+  SEND_MESSAGE(id, {
+    pipe_statut: allPipe,
+    id: player.ID,
+  });
+
+
 }

@@ -44,6 +44,7 @@
    
    function SEND_MESSAGE(_type, _data = "yes") {
   //  _data = {'data': _data, 't_created': Date.now()};
+  //  _data = {'data': _data, 'level': 0};
      DATABASE.ref(_type).set(_data);
     //  console.log( DATABASE)
    }
