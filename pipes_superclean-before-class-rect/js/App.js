@@ -69,10 +69,11 @@ function setup() {
   }
   grid.drawGrid();
   //SET UP DOOR PIPE
-  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[0][3], p_02, pLevel.level1[0][4], pLevel.level1[0][5]));
-  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[1][3], p_02, pLevel.level1[1][4], pLevel.level1[1][5]));
-  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[2][3], p_big_01, pLevel.level1[2][4], pLevel.level1[2][5], pLevel.level1[2][6], pLevel.level1[2][7]));
-  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[2][3], p_big_02, pLevel.level1[3][4], pLevel.level1[3][5], pLevel.level1[3][6], pLevel.level1[3][7]));
+  console.log(player.ID-1)
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[player.ID-1][0][3], p_02, pLevel.level1[player.ID-1][0][4], pLevel.level1[player.ID-1][0][5]));
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[player.ID-1][1][3], p_02, pLevel.level1[player.ID-1][1][4], pLevel.level1[player.ID-1][1][5]));
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[player.ID-1][2][3], p_big_01, pLevel.level1[player.ID-1][2][4], pLevel.level1[player.ID-1][2][5], pLevel.level1[player.ID-1][2][6], pLevel.level1[player.ID-1][2][7]));
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[player.ID-1][2][3], p_big_02, pLevel.level1[player.ID-1][3][4], pLevel.level1[player.ID-1][3][5], pLevel.level1[player.ID-1][3][6], pLevel.level1[player.ID-1][3][7]));
   // pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[3][3], p_03, pLevel.level1[3][4], pLevel.level1[3][5]));
 
   //SET UP ANIMATION GAME
@@ -92,7 +93,7 @@ function setup() {
     game.sendPipe.push(sharePipeInfo);
     //
 
-    targ.push(grid.snapSetUp(pLevel.level1[i][0], pLevel.level1[i][1]));
+    targ.push(grid.snapSetUp(pLevel.level1[player.ID-1][i][0], pLevel.level1[player.ID-1][i][1]));
   }
   //SEND TO les pipes 
   sendInit(player.ID, game.sendPipe);
@@ -101,7 +102,7 @@ function setup() {
   // CHAQUE SHAPE DETECT SON OCCUPATION SUR LES RECTANGLES
   for (let i = 0; i < targ.length; i++) {
     // RECUP LES CORDONNES DU PIPES APPLIQUEE SUR RECT RESPECTIF
-    const targP = { x: pLevel.level1[i][0], y: pLevel.level1[i][1] };
+    const targP = { x: pLevel.level1[player.ID-1][i][0], y: pLevel.level1[player.ID-1][i][1] };
 
     //ASSIGN STATUT FULL TO RECT
     if (grid.rectState(rectGrid, targP.y, targP.x).statut == true) {
@@ -139,16 +140,16 @@ function draw() {
     //   alert("FIRST PIPES VOLER")
     // }
     if (pipe[index].pipeIsUsed == false) {
-      pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * pLevel.level1[index][2]);
-      if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && pLevel.level1[index][3] == "true") {
+      pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * pLevel.level1[player.ID-1][index][2]);
+      if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && pLevel.level1[player.ID-1][index][3] == "true") {
         isDraging = true;
         pipe[index].isDrag = true;
         targ[index] = pipe[index].drag(mouseX, mouseY);
         game.lastPosition = { x: targ[index].x, y: targ[index].y, index: index };
       }
     } else if (pipe[index].playerUsed == player.ID) {
-      pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * pLevel.level1[index][2]);
-      if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && pLevel.level1[index][3] == "true") {
+      pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * pLevel.level1[player.ID-1][index][2]);
+      if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && pLevel.level1[player.ID-1][index][3] == "true") {
         isDraging = true;
         pipe[index].isDrag = true;
         targ[index] = pipe[index].drag(mouseX, mouseY);
@@ -192,7 +193,7 @@ function draw() {
         }
       }
       for (let i = 0; i < targ.length; i++) {
-        const targP = { x: pLevel.level1[i][0], y: pLevel.level1[i][1] };
+        const targP = { x: pLevel.level1[player.ID-1][i][0], y: pLevel.level1[player.ID-1][i][1] };
       }
     }
     if (mouseIsPressed == false) {

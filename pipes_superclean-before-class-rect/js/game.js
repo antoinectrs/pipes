@@ -12,7 +12,7 @@ class Game {
   }
   checkPosition(pipeElement) {
     //TARGET X Y en fonction du JSON
-    if (pipeElement.x == pLevel.level1[2][6] && pipeElement.y == pLevel.level1[2][7]) {
+    if (pipeElement.x == pLevel.level1[player.ID-1][2][6] && pipeElement.y == pLevel.level1[player.ID-1][2][7]) {
       this.win01 = true;
     }
     // switch (mode) {

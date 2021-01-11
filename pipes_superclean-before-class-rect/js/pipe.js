@@ -1,5 +1,5 @@
 // let images = [];
-
+// SALUT
 let imageNumber = 1;
 let insideShape = false;
 
