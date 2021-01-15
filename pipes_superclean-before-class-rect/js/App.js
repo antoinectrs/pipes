@@ -78,8 +78,9 @@ function setup() {
 
   //SET UP ANIMATION GAME
   // FAIRE AUTRE LOOP SI PAS LE MEME NOMBRE DE TRACER POUR LES AUTRES NIVEAUX
-  for (let index = 0; index < pLevel.level1animation.length; index++) {
-    animationGame.push(grid.snapSetUp(pLevel.level1animation[index][1], pLevel.level1animation[index][0]))
+  console.log(player.ID-1)
+  for (let index = 0; index < pLevel.level1animation[player.ID-1].length; index++) {
+    animationGame.push(grid.snapSetUp(pLevel.level1animation[player.ID-1][index][1], pLevel.level1animation[player.ID-1][index][0]))
 
   }
   for (let i = 0; i < pipe.length; i++) {
@@ -124,7 +125,7 @@ function draw() {
     game.animationWin();
     if (game.posAnimation < 1) {
       game.posAnimation += game.speedAnimation;
-    } else if (game.setCounter < pLevel.level1animation.length - 2) {
+    } else if (game.setCounter < pLevel.level1animation[player.ID-1].length - 2) {
       game.setCounter++;
       game.posAnimation = 0;
     } else {
