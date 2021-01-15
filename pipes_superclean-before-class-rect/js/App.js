@@ -271,8 +271,17 @@ DATABASE.ref("/").on("value", (snap) => {
 });
 function sendInit(id_player, allPipe) {
   let id = "player_" + id_player;
-  SEND_MESSAGE(id, {
+  let levelMachine = "levelMachine";
+  console.log(id)
+  //INDIVIDUAL STATE PLAYER
+  // let statePlayer = false;
+  SEND_MESSAGE(id,{
     pipe_statut: allPipe,
     id: player.ID,
+    statePlayer: false,
+  });
+//SEND ANOTHER MESSAGE TO LOCAL FILE
+  SEND_MESSAGE(levelMachine,{
+    level: 0
   });
 }
