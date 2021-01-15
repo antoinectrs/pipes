@@ -20,7 +20,7 @@ class Game {
       // LEVEL_1
       if (pipeElement.x == pLevel.level1[player.ID - 1][2][6] && pipeElement.y == pLevel.level1[player.ID - 1][2][7] && pLevel.level1[player.ID - 1][pipeElement.index][8]==1) {
         this.win01 = true;
-
+        player.playerState = true;
       }
     }
     // PLAYER 2
@@ -28,8 +28,10 @@ class Game {
       // LEVEL_1
       if (pipeElement.x == pLevel.level1[player.ID - 1][2][6] && pipeElement.y == pLevel.level1[player.ID - 1][2][7] && pLevel.level1[player.ID - 1][pipeElement.index][8]==2) {
         this.win01 = true;
+        player.playerState = true;
       }
     } 
+    console.log( player.playerState)
 
     // switch (mode) {
     //   case 0:

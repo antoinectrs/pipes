@@ -104,8 +104,9 @@ function setup() {
     //
     targ.push(grid.snapSetUp(pLevel.level1[player.ID-1][i][0], pLevel.level1[player.ID-1][i][1]));
   }
-  //SEND TO les pipes 
-  sendInit(player.ID, game.sendPipe);
+  //SEND TO FIREBASE
+  // les pipes 
+  sendInit(player.ID, game.sendPipe, player.playerState);
 
   // SETUP RESTRICTION RECT SNAP
   // CHAQUE SHAPE DETECT SON OCCUPATION SUR LES RECTANGLES
@@ -130,6 +131,7 @@ function draw() {
 
   // FAIRE UN SWITCH POUR LES PROCHAIN NIVEAU
   if (game.win01 == true) {
+    sendInit(player.ID, game.sendPipe, player.playerState);
     game.animationWin();
     if (game.posAnimation < 1) {
       game.posAnimation += game.speedAnimation;
@@ -183,13 +185,13 @@ function draw() {
         pipe[index].playerUsed = player.ID;
         //CHANGE VALUE OUTSIDE ARRAY
         game.sendPipe[index].pipeIsUsed = pipe[index].pipeIsUsed;
-        sendInit(player.ID, game.sendPipe);
+        sendInit(player.ID, game.sendPipe, player.playerState);
 
       } else if (pipeP.y >= 5) {
         pipe[index].rot = 90;
         pipe[index].pipeIsUsed = false;
         game.sendPipe[index].pipeIsUsed = pipe[index].pipeIsUsed;
-        sendInit(player.ID, game.sendPipe);
+        sendInit(player.ID, game.sendPipe, player.playerState);
       }
       //DRAG NO LIMIT
         targ[index] = pipe[index].drag(mouseX, mouseY);
@@ -241,6 +243,10 @@ function windowResized() {
 DATABASE.ref("/").on("value", (snap) => {
   const value = snap.val();
   if (player.listenerDirection == "player_1") {
+     //SEND TO PLAYER CLASS ANOTHER PLAYER STATUT
+     player.otherPlayerState = value.player_2.statePlayer;
+  
+    //SEND ALL PIPE
     for (let index = 0; index < game.sendPipe.length; index++) {
       if (value.player_1.pipe_statut[index].pipeIsUsed == true) {
         pipe[index].pipeIsUsed = true;
@@ -250,6 +256,9 @@ DATABASE.ref("/").on("value", (snap) => {
       }
     }
   } else if (player.listenerDirection == "player_2") {
+    //SEND TO PLAYER CLASS ANOTHER PLAYER STATUT
+    player.otherPlayerState = value.player_1.statePlayer;
+
     for (let index = 0; index < game.sendPipe.length; index++) {
       if (value.player_2.pipe_statut[index].pipeIsUsed == true) {
         pipe[index].pipeIsUsed = true;
@@ -269,19 +278,19 @@ DATABASE.ref("/").on("value", (snap) => {
   // }
   // console.log(value)
 });
-function sendInit(id_player, allPipe) {
+function sendInit(id_player, allPipe, playerState) {
   let id = "player_" + id_player;
-  let levelMachine = "levelMachine";
-  console.log(id)
   //INDIVIDUAL STATE PLAYER
   // let statePlayer = false;
   SEND_MESSAGE(id,{
     pipe_statut: allPipe,
     id: player.ID,
-    statePlayer: false,
+    statePlayer: playerState,
   });
-//SEND ANOTHER MESSAGE TO LOCAL FILE
+  let levelMachine = "levelMachine";
+  //SEND ANOTHER MESSAGE TO LOCAL FILE
   SEND_MESSAGE(levelMachine,{
     level: 0
   });
 }
+

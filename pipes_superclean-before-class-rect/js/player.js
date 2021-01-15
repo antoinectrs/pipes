@@ -3,5 +3,7 @@ class Player {
     this.ID;
     this.winStatut = false;
     this.listenerDirection;
+    this.playerState=false;
+    this.otherPlayerState;
   }
 }
