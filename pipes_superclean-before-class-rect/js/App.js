@@ -216,6 +216,7 @@ function mouseReleased() {
   //CHECK IS WIN
   // for (let i = 0; i < targ.length; i++) {
   // console.log(game.checkPosition(pipeP));
+  console.log(pipeP);
   if (game.checkPosition(pipeP)) {
     game.animationWin();
   }
