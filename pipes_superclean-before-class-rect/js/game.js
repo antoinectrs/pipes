@@ -13,13 +13,14 @@ class Game {
   checkPosition(pipeElement) {
     //TARGET X Y en fonction du JSON
 
-    console.log(pipeElement.index)
+    // console.log(pipeElement.index);
+    console.log(pLevel.level1[player.ID - 1][pipeElement.index][8])
     // PLAYER 1
     if (player.ID == 1) {
       // LEVEL_1
       if (pipeElement.x == pLevel.level1[player.ID - 1][2][6] && pipeElement.y == pLevel.level1[player.ID - 1][2][7] && pLevel.level1[player.ID - 1][2][8]==1) {
         this.win01 = true;
-        console.log(pLevel.level1[player.ID - 1][2][8])
+
       }
     }
     // PLAYER 2
