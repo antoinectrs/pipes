@@ -69,16 +69,16 @@ function setup() {
   }
   grid.drawGrid();
   //SET UP DOOR PIPE
-  console.log(player.ID-1)
+  
+
   pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[player.ID-1][0][3], p_02, pLevel.level1[player.ID-1][0][4], pLevel.level1[player.ID-1][0][5]));
   pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[player.ID-1][1][3], p_02, pLevel.level1[player.ID-1][1][4], pLevel.level1[player.ID-1][1][5]));
-  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[player.ID-1][2][3], p_big_01, pLevel.level1[player.ID-1][2][4], pLevel.level1[player.ID-1][2][5], pLevel.level1[player.ID-1][2][6], pLevel.level1[player.ID-1][2][7]));
-  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[player.ID-1][2][3], p_big_02, pLevel.level1[player.ID-1][3][4], pLevel.level1[player.ID-1][3][5], pLevel.level1[player.ID-1][3][6], pLevel.level1[player.ID-1][3][7]));
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[player.ID-1][2][3], p_big_01, pLevel.level1[player.ID-1][2][4], pLevel.level1[player.ID-1][2][5], pLevel.level1[player.ID-1][2][6], pLevel.level1[player.ID-1][2][7], pLevel.level1[player.ID-1][2][8]));
+  pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[player.ID-1][2][3], p_big_02, pLevel.level1[player.ID-1][3][4], pLevel.level1[player.ID-1][3][5], pLevel.level1[player.ID-1][3][6], pLevel.level1[player.ID-1][3][7], pLevel.level1[player.ID-1][3][8]));
   // pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[3][3], p_03, pLevel.level1[3][4], pLevel.level1[3][5]));
 
   //SET UP ANIMATION GAME
   // FAIRE AUTRE LOOP SI PAS LE MEME NOMBRE DE TRACER POUR LES AUTRES NIVEAUX
-  console.log(player.ID-1)
   for (let index = 0; index < pLevel.level1animation[player.ID-1].length; index++) {
     animationGame.push(grid.snapSetUp(pLevel.level1animation[player.ID-1][index][1], pLevel.level1animation[player.ID-1][index][0]))
 
@@ -93,7 +93,6 @@ function setup() {
     let sharePipeInfo = { i: i, pipeIsUsed: pipe[i].pipeIsUsed };
     game.sendPipe.push(sharePipeInfo);
     //
-
     targ.push(grid.snapSetUp(pLevel.level1[player.ID-1][i][0], pLevel.level1[player.ID-1][i][1]));
   }
   //SEND TO les pipes 
@@ -162,11 +161,10 @@ function draw() {
 
 
     // DRAG PIPE
-
     if (pipe[index].isDrag == true && isDraging == true) {
-      pipeP = grid.snap(targ[index].x, targ[index].y).casePosition;
-
-
+      pipeP =  grid.snap(targ[index].x, targ[index].y).casePosition;
+      //SEND INDEX TO INSTANT PIPE
+      pipeP.index = index;
       //DETECT IF IN SHARE PIPE
       if (pipeP.y < 5 && pipe[index].pipeIsUsed == false) {
         //ROTATION
@@ -184,12 +182,9 @@ function draw() {
         game.sendPipe[index].pipeIsUsed = pipe[index].pipeIsUsed;
         sendInit(player.ID, game.sendPipe);
       }
-      // console.log(pipeP.y)
       //DRAG NO LIMIT
         targ[index] = pipe[index].drag(mouseX, mouseY);
-
       //REDRAG WITH LIMIT
-      // console.log(pipe[index].shape[0],pipe[index].shape[1])
       for (let i = 0; i < pipe[index].shape.length; i++) {
         if (grid.calculLimit(rectGrid, targ[game.lastPosition.index].casePosition, pipeP.x, pipeP.y) == true) {
           targ[game.lastPosition.index] = pipe[game.lastPosition.index].drag(game.lastPosition.x, game.lastPosition.y);
@@ -210,7 +205,7 @@ function draw() {
 }
 function mouseReleased() {
   //SOUND ANIMATION
-  winSound.play();
+  // winSound.play();
   if(game.win01==true){
     console.log("test")
     winSound.play();
@@ -218,10 +213,10 @@ function mouseReleased() {
 
   //CHECK IS WIN
   // for (let i = 0; i < targ.length; i++) {
-  // console.log(game.checkPosition(pipeP));
-  console.log(pipeP);
+    // console.log(game.checkPosition(pipeP));
   if (game.checkPosition(pipeP)) {
-    game.animationWin();
+      
+    // game.animationWin();
   }
   // }
   if (grid.calculLimit(rectGrid, targ[game.lastPosition.index].casePosition, pipeP.x, pipeP.y) == true) {
@@ -239,7 +234,6 @@ DATABASE.ref("/").on("value", (snap) => {
   if (player.listenerDirection == "player_1") {
     for (let index = 0; index < game.sendPipe.length; index++) {
       if (value.player_1.pipe_statut[index].pipeIsUsed == true) {
-        console.log(value.player_1.id);
         pipe[index].pipeIsUsed = true;
         pipe[index].playerUsed = value.player_1.id;
       }else{
