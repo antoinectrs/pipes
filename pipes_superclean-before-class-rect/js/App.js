@@ -139,6 +139,7 @@ function draw() {
     // if (pipe[index].pipeIsUsed == true) {
     //   alert("FIRST PIPES VOLER")
     // }
+
     if (pipe[index].pipeIsUsed == false) {
       pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * pLevel.level1[player.ID-1][index][2]);
       if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && pLevel.level1[player.ID-1][index][3] == "true") {
@@ -175,6 +176,7 @@ function draw() {
         //CHANGE VALUE OUTSIDE ARRAY
         game.sendPipe[index].pipeIsUsed = pipe[index].pipeIsUsed;
         sendInit(player.ID, game.sendPipe);
+
       } else if (pipeP.y >= 5) {
         pipe[index].rot = 90;
         pipe[index].pipeIsUsed = false;
@@ -239,6 +241,8 @@ DATABASE.ref("/").on("value", (snap) => {
         console.log(value.player_1.id);
         pipe[index].pipeIsUsed = true;
         pipe[index].playerUsed = value.player_1.id;
+      }else{
+        pipe[index].pipeIsUsed = false;
       }
     }
   } else if (player.listenerDirection == "player_2") {
@@ -246,6 +250,8 @@ DATABASE.ref("/").on("value", (snap) => {
       if (value.player_2.pipe_statut[index].pipeIsUsed == true) {
         pipe[index].pipeIsUsed = true;
         pipe[index].playerUsed = value.player_2.id;
+      }else{
+        pipe[index].pipeIsUsed = false;
       }
     }
   }
