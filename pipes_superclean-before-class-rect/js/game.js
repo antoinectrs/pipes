@@ -18,7 +18,7 @@ class Game {
     // PLAYER 1
     if (player.ID == 1) {
       // LEVEL_1
-      if (pipeElement.x == pLevel.level1[player.ID - 1][2][6] && pipeElement.y == pLevel.level1[player.ID - 1][2][7] && pLevel.level1[player.ID - 1][2][8]==1) {
+      if (pipeElement.x == pLevel.level1[player.ID - 1][2][6] && pipeElement.y == pLevel.level1[player.ID - 1][2][7] && pLevel.level1[player.ID - 1][pipeElement.index][8]==1) {
         this.win01 = true;
 
       }
@@ -26,7 +26,7 @@ class Game {
     // PLAYER 2
     if (player.ID == 2) {
       // LEVEL_1
-      if (pipeElement.x == pLevel.level1[player.ID - 1][2][6] && pipeElement.y == pLevel.level1[player.ID - 1][2][7]) {
+      if (pipeElement.x == pLevel.level1[player.ID - 1][2][6] && pipeElement.y == pLevel.level1[player.ID - 1][2][7] && pLevel.level1[player.ID - 1][pipeElement.index][8]==2) {
         this.win01 = true;
         // console.log(pLevel.level1[player.ID - 1][2][8])
       }
