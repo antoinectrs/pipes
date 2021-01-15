@@ -14,6 +14,11 @@ let p_01;
 let p_02;
 let p_03;
 let cross;
+let p_big_01;
+let p_big_02;
+let p_big_03;
+let p_big_04;
+let p_big_05;
 
 // GRID RECT VALUE
 let rectGrid = [];
@@ -30,7 +35,7 @@ let winSound;
 const path = "player_"
 function preload() {
   // for (let i = 0; i < imageNumber; i++) {
-  p_01 = loadImage("pipes_folder/pipes_02_scale.png");
+  // p_01 = loadImage("pipes_folder/pipes_02_scale.png");
   p_02 = loadImage("pipes_folder/door.png");
   p_03 = loadImage("pipes_folder/pipes_03_scale.png");
   pLevel = loadJSON("./js/position.json")
@@ -38,7 +43,11 @@ function preload() {
   p_big_01 = loadImage("pipes_folder/pipes01.png");
   p_big_02 = loadImage("pipes_folder/pipes02.png");
 
-  cross = loadImage("pipes_folder/cross.png");
+  p_big_03 = loadImage("pipes_folder/pipes03.png");
+  p_big_04 = loadImage("pipes_folder/pipes04.png");
+  p_big_05 = loadImage("pipes_folder/pipes05.png");
+
+  cross = loadImage("pipes_folder/cross.png");  
   // }
 
 
