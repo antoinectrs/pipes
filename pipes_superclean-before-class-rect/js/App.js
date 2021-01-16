@@ -136,11 +136,12 @@ function draw() {
     //CHECK ANOTHER PLAYER TO SEND THE DATABASE
     console.log(player.otherPlayerState)
     if (player.otherPlayerState == true) {
-
       sendLevel(1);
       player.otherPlayerState = false;
     }
-    game.animationWin();
+    if(player.winGeneral==true){
+      game.animationWin();
+    }
     if (game.posAnimation < 1) {
       game.posAnimation += game.speedAnimation;
     } else if (game.setCounter < pLevel.level1animation[player.ID - 1].length - 2) {
@@ -148,6 +149,7 @@ function draw() {
       game.posAnimation = 0;
     } else {
       game.win01 = !game.win01;
+      // player.winGeneral==true
     }
   }
   // console.log( pLevel.level1animation.length)
@@ -250,11 +252,15 @@ function windowResized() {
 //LIRE LE PLAYER INVERSE
 DATABASE.ref("/").on("value", (snap) => {
   const value = snap.val();
-  if (player.listenerDirection == "player_1") {
-    //SEND TO PLAYER CLASS ANOTHER PLAYER STATUT
-    player.otherPlayerState = value.player_1.statePlayer;
+//RECUPE ALL LEVEL
+// console.log(value.levelMachine.level)
+player.winGeneral = value.levelMachine.level;
 
-    //SEND ALL PIPE
+  // PLAYER 1
+  if (player.listenerDirection == "player_1") {
+    //RECUP TO PLAYER CLASS ANOTHER PLAYER STATUT
+    player.otherPlayerState = value.player_1.statePlayer;
+    //RECUP ALL PIPE
     for (let index = 0; index < game.sendPipe.length; index++) {
       if (value.player_1.pipe_statut[index].pipeIsUsed == true) {
         pipe[index].pipeIsUsed = true;
@@ -263,8 +269,10 @@ DATABASE.ref("/").on("value", (snap) => {
         pipe[index].pipeIsUsed = false;
       }
     }
-  } else if (player.listenerDirection == "player_2") {
-    //SEND TO PLAYER CLASS ANOTHER PLAYER STATUT
+  }
+  // PLAYER 2
+  else if (player.listenerDirection == "player_2") {
+    //RECUPE TO PLAYER CLASS ANOTHER PLAYER STATUT
     player.otherPlayerState = value.player_2.statePlayer;
 
     for (let index = 0; index < game.sendPipe.length; index++) {
