@@ -8,16 +8,35 @@
       position: fixed;
       overflow: hidden;
     }
-    #defaultCanvas0{
+
+    #defaultCanvas0 {
       /* display: none; */
     }
+    .fade-inTest {
+      opacity: 1;
+      animation-name: fadeInOpacity;
+      animation-iteration-count: 1;
+      animation-timing-function: ease-in;
+      animation-duration: 4s;
+      animation-delay: 2s;
+    }
+
+    @keyframes fadeInOpacity {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
     /* #svgLayout {
         position: absolute;
       } */
   </style>
-<script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-database.js"></script>
 
 
   <!-- p5 cdn -->

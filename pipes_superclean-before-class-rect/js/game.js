@@ -50,4 +50,9 @@ class Game {
     ellipse(x, y, grid.cellSize * 0.7);
     pop();
   }
+  fade(){
+    console.log("fade")
+    let element = document.getElementById("defaultCanvas0");
+    element.classList.add("fade-inTest");
+  }
 }

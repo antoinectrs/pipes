@@ -123,9 +123,7 @@ function setup() {
 }
 let isDraging = false;
 function draw() {
-  if (game.win01 == false) {
     background(255);
-  }
   grid.drawGrid();
   //show grid class
   // strokeWeight(2);
@@ -136,15 +134,15 @@ function draw() {
     //CHECK ANOTHER PLAYER TO SEND THE DATABASE
     // console.log(player.otherPlayerState)
 
- 
     if (player.otherPlayerState == true) {
-
       sendLevel(1);
+
       player.otherPlayerState = false;
     }
     game.win01 = !game.win01;
   }
   if(player.winGeneral==1){
+    game.fade();
     game.animationWin();
     if (game.posAnimation < 1) {
       game.posAnimation += game.speedAnimation;
