@@ -31,7 +31,7 @@ class Game {
         player.playerState = true;
       }
     } 
-    console.log( player.playerState)
+    // console.log( player.playerState)
 
     // switch (mode) {
     //   case 0:

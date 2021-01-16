@@ -4,6 +4,6 @@ class Player {
     this.winStatut = false;
     this.listenerDirection;
     this.playerState=false;
-    this.otherPlayerState;
+    this.otherPlayerState=false;;
   }
 }
