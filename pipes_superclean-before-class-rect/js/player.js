@@ -1,7 +1,7 @@
 class Player {
   constructor() {
     this.ID;
-    this.winGeneral = false;
+    this.winGeneral;
     this.listenerDirection;
     this.playerState=false;
     this.otherPlayerState=false;;

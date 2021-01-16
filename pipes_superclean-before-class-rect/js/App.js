@@ -129,28 +129,29 @@ function draw() {
   grid.drawGrid();
   //show grid class
   // strokeWeight(2);
-
   // FAIRE UN SWITCH POUR LES PROCHAIN NIVEAU
+  console.log(player.winGeneral,game.win01);
   if (game.win01 == true) {
     sendInit(player.ID, game.sendPipe, player.playerState);
     //CHECK ANOTHER PLAYER TO SEND THE DATABASE
-    console.log(player.otherPlayerState)
+    // console.log(player.otherPlayerState)
+
+ 
     if (player.otherPlayerState == true) {
+
       sendLevel(1);
       player.otherPlayerState = false;
     }
-    if(player.winGeneral==true){
-      game.animationWin();
-    }
+    game.win01 = !game.win01;
+  }
+  if(player.winGeneral==1){
+    game.animationWin();
     if (game.posAnimation < 1) {
       game.posAnimation += game.speedAnimation;
     } else if (game.setCounter < pLevel.level1animation[player.ID - 1].length - 2) {
       game.setCounter++;
       game.posAnimation = 0;
-    } else {
-      game.win01 = !game.win01;
-      // player.winGeneral==true
-    }
+    } 
   }
   // console.log( pLevel.level1animation.length)
 
@@ -231,7 +232,6 @@ function mouseReleased() {
     console.log("test")
     // winSound.play();
   }
-
   //CHECK IS WIN
   // for (let i = 0; i < targ.length; i++) {
   // console.log(game.checkPosition(pipeP));
@@ -253,7 +253,7 @@ function windowResized() {
 DATABASE.ref("/").on("value", (snap) => {
   const value = snap.val();
 //RECUPE ALL LEVEL
-// console.log(value.levelMachine.level)
+
 player.winGeneral = value.levelMachine.level;
 
   // PLAYER 1
@@ -274,7 +274,6 @@ player.winGeneral = value.levelMachine.level;
   else if (player.listenerDirection == "player_2") {
     //RECUPE TO PLAYER CLASS ANOTHER PLAYER STATUT
     player.otherPlayerState = value.player_2.statePlayer;
-
     for (let index = 0; index < game.sendPipe.length; index++) {
       if (value.player_2.pipe_statut[index].pipeIsUsed == true) {
         pipe[index].pipeIsUsed = true;
