@@ -12,9 +12,6 @@ class Game {
   }
   checkPosition(pipeElement) {
     //TARGET X Y en fonction du JSON
-
-    // console.log(pipeElement.index);
-    console.log(pLevel.level1[player.ID - 1][pipeElement.index][8])
     // PLAYER 1
     if (player.ID == 1) {
       // LEVEL_1
@@ -51,7 +48,6 @@ class Game {
     pop();
   }
   fade(){
-    console.log("fade")
     let element = document.getElementById("defaultCanvas0");
     element.classList.add("fade-inTest");
   }
