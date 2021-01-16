@@ -87,7 +87,6 @@ function setup() {
   }
   grid.drawGrid();
   //SET UP DOOR PIPE
-
   levelPipe();
   // pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[3][3], p_03, pLevel.level1[3][4], pLevel.level1[3][5]));
 
@@ -97,12 +96,10 @@ function setup() {
     animationGame.push(grid.snapSetUp(pLevel.level1animation[player.ID - 1][index][1], pLevel.level1animation[player.ID - 1][index][0]))
 
   }
-
   //SEND TO FIREBASE
   // les pipes 
   sendInit(player.ID, game.sendPipe, player.playerState);
   sendLevel(0);
-
   // SETUP RESTRICTION RECT SNAP
   // CHAQUE SHAPE DETECT SON OCCUPATION SUR LES RECTANGLES
 
@@ -132,33 +129,31 @@ function draw() {
 
     if (player.otherPlayerState == true) {
       sendLevel(1);
+     
       console.log("test")
       levelPipe();
       player.otherPlayerState = false;
     }
     game.win01 = !game.win01;
   }
-  if (player.winGeneral == 1) {
-    game.fade();
+  if (player.winGeneral == 1 && player.animationDone==false) {
+    
+   
     game.animationWin();
     if (game.posAnimation < 1) {
       game.posAnimation += game.speedAnimation;
     } else if (game.setCounter < pLevel.level1animation[player.ID - 1].length - 2) {
       game.setCounter++;
       game.posAnimation = 0;
+    }else if( game.setCounter==pLevel.level1animation[player.ID - 1].length - 2){
+      player.animationDone=true;
+      game.fade();
+      levelPipe();
     }
+    // console.log( game.setCounter==pLevel.level1animation[player.ID - 1].length - 2);
   }
-
-  // if(pipeP.length==0){
-  // console.log(pipe.length)
-  // }
   for (let index = 0; index < pipe.length; index++) {
     // SHOW PIPES
-    //LISTER DU PIPE MODIFIER snapshot
-    // if (pipe[index].pipeIsUsed == true) {
-    //   alert("FIRST PIPES VOLER")
-    // }
-    // console.log(targ[index].x)
     if (pipe[index].pipeIsUsed == false) {
       pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * adapteLevel[player.winGeneral][player.ID - 1][index][2]);
       if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && adapteLevel[player.winGeneral][player.ID - 1][index][3] == "true") {
@@ -325,7 +320,7 @@ function levelPipe() {
       game.sendPipe.push(sharePipeInfo);
       targ.push(grid.snapSetUp(pLevel.level1[player.ID - 1][i][0], pLevel.level1[player.ID - 1][i][1]));
     }
-  } else if (player.winGeneral == 1) {
+  } else if (player.winGeneral == 1 && player.animationDone==true) {
     pipe = [];
     targ = [];
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][0][3], p_02, pLevel.level2[player.ID - 1][0][4], pLevel.level2[player.ID - 1][0][5][0]));
@@ -338,6 +333,7 @@ function levelPipe() {
       game.sendPipe.push(sharePipeInfo);
       targ.push(grid.snapSetUp(pLevel.level2[player.ID - 1][i][0], pLevel.level2[player.ID - 1][i][1]));
     }
+    player.animationDone=false;
   }
 
   // for (let i = 0; i < pipe.length; i++) {

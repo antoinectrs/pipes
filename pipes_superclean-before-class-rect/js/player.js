@@ -5,5 +5,6 @@ class Player {
     this.listenerDirection;
     this.playerState=false;
     this.otherPlayerState=false;;
+    this.animationDone=false;
   }
 }
