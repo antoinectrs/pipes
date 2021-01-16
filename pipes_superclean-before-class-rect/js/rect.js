@@ -9,8 +9,8 @@ class Rect {
     // this.cross;
   }
   show(col, row) {
-    // fill(this.color);
-    noFill();
+    fill(this.color);
+    // noFill();
     noStroke();
     rect(col * this.cellSize, row * this.cellSize, this.cellSize, this.cellSize);
 
