@@ -105,7 +105,7 @@ function setup() {
 
   for (let i = 0; i < targ.length; i++) {
     // RECUP LES CORDONNES DU PIPES APPLIQUEE SUR RECT RESPECTIF
-    console.log(adapteLevel[player.winGeneral][player.ID - 1][i][0],"   ", pLevel.level1[player.ID - 1][i][0])
+    // console.log(adapteLevel[player.winGeneral][player.ID - 1][i][0],"   ", pLevel.level1[player.ID - 1][i][0])
     const targP = { x: adapteLevel[player.winGeneral][player.ID - 1][i][0], y: adapteLevel[player.winGeneral][player.ID - 1][i][1] };
 
     //ASSIGN STATUT FULL TO RECT
@@ -140,7 +140,6 @@ function draw() {
    
   
     if (game.posAnimation < 1) {
-      console.log("ins")
       game.posAnimation += game.speedAnimation;
     } else if (game.setCounter < pLevel.level1animation[player.ID - 1].length - 2) {
       game.setCounter++;
@@ -149,7 +148,7 @@ function draw() {
       game.fade();
       levelPipe();
       player.animationDone=true;
-      console.log( player.animationDone)
+      // console.log( player.animationDone)
     }
   }
   for (let index = 0; index < pipe.length; index++) {
@@ -180,6 +179,7 @@ function draw() {
       //SEND INDEX TO INSTANT PIPE
       pipeP.index = index;
       //DETECT IF IN SHARE PIPE
+      console.log(pipe[index].pipeIsUsed)
       if (pipeP.y < 5 && pipe[index].pipeIsUsed == false) {
         //ROTATION
 
@@ -258,7 +258,7 @@ DATABASE.ref("/").on("value", (snap) => {
     //RECUP ALL PIPE
   
     for (let index = 0; index < game.sendPipe.length; index++) {
-      console.log(value.player_1.pipe_statut[index])
+      // console.log(value.player_1.pipe_statut[index])
       if (value.player_1.pipe_statut[index].pipeIsUsed == true) {
         pipe[index].pipeIsUsed = true;
         pipe[index].playerUsed = value.player_1.id;
@@ -328,13 +328,15 @@ function levelPipe() {
     game.sendPipe = [];
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][0][3], p_02, pLevel.level2[player.ID - 1][0][4], pLevel.level2[player.ID - 1][0][5][0]));
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][1][3], p_02, pLevel.level2[player.ID - 1][1][4], pLevel.level2[player.ID - 1][1][5][0]));
-    pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][2][3], p_big_06, pLevel.level2[player.ID - 1][3][4], pLevel.level2[player.ID - 1][3][5][0], pLevel.level2[player.ID - 1][3][6], pLevel.level2[player.ID - 1][3][7], pLevel.level2[player.ID - 1][3][8]));
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][2][3], p_big_05, pLevel.level2[player.ID - 1][2][4], pLevel.level2[player.ID - 1][2][5][0], pLevel.level2[player.ID - 1][2][6], pLevel.level2[player.ID - 1][2][7], pLevel.level2[player.ID - 1][2][8]));
+    pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][3][3], p_big_06, pLevel.level2[player.ID - 1][3][4], pLevel.level2[player.ID - 1][3][5][0], pLevel.level2[player.ID - 1][3][6], pLevel.level2[player.ID - 1][3][7], pLevel.level2[player.ID - 1][3][8]));
+    // pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][2][3], p_big_05, pLevel.level2[player.ID - 1][2][4], pLevel.level2[player.ID - 1][2][5][0], pLevel.level2[player.ID - 1][2][6], pLevel.level2[player.ID - 1][2][7], pLevel.level2[player.ID - 1][2][8]));
 
     for (let i = 0; i < pipe.length; i++) {
       let sharePipeInfo = { i: i, pipeIsUsed: pipe[i].pipeIsUsed };
       game.sendPipe.push(sharePipeInfo);
       targ.push(grid.snapSetUp(pLevel.level2[player.ID - 1][i][0], pLevel.level2[player.ID - 1][i][1]));
+      // console.log(  pipe[i])
     }
   }
 
