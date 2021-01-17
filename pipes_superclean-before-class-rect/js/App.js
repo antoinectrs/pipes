@@ -129,8 +129,6 @@ function draw() {
 
     if (player.otherPlayerState == true) {
       sendLevel(1);
-     
-      console.log("test")
       // levelPipe();
       player.otherPlayerState = false;
     }
@@ -197,7 +195,7 @@ function draw() {
 
       } else if (pipeP.y >= 5) {
         // pipe[index].rot = adapteLevel[player.ID - 1][index][5][1];
-        console.log(adapteLevel[player.winGeneral][player.ID - 1][index])
+        // console.log(adapteLevel[player.winGeneral][player.ID - 1][index])
         pipe[index].rot = adapteLevel[player.winGeneral][player.ID - 1][index][5][0];
         pipe[index].pipeIsUsed = false;
         game.sendPipe[index].pipeIsUsed = pipe[index].pipeIsUsed;
@@ -258,7 +256,9 @@ DATABASE.ref("/").on("value", (snap) => {
     //RECUP TO PLAYER CLASS ANOTHER PLAYER STATUT
     player.otherPlayerState = value.player_1.statePlayer;
     //RECUP ALL PIPE
+  
     for (let index = 0; index < game.sendPipe.length; index++) {
+      console.log(value.player_1.pipe_statut[index])
       if (value.player_1.pipe_statut[index].pipeIsUsed == true) {
         pipe[index].pipeIsUsed = true;
         pipe[index].playerUsed = value.player_1.id;
@@ -325,6 +325,8 @@ function levelPipe() {
   } else if (player.winGeneral == 1) {
     pipe = [];
     targ = [];
+    game.sendPipe = [];
+    
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][0][3], p_02, pLevel.level2[player.ID - 1][0][4], pLevel.level2[player.ID - 1][0][5][0]));
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][1][3], p_02, pLevel.level2[player.ID - 1][1][4], pLevel.level2[player.ID - 1][1][5][0]));
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][2][3], p_big_06, pLevel.level2[player.ID - 1][3][4], pLevel.level2[player.ID - 1][3][5][0], pLevel.level2[player.ID - 1][3][6], pLevel.level2[player.ID - 1][3][7], pLevel.level2[player.ID - 1][3][8]));
