@@ -9,9 +9,14 @@
       overflow: hidden;
     }
 
+    main {
+      position: absolute;
+    }
+
     #defaultCanvas0 {
       /* display: none; */
     }
+
     .fade-inTest {
       opacity: 1;
       animation-name: fadeInOpacity;
@@ -21,12 +26,69 @@
       /* animation-delay: 2s; */
     }
 
+    #defaultCanvas0  {
+      /* animation-delay: 8s; */
+      opacity: 1;
+      animation-name: fadeInOpacity;
+      animation-iteration-count: 1;
+      animation-timing-function: ease-in;
+      animation-duration: 8s;
+    
+    }
+
+    #logo {
+      position: absolute;
+      top: 34vh;
+     
+      left: 34vw;
+      pointer-events: none;
+
+
+    }
+    #animeLogo{
+      animation-name: animeLogoKey;
+      animation-iteration-count: 1;
+      animation-duration: 8s;
+      animation-delay: 1s;
+      pointer-events: none;
+    }
+
     @keyframes fadeInOpacity {
       0% {
         opacity: 0;
       }
+      90% {
+        opacity: 0;
+      }
       100% {
         opacity: 1;
+      }
+    }
+
+    @keyframes animeLogoKey {
+      0% {
+        z-index: 200;
+        transform: rotate(0);
+      }
+      10%{
+        transform: rotate(90deg);
+      }
+      20%{
+        transform: rotate(90deg);
+      }
+      40%{
+        transform: rotate(180deg);
+      }
+      60%{
+        transform: rotate(00);
+     
+      }
+      80%{
+
+      }
+
+      100% {
+
       }
     }
 
@@ -57,6 +119,11 @@
 </head>
 
 <body>
+  <div id="logo">
+    <img id="animeLogo" src="logo/logo.png">
+    <img src="logo/text.png">
+
+  </div>
 </body>
 
 </html>

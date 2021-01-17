@@ -311,7 +311,7 @@ function levelPipe() {
 
   // console.log(player.winGeneral)
   if (player.winGeneral == 0) {
-    console.log(pLevel.level1[player.ID - 1][2][5][0])
+    // console.log(pLevel.level1[player.ID - 1][2][5][0])
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[player.ID - 1][0][3], p_02, pLevel.level1[player.ID - 1][0][4], pLevel.level1[player.ID - 1][0][5][0]));
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[player.ID - 1][1][3], p_02, pLevel.level1[player.ID - 1][1][4], pLevel.level1[player.ID - 1][1][5][0]));
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[player.ID - 1][2][3], p_big_01, pLevel.level1[player.ID - 1][2][4], pLevel.level1[player.ID - 1][2][5][0], pLevel.level1[player.ID - 1][2][6], pLevel.level1[player.ID - 1][2][7], pLevel.level1[player.ID - 1][2][8]));
@@ -326,7 +326,6 @@ function levelPipe() {
     pipe = [];
     targ = [];
     game.sendPipe = [];
-    
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][0][3], p_02, pLevel.level2[player.ID - 1][0][4], pLevel.level2[player.ID - 1][0][5][0]));
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][1][3], p_02, pLevel.level2[player.ID - 1][1][4], pLevel.level2[player.ID - 1][1][5][0]));
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][2][3], p_big_06, pLevel.level2[player.ID - 1][3][4], pLevel.level2[player.ID - 1][3][5][0], pLevel.level2[player.ID - 1][3][6], pLevel.level2[player.ID - 1][3][7], pLevel.level2[player.ID - 1][3][8]));
