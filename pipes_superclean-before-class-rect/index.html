@@ -19,75 +19,107 @@
 
     .fade-inTest {
       opacity: 1;
-      animation-name: fadeInOpacity;
+      animation-name: fadeGame;
       animation-iteration-count: 1;
       animation-timing-function: ease-in;
       animation-duration: 4s;
       /* animation-delay: 2s; */
     }
 
-    #defaultCanvas0  {
+    #defaultCanvas0 {
       /* animation-delay: 8s; */
-      opacity: 1;
+      /* opacity: 1;
       animation-name: fadeInOpacity;
       animation-iteration-count: 1;
       animation-timing-function: ease-in;
+      animation-duration: 8s; */
+
+    }
+
+    #screen {
+      opacity: 0;
+      z-index: 200;
+      pointer-events: none;
+      position: absolute;
+      padding-right: 100vw;
+      padding-bottom: 100vh;
+      background: whitesmoke;
+      margin-right: auto;
+      margin-left: auto;
+      margin-top: auto;
+      animation-name: animeLogoKey;
+      animation-iteration-count: 1;
       animation-duration: 8s;
-    
     }
 
     #logo {
-      position: absolute;
-      top: 34vh;
-     
-      left: 34vw;
       pointer-events: none;
-
-
+      margin-left: 100%;
+      margin-top: 170%;
     }
-    #animeLogo{
-      animation-name: animeLogoKey;
+
+    #animeLogo {
+      animation-name: animeRot;
       animation-iteration-count: 1;
       animation-duration: 8s;
       animation-delay: 1s;
       pointer-events: none;
     }
 
-    @keyframes fadeInOpacity {
+    @keyframes fadeGame {
       0% {
         opacity: 0;
       }
-      90% {
-        opacity: 0;
-      }
+
       100% {
         opacity: 1;
       }
     }
 
-    @keyframes animeLogoKey {
+    @keyframes fadeInOpacity {
       0% {
-        z-index: 200;
-        transform: rotate(0);
+        opacity: 0;
       }
-      10%{
-        transform: rotate(90deg);
-      }
-      20%{
-        transform: rotate(90deg);
-      }
-      40%{
-        transform: rotate(180deg);
-      }
-      60%{
-        transform: rotate(00);
-     
-      }
-      80%{
 
+      90% {
+        opacity: 0;
       }
 
       100% {
+        opacity: 1;
+      }
+    }
+    @keyframes animeLogoKey {
+      0% {
+        opacity: 1;
+      }
+
+      80% {
+        opacity: 1;
+      }
+
+      100% {   opacity: 0;}
+    }
+    @keyframes animeRot {
+      0% {
+      
+        transform: rotate(0);
+      }
+
+      10% {
+        transform: rotate(90deg);
+      }
+
+      20% {
+        transform: rotate(90deg);
+      }
+
+      40% {
+        transform: rotate(180deg);
+      }
+
+      60% {
+        transform: rotate(00);
 
       }
     }
@@ -119,11 +151,13 @@
 </head>
 
 <body>
-  <div id="logo">
-    <img id="animeLogo" src="logo/logo.png">
-    <img src="logo/text.png">
-
+  <div id="screen">
+    <div id="logo">
+      <img id="animeLogo" src="logo/logo.png">
+      <img src="logo/text.png">
+    </div>
   </div>
+
 </body>
 
 </html>
