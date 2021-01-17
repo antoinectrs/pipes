@@ -179,7 +179,7 @@ function draw() {
       //SEND INDEX TO INSTANT PIPE
       pipeP.index = index;
       //DETECT IF IN SHARE PIPE
-      console.log(pipe[index].pipeIsUsed)
+      console.log(pipe[index].pipeIsUsed);
       if (pipeP.y < 5 && pipe[index].pipeIsUsed == false) {
         //ROTATION
 
