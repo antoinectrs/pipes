@@ -153,7 +153,11 @@ function draw() {
   }
   for (let index = 0; index < pipe.length; index++) {
     // SHOW PIPES
+    // console.log(pipe[index].playerUsed);
+    // console.log(pipe[index].pipeIsUsed, pipe[index].playerUsed);
+    // console.log( pipe[index].playerUsed)
     if (pipe[index].pipeIsUsed == false) {
+     
       pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * adapteLevel[player.winGeneral][player.ID - 1][index][2]);
       if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && adapteLevel[player.winGeneral][player.ID - 1][index][3] == "true") {
         isDraging = true;
@@ -162,6 +166,7 @@ function draw() {
         game.lastPosition = { x: targ[index].x, y: targ[index].y, index: index };
       }
     } else if (pipe[index].playerUsed == player.ID) {
+      // console.log("inside");
       pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * adapteLevel[player.winGeneral][player.ID - 1][index][2]);
       if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && adapteLevel[player.winGeneral][player.ID - 1][index][3] == "true") {
         isDraging = true;
@@ -170,30 +175,31 @@ function draw() {
         game.lastPosition = { x: targ[index].x, y: targ[index].y, index: index };
       }
     }
-
-
-
     // DRAG PIPE
     if (pipe[index].isDrag == true && isDraging == true) {
       pipeP = grid.snap(targ[index].x, targ[index].y).casePosition;
       //SEND INDEX TO INSTANT PIPE
       pipeP.index = index;
       //DETECT IF IN SHARE PIPE
-      console.log(pipe[index].pipeIsUsed);
+      // IF PIPE TOUCH BUT NOT SHARE == PIPE IS MOVE BY PLAYER
       if (pipeP.y < 5 && pipe[index].pipeIsUsed == false) {
         //ROTATION
-
         pipe[index].rot = adapteLevel[player.winGeneral][player.ID - 1][index][5][1];
-     
         // pipe[index].rot = adapteLevel[player.ID - 1][index][5][1];
         //SENDMODIFICATION INSIDE
+    
         let pipUse = pipe[index].pipeIsUsed = true;
         pipe[index].playerUsed = player.ID;
+        // console.log( pipe[index].playerUsed)
         //CHANGE VALUE OUTSIDE ARRAY
         game.sendPipe[index].pipeIsUsed = pipe[index].pipeIsUsed;
         sendInit(player.ID, game.sendPipe, player.playerState);
 
-      } else if (pipeP.y >= 5) {
+       } else if (pipeP.y >= 5) {
+        //  if(pipe[index].pipeIsUsed == false){
+        //   pipe[index].playerUsed=true;
+        //  }
+      
         // pipe[index].rot = adapteLevel[player.ID - 1][index][5][1];
         // console.log(adapteLevel[player.winGeneral][player.ID - 1][index])
         pipe[index].rot = adapteLevel[player.winGeneral][player.ID - 1][index][5][0];
@@ -319,7 +325,7 @@ function levelPipe() {
 
     for (let i = 0; i < pipe.length; i++) {
       let sharePipeInfo = { i: i, pipeIsUsed: pipe[i].pipeIsUsed };
-      game.sendPipe.push(sharePipeInfo);
+      game.sendPipe.push(sharePipeInfo); 
       targ.push(grid.snapSetUp(pLevel.level1[player.ID - 1][i][0], pLevel.level1[player.ID - 1][i][1]));
     }
   } else if (player.winGeneral == 1) {
@@ -333,10 +339,10 @@ function levelPipe() {
     // pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][2][3], p_big_05, pLevel.level2[player.ID - 1][2][4], pLevel.level2[player.ID - 1][2][5][0], pLevel.level2[player.ID - 1][2][6], pLevel.level2[player.ID - 1][2][7], pLevel.level2[player.ID - 1][2][8]));
 
     for (let i = 0; i < pipe.length; i++) {
+      sendInit(player.ID, game.sendPipe, player.playerState);
       let sharePipeInfo = { i: i, pipeIsUsed: pipe[i].pipeIsUsed };
-      game.sendPipe.push(sharePipeInfo);
+      game.sendPipe.push(sharePipeInfo); 
       targ.push(grid.snapSetUp(pLevel.level2[player.ID - 1][i][0], pLevel.level2[player.ID - 1][i][1]));
-      // console.log(  pipe[i])
     }
   }
 
