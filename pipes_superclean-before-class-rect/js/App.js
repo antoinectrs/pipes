@@ -165,14 +165,7 @@ function draw() {
   }
   for (let index = 0; index < pipe.length; index++) {
     // SHOW PIPES
-    // console.log(pipe[index].playerUsed);
-    // console.log(pipe[index].pipeIsUsed, pipe[index].playerUsed);
-    // console.log( pipe[index].playerUsed)
-    if (pipe[index].pipeIsUsed == false) {
-      if(player.winGeneral == 2){
-        // console.log(player.winGeneral);
-        // player.winGeneral = 1;
-      }    
+    if (pipe[index].pipeIsUsed == false) { 
       pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * adapteLevel[player.winGeneral][player.ID - 1][index][2]);
       if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && adapteLevel[player.winGeneral][player.ID - 1][index][3] == "true") {
         isDraging = true;
@@ -270,7 +263,6 @@ function windowResized() {
 DATABASE.ref("/").on("value", (snap) => {
   const value = snap.val();
   //RECUPE ALL LEVEL
-console.log(value.levelMachine.level);
   player.winGeneral = value.levelMachine.level;
   // PLAYER 1
   if (player.listenerDirection == "player_1") {
@@ -303,13 +295,6 @@ console.log(value.levelMachine.level);
   }
   let pathFirebase = player.listenerDirection
   let indexTest = 1;
-
-  // }
-
-  // if (value.) {
-
-  // }
-  // console.log(value)
 });
 function sendInit(id_player, allPipe, playerState) {
   let id = "player_" + id_player;
@@ -329,8 +314,6 @@ function sendLevel(levelNumber) {
   });
 }
 function levelPipe() {
-
-  // console.log(player.winGeneral)
   if (player.winGeneral == 0) {
     // console.log(pLevel.level1[player.ID - 1][2][5][0])
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level1[player.ID - 1][0][3], p_02, pLevel.level1[player.ID - 1][0][4], pLevel.level1[player.ID - 1][0][5][0]));
