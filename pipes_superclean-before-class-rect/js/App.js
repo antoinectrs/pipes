@@ -167,7 +167,11 @@ function draw() {
     // SHOW PIPES
     if (pipe[index].pipeIsUsed == false) { 
       pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * adapteLevel[player.winGeneral][player.ID - 1][index][2]);
-      if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && adapteLevel[player.winGeneral][player.ID - 1][index][3] == "true") {
+      // if( player.oneSelection==false){
+      //   console.log(pipe[index])
+      // }
+
+      if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && adapteLevel[player.winGeneral][player.ID - 1][index][3] == "true" && isDraging == false) {
         isDraging = true;
         pipe[index].isDrag = true;
         targ[index] = pipe[index].drag(mouseX, mouseY);
@@ -227,10 +231,13 @@ function draw() {
       }
     }
     if (mouseIsPressed == false) {
+      
       // if (pipe[index].drag().x == pLevel.level1[2][0] && pipe[index].drag().y == pLevel.level1[3][1]) {
       //   // console.log("win");
       // }
       isDraging = false;
+      // player.oneSelection=false;
+      // console.log(player.oneSelection);
       pipe[index].isDrag = false;
     }
   }
