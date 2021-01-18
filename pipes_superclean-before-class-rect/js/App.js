@@ -21,6 +21,12 @@ let p_big_04;
 let p_big_05;
 let p_big_06;
 
+let p_big_07;
+let p_big_08;
+let p_big_09;
+
+
+
 // GRID RECT VALUE
 let rectGrid = [];
 
@@ -50,6 +56,10 @@ function preload() {
   p_big_04 = loadImage("pipes_folder/pipes_04_strokescale.png");
   p_big_05 = loadImage("pipes_folder/pipes05.png");
   p_big_06 = loadImage("pipes_folder/pipes06.png");
+
+  p_big_07 = loadImage("pipes_folder/pipes07.png");
+  p_big_08 = loadImage("pipes_folder/pipes08.png");
+  p_big_09 = loadImage("pipes_folder/pipes09.png");
 
   cross = loadImage("pipes_folder/cross.png");
   // }
@@ -136,8 +146,9 @@ function draw() {
   }
 
   if (game.win02 == true) {
+    // console.log("send2")
     sendInit(player.ID, game.sendPipe, player.playerState);
-    console.log(player.winGeneral, game.win01, player.otherPlayerState);
+    // console.log(player.winGeneral, game.win01, player.otherPlayerState);
     if (player.otherPlayerState == true) {
       sendLevel(2);
       player.otherPlayerState = false;
@@ -161,7 +172,8 @@ function draw() {
     }
   }
   if (player.winGeneral == 2){
-    levelPipe();
+    // levelPipe();
+    console.log("test")
   }
   for (let index = 0; index < pipe.length; index++) {
     // SHOW PIPES
@@ -231,10 +243,6 @@ function draw() {
       }
     }
     if (mouseIsPressed == false) {
-      
-      // if (pipe[index].drag().x == pLevel.level1[2][0] && pipe[index].drag().y == pLevel.level1[3][1]) {
-      //   // console.log("win");
-      // }
       isDraging = false;
       // player.oneSelection=false;
       // console.log(player.oneSelection);
@@ -363,6 +371,8 @@ function levelPipe() {
     game.sendPipe = [];
     player.playerState = false;
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level3[player.ID - 1][0][3], p_02, pLevel.level3[player.ID - 1][0][4], pLevel.level3[player.ID - 1][0][5][0]));
+    pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level3[player.ID - 1][1][3], p_02, pLevel.level3[player.ID - 1][1][4], pLevel.level3[player.ID - 1][1][5][0]));
+    pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level3[player.ID - 1][2][3], p_big_08, pLevel.level3[player.ID - 1][2][4], pLevel.level3[player.ID - 1][2][5][0], pLevel.level3[player.ID - 1][2][6], pLevel.level3[player.ID - 1][2][7], pLevel.level3[player.ID - 1][2][8]));
 
     for (let i = 0; i < pipe.length; i++) {
       sendInit(player.ID, game.sendPipe, player.playerState);
