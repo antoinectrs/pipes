@@ -60,6 +60,7 @@ function setup() {
   //TRY TO ADADAPTE LEVEL 1 IN ARRAY
   adapteLevel.push(pLevel.level1);
   adapteLevel.push(pLevel.level2);
+  adapteLevel.push(pLevel.level3);
 
   //
 
@@ -121,13 +122,12 @@ function draw() {
   //show grid class
   // strokeWeight(2);
   // FAIRE UN SWITCH POUR LES PROCHAIN NIVEAU
-  console.log(player.winGeneral, game.win01, player.otherPlayerState);
+  // console.log(player.winGeneral, game.win01, player.otherPlayerState);
   if (game.win01 == true) {
     sendInit(player.ID, game.sendPipe, player.playerState);
     //CHECK ANOTHER PLAYER TO SEND THE DATABASE
     // console.log()
-    if (player.otherPlayerState == true) {
-     
+    if (player.otherPlayerState == true) { 
       sendLevel(1);
       // levelPipe();
       player.otherPlayerState = false;
@@ -137,11 +137,12 @@ function draw() {
 
   if (game.win02 == true) {
     sendInit(player.ID, game.sendPipe, player.playerState);
-    // console.log(player.winGeneral, game.win01, player.otherPlayerState);
+    console.log(player.winGeneral, game.win01, player.otherPlayerState);
     if (player.otherPlayerState == true) {
-    console.log(game.win02);
-    // sendLevel(2);
+      sendLevel(2);
+      player.otherPlayerState = false;
     }
+    game.win02 = !game.win02;
   }
   //ANIMATION 1
   if (player.winGeneral == 1 && player.animationDone==false) {
@@ -158,6 +159,9 @@ function draw() {
       player.animationDone=true;
       // console.log( player.animationDone)
     }
+    if (player.winGeneral == 2){
+      levelPipe();
+    }
   }
   for (let index = 0; index < pipe.length; index++) {
     // SHOW PIPES
@@ -165,7 +169,10 @@ function draw() {
     // console.log(pipe[index].pipeIsUsed, pipe[index].playerUsed);
     // console.log( pipe[index].playerUsed)
     if (pipe[index].pipeIsUsed == false) {
-     
+      if(player.winGeneral == 2){
+        // console.log(player.winGeneral);
+        // player.winGeneral = 1;
+      }    
       pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * adapteLevel[player.winGeneral][player.ID - 1][index][2]);
       if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && adapteLevel[player.winGeneral][player.ID - 1][index][3] == "true") {
         isDraging = true;
@@ -174,7 +181,6 @@ function draw() {
         game.lastPosition = { x: targ[index].x, y: targ[index].y, index: index };
       }
     } else if (pipe[index].playerUsed == player.ID) {
-      // console.log("inside");
       pipe[index].show(targ[index].x, targ[index].y, cellS, cellS * adapteLevel[player.winGeneral][player.ID - 1][index][2]);
       if (pipe[index].pressed(targ[index].x, targ[index].y, cellS, cellS) == false && mouseIsPressed && adapteLevel[player.winGeneral][player.ID - 1][index][3] == "true") {
         isDraging = true;
@@ -235,6 +241,7 @@ function draw() {
       pipe[index].isDrag = false;
     }
   }
+        // console.log( player.animationDone)
 }
 function mouseReleased() {
   //SOUND ANIMATION
@@ -263,7 +270,7 @@ function windowResized() {
 DATABASE.ref("/").on("value", (snap) => {
   const value = snap.val();
   //RECUPE ALL LEVEL
-console.log(value.player_1.statePlayer)
+console.log(value.levelMachine.level);
   player.winGeneral = value.levelMachine.level;
   // PLAYER 1
   if (player.listenerDirection == "player_1") {
@@ -358,7 +365,15 @@ function levelPipe() {
       targ.push(grid.snapSetUp(pLevel.level2[player.ID - 1][i][0], pLevel.level2[player.ID - 1][i][1]));
     }
   }
+  else if (player.winGeneral == 2) {
+    pipe = [];
+    targ = [];
+    game.keepPipePosition = [];
+    game.sendPipe = [];
+    player.playerState = false;
 
+    // pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][0][3], p_02, pLevel.level2[player.ID - 1][0][4], pLevel.level2[player.ID - 1][0][5][0]));
+  }
   // for (let i = 0; i < pipe.length; i++) {
   //   // bug define shape 2 in grid
   //   // if((pLevel.level1[i][2])%2 == 0 ){
