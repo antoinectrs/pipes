@@ -6,6 +6,7 @@ class Game {
     this.speedAnimation = 0.03;
     this.setCounter = 0;
     this.win01 = false;
+    this.win02 = false;
 
     this.sendPipe = [];
     this.keepPipePositionLevel2 = { pipeWin1: false, pipeWin2: false };
@@ -37,7 +38,7 @@ class Game {
         console.log(this.keepPipePositionLevel2);
         if(this.keepPipePositionLevel2.pipeWin1==true && this.keepPipePositionLevel2.pipeWin2==true){
           console.log("WWWWIN")
-          this.win01 = true;
+          this.win02 = true;
           player.playerState = true;
         }
       }
@@ -87,7 +88,7 @@ class Game {
         //SEND IF WIN
         if(this.keepPipePositionLevel2.pipeWin1==true && this.keepPipePositionLevel2.pipeWin2==true){
           console.log("WWWWIN")
-          this.win01 = true;
+          this.win02 = true;
           player.playerState = true;
         }
       }
