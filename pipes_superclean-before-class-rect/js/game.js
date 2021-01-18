@@ -24,15 +24,22 @@ class Game {
       } else if (player.winGeneral == 1) {
         if (pipeElement.x == pLevel.level2[player.ID - 1][2][6] && pipeElement.y == pLevel.level2[player.ID - 1][2][7]) {
           this.keepPipePositionLevel2.pipeWin1 = true;
-        } else {
-          this.keepPipePositionLevel2.pipeWin1 = false;
         }
+        // else {
+        //   this.keepPipePositionLevel2.pipeWin1 = false;
+        // }
         if (pipeElement.x == pLevel.level2[player.ID - 1][4][6] && pipeElement.y == pLevel.level2[player.ID - 1][4][7] && pLevel.level2[player.ID - 1][pipeElement.index][8] == 2) {
           this.keepPipePositionLevel2.pipeWin2 = true;
-        } else {
-          this.keepPipePositionLevel2.pipeWin2 = false;
         }
+        // else {
+        //   this.keepPipePositionLevel2.pipeWin2 = false;
+        // }
         console.log(this.keepPipePositionLevel2);
+        if(this.keepPipePositionLevel2.pipeWin1==true && this.keepPipePositionLevel2.pipeWin2==true){
+          console.log("WWWWIN")
+          this.win01 = true;
+          player.playerState = true;
+        }
       }
     }
     // PLAYER 2
@@ -80,6 +87,8 @@ class Game {
         //SEND IF WIN
         if(this.keepPipePositionLevel2.pipeWin1==true && this.keepPipePositionLevel2.pipeWin2==true){
           console.log("WWWWIN")
+          this.win01 = true;
+          player.playerState = true;
         }
       }
     }
