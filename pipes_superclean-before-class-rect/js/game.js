@@ -17,7 +17,7 @@ class Game {
     // PLAYER 1
     if (player.ID == 1) {
       // LEVEL_1
-      if (pipeElement.x == pLevel.level2[player.ID - 1][2][6] && pipeElement.y == pLevel.level1[player.ID - 1][2][7] && pLevel.level1[player.ID - 1][pipeElement.index][8]==1) {
+      if (pipeElement.x == pLevel.level1[player.ID - 1][2][6] && pipeElement.y == pLevel.level1[player.ID - 1][2][7] && pLevel.level1[player.ID - 1][pipeElement.index][8]==1) {
         this.win01 = true;
         player.playerState = true;
       }
@@ -25,12 +25,13 @@ class Game {
       // else if (pipeElement.x == pLevel.level2[player.ID - 1][4][6] && pipeElement.y == pLevel.level2[player.ID - 1][4][7] && pLevel.level2[player.ID - 1][pipeElement.index][8]==2) {
       // else if (pipeElement.x == pLevel.level2[player.ID - 1][4][6] && pipeElement.y == pLevel.level2[player.ID - 1][4][7] ) {
       else if (player.winGeneral==1) {
+        if(pipeElement.x == pLevel.level2[player.ID - 1][2][6] && pipeElement.y == pLevel.level2[player.ID - 1][2][7] ){
+          console.log("in1")
+        }
         // console.log(player.winGeneral)
         if(pipeElement.x == pLevel.level2[player.ID - 1][4][6] && pipeElement.y == pLevel.level2[player.ID - 1][4][7] && pLevel.level2[player.ID - 1][pipeElement.index][8]==2){
-        // if(pipeElement.x == pLevel.level2[player.ID - 1][4][6] && pipeElement.y == pLevel.level2[player.ID - 1][4][7] ){
-          console.log(pLevel.level1[player.ID - 1][pipeElement.index][8]);
           this.keepPipePosition.push(pLevel.level2[player.ID - 1][pipeElement.index][8]);
-          console.log("in")
+          console.log("in2")
         }else{
         
         }
