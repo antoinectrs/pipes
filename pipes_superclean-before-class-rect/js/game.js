@@ -8,6 +8,7 @@ class Game {
     this.win01 = false;
 
     this.sendPipe = [];
+    this.keepPipePosition = [];
     //mettre un listner du pipe
   }
   checkPosition(pipeElement) {
@@ -18,6 +19,25 @@ class Game {
       if (pipeElement.x == pLevel.level1[player.ID - 1][2][6] && pipeElement.y == pLevel.level1[player.ID - 1][2][7] && pLevel.level1[player.ID - 1][pipeElement.index][8]==1) {
         this.win01 = true;
         player.playerState = true;
+      }
+      // CHECK ONLY ON SHAPE
+      // else if (pipeElement.x == pLevel.level2[player.ID - 1][4][6] && pipeElement.y == pLevel.level2[player.ID - 1][4][7] && pLevel.level2[player.ID - 1][pipeElement.index][8]==2) {
+      else if (pipeElement.x == pLevel.level2[player.ID - 1][4][6] && pipeElement.y == pLevel.level2[player.ID - 1][4][7] ) {
+        if(pLevel.level1[player.ID - 1][pipeElement.index][8]==1){
+
+        }
+        let idPipe= pLevel.level1[player.ID - 1][pipeElement.index][8];
+        switch (idPipe) {
+          case 1:
+            this.keepPipePosition.push({idPipe:idPipe,goodPlace:true});
+            break;
+          case 2:
+            this.keepPipePosition.push({idPipe:idPipe,goodPlace:true});
+            break;
+          default:
+            //  
+        }
+       console.log(this.keepPipePosition);
       }
     }
     // PLAYER 2

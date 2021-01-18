@@ -46,7 +46,8 @@ function preload() {
   p_big_02 = loadImage("pipes_folder/pipes02.png");
 
   p_big_03 = loadImage("pipes_folder/pipes03.png");
-  p_big_04 = loadImage("pipes_folder/pipes04.png");
+  // p_big_04 = loadImage("pipes_folder/pipes04.png");
+  p_big_04 = loadImage("pipes_folder/pipes_04_strokescale.png");
   p_big_05 = loadImage("pipes_folder/pipes05.png");
   p_big_06 = loadImage("pipes_folder/pipes06.png");
 
