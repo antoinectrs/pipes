@@ -13,44 +13,25 @@ class Game {
   }
   checkPosition(pipeElement) {
     //TARGET X Y en fonction du JSON
-
     // PLAYER 1
     if (player.ID == 1) {
       // LEVEL_1
-      if (pipeElement.x == pLevel.level1[player.ID - 1][2][6] && pipeElement.y == pLevel.level1[player.ID - 1][2][7] && pLevel.level1[player.ID - 1][pipeElement.index][8] == 1) {
-        this.win01 = true;
-        player.playerState = true;
-      }
-      // CHECK ONLY ON SHAPE
-      // else if (pipeElement.x == pLevel.level2[player.ID - 1][4][6] && pipeElement.y == pLevel.level2[player.ID - 1][4][7] && pLevel.level2[player.ID - 1][pipeElement.index][8]==2) {
-      // else if (pipeElement.x == pLevel.level2[player.ID - 1][4][6] && pipeElement.y == pLevel.level2[player.ID - 1][4][7] ) {
-      else if (player.winGeneral == 1) {
+      if (player.winGeneral == 0) {
+        if (pipeElement.x == pLevel.level1[player.ID - 1][2][6] && pipeElement.y == pLevel.level1[player.ID - 1][2][7] && pLevel.level1[player.ID - 1][pipeElement.index][8] == 1) {
+          this.win01 = true;
+          player.playerState = true;
+        }
+      }else if (player.winGeneral == 1) {
         if (pipeElement.x == pLevel.level2[player.ID - 1][2][6] && pipeElement.y == pLevel.level2[player.ID - 1][2][7]) {
-          // this.keepPipePosition.push(pLevel.level2[player.ID - 1][pipeElement.index][8]);
           this.keepPipePositionLevel2.pipeWin1 = true;
         } else {
-
+          this.keepPipePositionLevel2.pipeWin1 = false;
         }
-
         if (pipeElement.x == pLevel.level2[player.ID - 1][4][6] && pipeElement.y == pLevel.level2[player.ID - 1][4][7] && pLevel.level2[player.ID - 1][pipeElement.index][8] == 2) {
           this.keepPipePositionLevel2.pipeWin2 = true;
-          // this.keepPipePosition.push(pLevel.level2[player.ID - 1][pipeElement.index][8]);
+        }else {
+          this.keepPipePositionLevel2.pipeWin2 = false;
         }
-        // else if(pipeElement.x == pLevel.level2[player.ID - 1][4][6] && pipeElement.y == pLevel.level2[player.ID - 1][4][7] && pLevel.level1[player.ID - 1][pipeElement.index][8]==2){
-        //   this.keepPipePosition.push(pLevel.level1[player.ID - 1][pipeElement.index][8] );
-        // }
-        //   let idPipe= pLevel.level1[player.ID - 1][pipeElement.index][8];
-        //   switch (idPipe) {
-        //     case 1:
-        //       this.keepPipePosition.push({idPipe:idPipe,goodPlace:true});
-        //       break;
-        //     case 2:
-        //       this.keepPipePosition.push({idPipe:idPipe,goodPlace:true});
-        //       break;
-        //     default:
-        //       //  
-        //   }
-        // console.log(pLevel.level2[player.ID - 1][pipeElement.index]);
         console.log(this.keepPipePositionLevel2);
       }
     }
@@ -62,29 +43,29 @@ class Game {
           this.win01 = true;
           player.playerState = true;
         }
-      } else if (player.winGeneral == 1) {
-        console.log(pipeElement.x, pipeElement.y)
+      }else if (player.winGeneral == 1) {
         if (pipeElement.x == pLevel.level2[player.ID - 1][3][6] && pipeElement.y == pLevel.level2[player.ID - 1][3][7]) {
           this.keepPipePositionLevel2.pipeWin1 = true;
-          // this.keepPipePosition.push(pLevel.level2[player.ID - 1][pipeElement.index][8]);
-        } else if (pipeElement.x == pLevel.level2[player.ID - 1][5][6] && pipeElement.y == pLevel.level2[player.ID - 1][5][7] && pLevel.level2[player.ID - 1][pipeElement.index][8] == 2) {
+          console.log("1 tru")
+        }else{
+          console.log("1 false")
+          // this.keepPipePositionLevel2.pipeWin1 = false;
+        }
+
+        if (pipeElement.x == pLevel.level2[player.ID - 1][5][6] && pipeElement.y == pLevel.level2[player.ID - 1][5][7] && pLevel.level2[player.ID - 1][pipeElement.index][8] == 2) {
           this.keepPipePositionLevel2.pipeWin2 = true;
-          // this.keepPipePosition.push(pLevel.level2[player.ID - 1][pipeElement.index][8]);
+          console.log("2 tru")
+        }else{
+          console.log("2 false")
+          // this.keepPipePositionLevel2.pipeWin2 = false;
         }
         console.log(this.keepPipePositionLevel2);
+        //SEND IF WIN
+        if(this.keepPipePositionLevel2.pipeWin1==true && this.keepPipePositionLevel2.pipeWin2==true){
+          console.log("WWWWIN")
+        }
       }
-
-      // console.log(pLevel.level2[player.ID - 1][pipeElement.index]);
     }
-    // console.log( player.playerState)
-
-    // switch (mode) {
-    //   case 0:
-    //     break;
-    //   case 1:
-    //     scene1();
-    //     break;
-    // }
   }
   animationWin() {
     let x = lerp(animationGame[this.setCounter].x, animationGame[this.setCounter + 1].x, this.posAnimation);
