@@ -159,9 +159,9 @@ function draw() {
       player.animationDone=true;
       // console.log( player.animationDone)
     }
-    if (player.winGeneral == 2){
-      levelPipe();
-    }
+  }
+  if (player.winGeneral == 2){
+    levelPipe();
   }
   for (let index = 0; index < pipe.length; index++) {
     // SHOW PIPES
@@ -366,12 +366,20 @@ function levelPipe() {
     }
   }
   else if (player.winGeneral == 2) {
+    console.log("level2 set up")
     pipe = [];
     targ = [];
     game.keepPipePosition = [];
     game.sendPipe = [];
     player.playerState = false;
+    pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level3[player.ID - 1][0][3], p_02, pLevel.level3[player.ID - 1][0][4], pLevel.level3[player.ID - 1][0][5][0]));
 
+    for (let i = 0; i < pipe.length; i++) {
+      sendInit(player.ID, game.sendPipe, player.playerState);
+      let sharePipeInfo = { i: i, pipeIsUsed: pipe[i].pipeIsUsed };
+      game.sendPipe.push(sharePipeInfo); 
+      targ.push(grid.snapSetUp(pLevel.level3[player.ID - 1][i][0], pLevel.level3[player.ID - 1][i][1]));
+    }
     // pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][0][3], p_02, pLevel.level2[player.ID - 1][0][4], pLevel.level2[player.ID - 1][0][5][0]));
   }
   // for (let i = 0; i < pipe.length; i++) {
