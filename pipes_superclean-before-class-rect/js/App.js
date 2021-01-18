@@ -336,6 +336,8 @@ function levelPipe() {
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][1][3], p_02, pLevel.level2[player.ID - 1][1][4], pLevel.level2[player.ID - 1][1][5][0]));
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][2][3], p_big_05, pLevel.level2[player.ID - 1][2][4], pLevel.level2[player.ID - 1][2][5][0], pLevel.level2[player.ID - 1][2][6], pLevel.level2[player.ID - 1][2][7], pLevel.level2[player.ID - 1][2][8]));
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][3][3], p_big_06, pLevel.level2[player.ID - 1][3][4], pLevel.level2[player.ID - 1][3][5][0], pLevel.level2[player.ID - 1][3][6], pLevel.level2[player.ID - 1][3][7], pLevel.level2[player.ID - 1][3][8]));
+    pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][4][3], p_big_03, pLevel.level2[player.ID - 1][4][4], pLevel.level2[player.ID - 1][4][5][0], pLevel.level2[player.ID - 1][4][6], pLevel.level2[player.ID - 1][4][7], pLevel.level2[player.ID - 1][4][8]));
+    pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][5][3], p_big_05, pLevel.level2[player.ID - 1][5][4], pLevel.level2[player.ID - 1][5][5][0], pLevel.level2[player.ID - 1][5][6], pLevel.level2[player.ID - 1][5][7], pLevel.level2[player.ID - 1][5][8]));
     // pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level2[player.ID - 1][2][3], p_big_05, pLevel.level2[player.ID - 1][2][4], pLevel.level2[player.ID - 1][2][5][0], pLevel.level2[player.ID - 1][2][6], pLevel.level2[player.ID - 1][2][7], pLevel.level2[player.ID - 1][2][8]));
 
     for (let i = 0; i < pipe.length; i++) {
