@@ -146,6 +146,7 @@ function draw() {
     sendInit(player.ID, game.sendPipe, player.playerState);
     // console.log(player.winGeneral, game.win01, player.otherPlayerState);
     if (player.otherPlayerState == true) {
+      // console.log("SEND LEVEL")
       sendLevel(2);
       player.animationDone = false
       player.otherPlayerState = false;
@@ -156,7 +157,7 @@ function draw() {
   if (player.winGeneral == 1 && player.animationDone == false) {
     // console.log("test")
     game.animationWin(0);
-    console.log(game.posAnimation, game.setCounter);
+    // console.log(game.posAnimation, game.setCounter);
     if (game.posAnimation < 1) {
       game.posAnimation += game.speedAnimation;
     } else if (game.setCounter < pLevel.level1animation[player.ID - 1].length - 2) {
@@ -296,6 +297,7 @@ DATABASE.ref("/").on("value", (snap) => {
   const value = snap.val();
   //RECUPE ALL LEVEL
   player.winGeneral = value.levelMachine.level;
+  console.log(value.player_1.statePlayer, value.player_2.statePlayer);
   // PLAYER 1
   if (player.listenerDirection == "player_1") {
     //RECUP TO PLAYER CLASS ANOTHER PLAYER STATUT
@@ -356,7 +358,7 @@ function setUpAnimation() {
     for (let index = 0; index < pLevel.level2animation[player.ID - 1].length; index++) {
       animationGame[1].push(grid.snapSetUp(pLevel.level2animation[player.ID - 1][index][1], pLevel.level2animation[player.ID - 1][index][0]));
     }
-    console.log(animationGame)
+    // console.log(animationGame)
   // }
 
 }
@@ -406,8 +408,9 @@ function levelPipe() {
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level3[player.ID - 1][0][3], p_02, pLevel.level3[player.ID - 1][0][4], pLevel.level3[player.ID - 1][0][5][0]));
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level3[player.ID - 1][1][3], p_02, pLevel.level3[player.ID - 1][1][4], pLevel.level3[player.ID - 1][1][5][0]));
     pipe.push(new Pipe(width / 2, height / 2, cellS, cellS * pLevel.level3[player.ID - 1][2][3], p_big_08, pLevel.level3[player.ID - 1][2][4], pLevel.level3[player.ID - 1][2][5][0], pLevel.level3[player.ID - 1][2][6], pLevel.level3[player.ID - 1][2][7], pLevel.level3[player.ID - 1][2][8]));
-
+    
     for (let i = 0; i < pipe.length; i++) {
+      console.log(player.ID, game.sendPipe, player.playerState);
       sendInit(player.ID, game.sendPipe, player.playerState);
       let sharePipeInfo = { i: i, pipeIsUsed: pipe[i].pipeIsUsed };
       game.sendPipe.push(sharePipeInfo);

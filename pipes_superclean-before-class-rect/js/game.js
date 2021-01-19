@@ -95,7 +95,7 @@ class Game {
     }
   }
   animationWin(level) {
-    console.log(animationGame)
+    // console.log(ansmationGame)
     let x = lerp(animationGame[level][this.setCounter].x, animationGame[level][this.setCounter + 1].x, this.posAnimation);
     let y = lerp(animationGame[level][this.setCounter].y, animationGame[level][this.setCounter + 1].y, this.posAnimation);
     push();
