@@ -147,6 +147,7 @@ function draw() {
     // console.log(player.winGeneral, game.win01, player.otherPlayerState);
     if (player.otherPlayerState == true) {
       sendLevel(2);
+      player.animationDone = false
       player.otherPlayerState = false;
     }
     game.win02 = !game.win02;
@@ -171,7 +172,7 @@ function draw() {
     }
   }
 
-  if (player.winGeneral == 2) {
+  if (player.winGeneral == 2 && player.animationDone == false) {
     // levelPipe();
     game.animationWin(1);
     console.log(game.posAnimation, game.setCounter);
@@ -182,7 +183,9 @@ function draw() {
       game.posAnimation = 0;
     } else if (game.setCounter == pLevel.level2animation[player.ID - 1].length - 2) {
       game.fade();
-      // levelPipe();
+      levelPipe();
+      game.posAnimation = 0;
+      game.setCounter=0;
       player.animationDone = true;
       // console.log( player.animationDone)
     }
