@@ -170,7 +170,18 @@ function draw() {
 
   if (player.winGeneral == 2) {
     // levelPipe();
-    game.animationWin();
+    game.animationWin(1);
+    if (game.posAnimation < 1) {
+      game.posAnimation += game.speedAnimation;
+    } else if (game.setCounter < pLevel.level2animation[player.ID - 1].length - 2) {
+      game.setCounter++;
+      game.posAnimation = 0;
+    } else if (game.setCounter == pLevel.level2animation[player.ID - 1].length - 2) {
+      game.fade();
+      // levelPipe();
+      player.animationDone = true;
+      console.log( player.animationDone)
+    }
 
     console.log("test")
   }
@@ -328,16 +339,18 @@ function sendLevel(levelNumber) {
   });
 }
 function setUpAnimation() {
-  if (player.winGeneral == 0) {
+  // if (player.winGeneral == 0) {
     // FAIRE AUTRE LOOP SI PAS LE MEME NOMBRE DE TRACER POUR LES AUTRES NIVEAUX
     for (let index = 0; index < pLevel.level1animation[player.ID - 1].length; index++) {
       animationGame[0].push(grid.snapSetUp(pLevel.level1animation[player.ID - 1][index][1], pLevel.level1animation[player.ID - 1][index][0]))
     }
-  } else if (player.winGeneral == 1) {
+  // } else if (player.winGeneral == 1) {
+   
     for (let index = 0; index < pLevel.level2animation[player.ID - 1].length; index++) {
-      animationGame[1].push(grid.snapSetUp(pLevel.level2animation[player.ID - 1][index][1], pLevel.level2animation[player.ID - 1][index][0]))
+      animationGame[1].push(grid.snapSetUp(pLevel.level2animation[player.ID - 1][index][1], pLevel.level2animation[player.ID - 1][index][0]));
     }
-  }
+    console.log(animationGame)
+  // }
 
 }
 function levelPipe() {
