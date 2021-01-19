@@ -155,6 +155,7 @@ function draw() {
   if (player.winGeneral == 1 && player.animationDone == false) {
     // console.log("test")
     game.animationWin(0);
+    console.log(game.posAnimation, game.setCounter);
     if (game.posAnimation < 1) {
       game.posAnimation += game.speedAnimation;
     } else if (game.setCounter < pLevel.level1animation[player.ID - 1].length - 2) {
@@ -163,6 +164,8 @@ function draw() {
     } else if (game.setCounter == pLevel.level1animation[player.ID - 1].length - 2) {
       game.fade();
       levelPipe();
+      game.posAnimation = 0;
+      game.setCounter=0;
       player.animationDone = true;
       // console.log( player.animationDone)
     }
@@ -171,6 +174,7 @@ function draw() {
   if (player.winGeneral == 2) {
     // levelPipe();
     game.animationWin(1);
+    console.log(game.posAnimation, game.setCounter);
     if (game.posAnimation < 1) {
       game.posAnimation += game.speedAnimation;
     } else if (game.setCounter < pLevel.level2animation[player.ID - 1].length - 2) {
@@ -180,10 +184,10 @@ function draw() {
       game.fade();
       // levelPipe();
       player.animationDone = true;
-      console.log( player.animationDone)
+      // console.log( player.animationDone)
     }
 
-    console.log("test")
+    // console.log("test")
   }
   for (let index = 0; index < pipe.length; index++) {
     // SHOW PIPES
@@ -389,7 +393,7 @@ function levelPipe() {
     }
   }
   else if (player.winGeneral == 2) {
-    console.log("level2 set up")
+    // console.log("level2 set up")
     pipe = [];
     targ = [];
     game.keepPipePosition = [];
