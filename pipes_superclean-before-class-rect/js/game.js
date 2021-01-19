@@ -94,9 +94,9 @@ class Game {
       }
     }
   }
-  animationWin() {
-    let x = lerp(animationGame[this.setCounter].x, animationGame[this.setCounter + 1].x, this.posAnimation);
-    let y = lerp(animationGame[this.setCounter].y, animationGame[this.setCounter + 1].y, this.posAnimation);
+  animationWin(level) {
+    let x = lerp(animationGame[level][this.setCounter].x, animationGame[level][this.setCounter + 1].x, this.posAnimation);
+    let y = lerp(animationGame[level][this.setCounter].y, animationGame[level][this.setCounter + 1].y, this.posAnimation);
     push();
     noStroke();
     fill(0)
